@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/clover-health-fhir-openapi-original.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - cookie
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/clover-health-fhir-openapi-original.yml
+- name: cookieAuth
+  type: apiKey
+  in: cookie
+  parameter: sessionid
+  sources:
+  - openapi/clover-health-fhir-openapi-original.yml
