@@ -1,0 +1,1485 @@
+openapi: 3.0.3
+info:
+  title: FHIR fhir-r4-formulary-api API
+  version: 1.0.0
+  description: Formulary and Provider Directory API
+tags:
+- name: fhir-r4-formulary-api
+paths:
+  /formulary/api/List:
+    get:
+      operationId: list_formulary
+      description: This interaction searches a set of resources based on some filter criteria.
+      summary: This interaction searches a set of resources based on some filter criteria.
+      parameters:
+      - in: query
+        name: _count
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 1
+          default: 20
+          title: ' count'
+        description: Maximum number of results to be returned
+      - in: query
+        name: _offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: ' offset'
+        description: Number of results to be offset
+      - in: query
+        name: _profile
+        schema:
+          type: string
+          title: ' profile'
+          minLength: 1
+        description: An URL of profile in structured definition
+      - in: query
+        name: identifier
+        schema:
+          type: string
+          minLength: 1
+        description: CoveragePlan identifier. It can be in the type of CloverHealth's identifier (E.g. 001, 002) or the plan ID (E.g. H5141)
+      - in: query
+        name: item
+        schema:
+          type: string
+          minLength: 1
+        description: The identifier of the associated FormularyDrug (also known as MedicationKnowledge) under the CoveragePlan
+      - in: query
+        name: status
+        schema:
+          enum:
+          - current
+          - retired
+          - entered-in-error
+          type: string
+          minLength: 1
+        description: '* `current` - current
+
+          * `retired` - retired
+
+          * `entered-in-error` - entered-in-error'
+      tags:
+      - fhir-r4-formulary-api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FormularyListResponse'
+              examples:
+                JSONExample:
+                  value:
+                    resourceType: Bundle
+                    id: 14f5b0a7-2d8b-43fb-a46e-b6c7d92aa59e
+                    meta:
+                      lastUpdated: '2021-05-27T03:30:14.877Z'
+                    type: searchset
+                    total: 1
+                    link:
+                    - relation: self
+                      url: https://public-api.cloverhealth.com/formulary/api/List
+                    entry:
+                    - fullUrl: https://public-api.cloverhealth.com/formulary/api/List/a1bf521c-7fe0-5329-b1bb-8858a52cd807
+                      search:
+                        mode: match
+                      resource:
+                        resourceType: List
+                        id: a1bf521c-7fe0-5329-b1bb-8858a52cd807
+                        meta:
+                          lastUpdated: '2021-05-18T10:18:01.162981+00:00'
+                          profile:
+                          - http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan
+                        identifier:
+                        - system: https://www.cloverhealth.com/plans
+                          value: '001'
+                        - system: https://www.cloverhealth.com/plans
+                          value: '002'
+                        - value: H5141
+                        status: current
+                        mode: snapshot
+                        title: H5141
+                        date: '2021-05-18T10:18:01.162981+00:00'
+                        extension:
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                          extension:
+                          - url: drugTierID
+                            valueCodeableConcept:
+                              coding:
+                              - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                                code: preferred-brand
+                                display: 'Preferred Brand: Brand name drugs'
+                          - url: mailOrder
+                            valueBoolean: true
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                          extension:
+                          - url: drugTierID
+                            valueCodeableConcept:
+                              coding:
+                              - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                                code: specialty
+                                display: 'Specialty: Drugs used to treat complex conditions like cancer and multiple sclerosis.They can be generic or brand name, and are typically the most expensive drugs on the formulary.'
+                          - url: mailOrder
+                            valueBoolean: true
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                          extension:
+                          - url: drugTierID
+                            valueCodeableConcept:
+                              coding:
+                              - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                                code: non-preferred-generic
+                                display: 'Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.'
+                          - url: mailOrder
+                            valueBoolean: true
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                          extension:
+                          - url: drugTierID
+                            valueCodeableConcept:
+                              coding:
+                              - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                                code: generic
+                                display: 'Generic: Commonly prescribed generic drugs that cost more than drugs in the ‘preferred generic’ tier.'
+                          - url: mailOrder
+                            valueBoolean: true
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                          extension:
+                          - url: drugTierID
+                            valueCodeableConcept:
+                              coding:
+                              - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                                code: non-preferred-brand
+                                display: 'Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.'
+                          - url: mailOrder
+                            valueBoolean: true
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Network-extension
+                          valueString: Not Applicable
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-SummaryURL-extension
+                          valueString: https://cdn.cloverhealth.com/filer_public/d0/b6/d0b6294a-2e6b-4504-b9d4-bf65a4753210/76207_nj_eng_ch_nj_cy21_5t_gs_core_april_21.pdf
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanIDType-extension
+                          valueString: HIOS-PLAN-ID
+                        entry:
+                        - item:
+                            reference: MedicationKnowledge/000212621243033
+                        - item:
+                            reference: MedicationKnowledge/000212621923056
+                  summary: JSON Example
+                  description: '
+
+                    ListBundle
+
+
+                    Contains a collection of resources
+
+
+                    - Rule: total only when a search or history
+
+                    - Rule: entry.search only when a search
+
+                    - Rule: entry.request mandatory for batch/transaction/history, otherwise prohibited
+
+                    - Rule: entry.response mandatory for batch-response/transaction-response/history, otherwise prohibited
+
+                    - Rule: FullUrl must be unique in a bundle, or else entries with the same fullUrl must have different meta.versionId (except in history bundles)
+
+                    - Rule: A document must have an identifier with a system and a value
+
+                    - Rule: A document must have a date
+
+                    - Rule: A document must have a Composition as the first resource
+
+                    - Rule: A message must have a MessageHeader as the first resource Elements defined in Ancestors: id, meta, implicitRules, language
+
+                    '
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FormularyListResponse'
+              examples:
+                XMLExample:
+                  value: "\n<?xml version='1.0' encoding='UTF-8'?>\n<Bundle xmlns=\"http://hl7.org/fhir\">\n  <id value=\"901d94d9-cbcf-4e11-abc9-4c7b88370987\"/>\n  <meta>\n    <lastUpdated value=\"2021-05-27T03:29:00.024Z\"/>\n  </meta>\n  <type value=\"searchset\"/>\n  <total value=\"1\"/>\n  <link>\n    <relation value=\"self\"/>\n    <url value=\"https://public-api.cloverhealth.com/formulary/api/List\"/>\n  </link>\n  <entry>\n    <fullUrl value=\"https://public-api.cloverhealth.com/formulary/api/List/a1bf521c-7fe0-5329-b1bb-8858a52cd807\"/>\n    <resource>\n      <List xmlns=\"http://hl7.org/fhir\">\n        <id value=\"a1bf521c-7fe0-5329-b1bb-8858a52cd807\"/>\n        <meta>\n          <lastUpdated value=\"2021-05-18T10:18:01.162981+00:00\"/>\n          <profile value=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan\"/>\n        </meta>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n          <extension url=\"drugTierID\">\n            <valueCodeableConcept>\n              <coding>\n                <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n                <code value=\"preferred-brand\"/>\n                <display value=\"Preferred Brand: Brand name drugs\"/>\n              </coding>\n            </valueCodeableConcept>\n          </extension>\n          <extension url=\"mailOrder\">\n            <valueBoolean value=\"true\"/>\n          </extension>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n          <extension url=\"drugTierID\">\n            <valueCodeableConcept>\n              <coding>\n                <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n                <code value=\"specialty\"/>\n                <display value=\"Specialty: Drugs used to treat complex conditions like cancer and multiple sclerosis.They can be generic or brand name, and are typically the most expensive drugs on the formulary.\"/>\n              </coding>\n            </valueCodeableConcept>\n          </extension>\n          <extension url=\"mailOrder\">\n            <valueBoolean value=\"true\"/>\n          </extension>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n          <extension url=\"drugTierID\">\n            <valueCodeableConcept>\n              <coding>\n                <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n                <code value=\"non-preferred-generic\"/>\n                <display value=\"Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.\"/>\n              </coding>\n            </valueCodeableConcept>\n          </extension>\n          <extension url=\"mailOrder\">\n            <valueBoolean value=\"true\"/>\n          </extension>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n          <extension url=\"drugTierID\">\n            <valueCodeableConcept>\n              <coding>\n                <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n                <code value=\"generic\"/>\n                <display value=\"Generic: Commonly prescribed generic drugs that cost more than drugs in the ‘preferred generic’ tier.\"/>\n              </coding>\n            </valueCodeableConcept>\n          </extension>\n          <extension url=\"mailOrder\">\n            <valueBoolean value=\"true\"/>\n          </extension>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n          <extension url=\"drugTierID\">\n            <valueCodeableConcept>\n              <coding>\n                <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n                <code value=\"non-preferred-brand\"/>\n                <display value=\"Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.\"/>\n              </coding>\n            </valueCodeableConcept>\n          </extension>\n          <extension url=\"mailOrder\">\n            <valueBoolean value=\"true\"/>\n          </extension>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Network-extension\">\n          <valueString value=\"Not Applicable\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-SummaryURL-extension\">\n          <valueString value=\"https://cdn.cloverhealth.com/filer_public/d0/b6/d0b6294a-2e6b-4504-b9d4-bf65a4753210/76207_nj_eng_ch_nj_cy21_5t_gs_core_april_21.pdf\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanIDType-extension\">\n          <valueString value=\"HIOS-PLAN-ID\"/>\n        </extension>\n        <identifier>\n          <system value=\"https://www.cloverhealth.com/plans\"/>\n          <value value=\"001\"/>\n        </identifier>\n        <identifier>\n          <system value=\"https://www.cloverhealth.com/plans\"/>\n          <value value=\"002\"/>\n        </identifier>\n        <identifier>\n          <value value=\"H5141\"/>\n        </identifier>\n        <status value=\"current\"/>\n        <mode value=\"snapshot\"/>\n        <title value=\"H5141\"/>\n        <date value=\"2021-05-18T10:18:01.162981+00:00\"/>\n        <entry>\n          <item>\n            <reference value=\"MedicationKnowledge/000212621243033\"/>\n          </item>\n        </entry>\n        <entry>\n          <item>\n            <reference value=\"MedicationKnowledge/000212621923056\"/>\n          </item>\n        </entry>\n      </List>\n    </resource>\n    <search>\n      <mode value=\"match\"/>\n    </search>\n  </entry>\n</Bundle>\n"
+                  summary: XML Example
+                  description: '
+
+                    ListBundle
+
+
+                    Contains a collection of resources
+
+
+                    - Rule: total only when a search or history
+
+                    - Rule: entry.search only when a search
+
+                    - Rule: entry.request mandatory for batch/transaction/history, otherwise prohibited
+
+                    - Rule: entry.response mandatory for batch-response/transaction-response/history, otherwise prohibited
+
+                    - Rule: FullUrl must be unique in a bundle, or else entries with the same fullUrl must have different meta.versionId (except in history bundles)
+
+                    - Rule: A document must have an identifier with a system and a value
+
+                    - Rule: A document must have a date
+
+                    - Rule: A document must have a Composition as the first resource
+
+                    - Rule: A message must have a MessageHeader as the first resource Elements defined in Ancestors: id, meta, implicitRules, language
+
+                    '
+          description: ''
+  /formulary/api/List/{id}:
+    get:
+      operationId: list_formulary_item
+      description: The read interaction accesses the current contents of a resource.
+      summary: The read interaction accesses the current contents of a resource.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - fhir-r4-formulary-api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FormularyListItemResponse'
+              examples:
+                JSONExample:
+                  value:
+                    resourceType: List
+                    id: a1bf521c-7fe0-5329-b1bb-8858a52cd807
+                    meta:
+                      lastUpdated: '2021-05-18T10:18:01.162981+00:00'
+                      profile:
+                      - http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan
+                    identifier:
+                    - system: https://www.cloverhealth.com/plans
+                      value: '001'
+                    - system: https://www.cloverhealth.com/plans
+                      value: '002'
+                    - value: H5141
+                    status: current
+                    mode: snapshot
+                    title: H5141
+                    date: '2021-05-18T10:18:01.162981+00:00'
+                    extension:
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                      extension:
+                      - url: drugTierID
+                        valueCodeableConcept:
+                          coding:
+                          - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                            code: preferred-generic
+                            display: 'Preferred Generic: Commonly prescribed generic drugs.'
+                      - url: mailOrder
+                        valueBoolean: true
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                      extension:
+                      - url: drugTierID
+                        valueCodeableConcept:
+                          coding:
+                          - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                            code: non-preferred-generic
+                            display: 'Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.'
+                      - url: mailOrder
+                        valueBoolean: true
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension
+                      extension:
+                      - url: drugTierID
+                        valueCodeableConcept:
+                          coding:
+                          - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                            code: non-preferred-brand
+                            display: 'Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.'
+                      - url: mailOrder
+                        valueBoolean: true
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Network-extension
+                      valueString: Not Applicable
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-SummaryURL-extension
+                      valueString: https://cdn.cloverhealth.com/filer_public/d0/b6/d0b6294a-2e6b-4504-b9d4-bf65a4753210/76207_nj_eng_ch_nj_cy21_5t_gs_core_april_21.pdf
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanIDType-extension
+                      valueString: HIOS-PLAN-ID
+                    entry:
+                    - item:
+                        reference: MedicationKnowledge/000212621000001
+                    - item:
+                        reference: MedicationKnowledge/000212621000048
+                  summary: JSON Example
+                  description: '
+
+                    List
+
+
+                    A list is a curated collection of resources
+
+
+                    - Rule: A list can only have an emptyReason if it is empty
+
+                    - Rule: The deleted flag can only be used if the mode of the list is "changes"
+
+                    - Rule: An entry date can only be used if the mode of the list is "working" Elements defined in Ancestors: id, meta, implicitRules, language, text, contained, extension, modifierExtension
+
+                    '
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FormularyListItemResponse'
+              examples:
+                XMLExample:
+                  value: "<?xml version='1.0' encoding='UTF-8'?>\n<List xmlns=\"http://hl7.org/fhir\">\n  <id value=\"a1bf521c-7fe0-5329-b1bb-8858a52cd807\"/>\n  <meta>\n    <lastUpdated value=\"2021-05-18T10:18:01.162981+00:00\"/>\n    <profile value=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan\"/>\n  </meta>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n    <extension url=\"drugTierID\">\n      <valueCodeableConcept>\n        <coding>\n          <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n          <code value=\"preferred-generic\"/>\n          <display value=\"Preferred Generic: Commonly prescribed generic drugs.\"/>\n        </coding>\n      </valueCodeableConcept>\n    </extension>\n    <extension url=\"mailOrder\">\n      <valueBoolean value=\"true\"/>\n    </extension>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n    <extension url=\"drugTierID\">\n      <valueCodeableConcept>\n        <coding>\n          <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n          <code value=\"non-preferred-generic\"/>\n          <display value=\"Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.\"/>\n        </coding>\n      </valueCodeableConcept>\n    </extension>\n    <extension url=\"mailOrder\">\n      <valueBoolean value=\"true\"/>\n    </extension>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\">\n    <extension url=\"drugTierID\">\n      <valueCodeableConcept>\n        <coding>\n          <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n          <code value=\"non-preferred-brand\"/>\n          <display value=\"Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.\"/>\n        </coding>\n      </valueCodeableConcept>\n    </extension>\n    <extension url=\"mailOrder\">\n      <valueBoolean value=\"true\"/>\n    </extension>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Network-extension\">\n    <valueString value=\"Not Applicable\"/>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-SummaryURL-extension\">\n    <valueString value=\"https://cdn.cloverhealth.com/filer_public/d0/b6/d0b6294a-2e6b-4504-b9d4-bf65a4753210/76207_nj_eng_ch_nj_cy21_5t_gs_core_april_21.pdf\"/>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanIDType-extension\">\n    <valueString value=\"HIOS-PLAN-ID\"/>\n  </extension>\n  <identifier>\n    <system value=\"https://www.cloverhealth.com/plans\"/>\n    <value value=\"001\"/>\n  </identifier>\n  <identifier>\n    <system value=\"https://www.cloverhealth.com/plans\"/>\n    <value value=\"002\"/>\n  </identifier>\n  <identifier>\n    <value value=\"H5141\"/>\n  </identifier>\n  <status value=\"current\"/>\n  <mode value=\"snapshot\"/>\n  <title value=\"H5141\"/>\n  <date value=\"2021-05-18T10:18:01.162981+00:00\"/>\n  <entry>\n    <item>\n      <reference value=\"MedicationKnowledge/000212621000001\"/>\n    </item>\n  </entry>\n  <entry>\n    <item>\n      <reference value=\"MedicationKnowledge/000212621000048\"/>\n    </item>\n  </entry>\n</List>"
+                  summary: XML Example
+                  description: '
+
+                    List
+
+
+                    A list is a curated collection of resources
+
+
+                    - Rule: A list can only have an emptyReason if it is empty
+
+                    - Rule: The deleted flag can only be used if the mode of the list is "changes"
+
+                    - Rule: An entry date can only be used if the mode of the list is "working" Elements defined in Ancestors: id, meta, implicitRules, language, text, contained, extension, modifierExtension
+
+                    '
+          description: ''
+  /formulary/api/MedicationKnowledge:
+    get:
+      operationId: search_medication_knowledge
+      description: This interaction searches a set of resources based on some filter criteria.
+      summary: This interaction searches a set of resources based on some filter criteria.
+      parameters:
+      - in: query
+        name: DrugName
+        schema:
+          type: string
+          minLength: 1
+        description: Name of the drug
+      - in: query
+        name: DrugPlan
+        schema:
+          type: string
+          minLength: 1
+        description: Plan of the drug
+      - in: query
+        name: DrugTier
+        schema:
+          type: string
+          minLength: 1
+        description: Drug tier of the drug
+      - in: query
+        name: _count
+        schema:
+          type: integer
+          maximum: 10000
+          minimum: 1
+          default: 20
+          title: ' count'
+        description: Maximum number of results to be returned
+      - in: query
+        name: _offset
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: ' offset'
+        description: Number of results to be offset
+      - in: query
+        name: _profile
+        schema:
+          type: string
+          title: ' profile'
+          minLength: 1
+        description: An URL of profile in structured definition
+      - in: query
+        name: code
+        schema:
+          type: string
+          minLength: 1
+        description: Rx code of the drug
+      tags:
+      - fhir-r4-formulary-api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FormularyMedicationKnowledgeResponse'
+              examples:
+                JSONExample:
+                  value:
+                    resourceType: Bundle
+                    id: 2f6e91d0-60ea-41b6-96cb-354ec38697ad
+                    meta:
+                      lastUpdated: '2021-05-27T12:10:37.416+08:00'
+                    type: searchset
+                    total: 2
+                    link:
+                    - relation: self
+                      url: https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge
+                    entry:
+                    - fullUrl: https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge/000211871000001
+                      resource:
+                        resourceType: MedicationKnowledge
+                        id: 000211871000001
+                        meta:
+                          profile:
+                          - http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug
+                        text:
+                          status: generated
+                          div: '<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative</b></p><p><b>Drug Tier ID</b>:<span title="Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS preferred-generic}">Preferred Generic: Commonly prescribed generic drugs.</span></p><p><b>Prior Authorization</b>: false</p><p><b>Step Therapy Limit</b>: false</p><p><b>Quantity Limit</b>: true</p><p><b>Plan ID</b>: H5141</p><p><b>code</b>:<span title="Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000001}">OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG</span></p></div>'
+                        extension:
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension
+                          valueCodeableConcept:
+                            coding:
+                            - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                              code: preferred-generic
+                              display: 'Preferred Generic: Commonly prescribed generic drugs.'
+                            - system: https://www.cloverhealth.com/members/formulary/DrugTierLevel
+                              code: Tier 1
+                              display: Preferred Generic drugs
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension
+                          valueBoolean: false
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension
+                          valueBoolean: false
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension
+                          valueBoolean: true
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension
+                          valueString: H5141
+                        - url: https://www.cloverhealth.com/members/formulary
+                          valueString: 00021187
+                        code:
+                          coding:
+                          - system: http://www.nlm.nih.gov/research/umls/rxnorm
+                            code: '1000001'
+                            display: OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG
+                      search:
+                        mode: match
+                    - fullUrl: https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge/000211871000048
+                      resource:
+                        resourceType: MedicationKnowledge
+                        id: 000211871000048
+                        meta:
+                          profile:
+                          - http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug
+                        text:
+                          status: generated
+                          div: '<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative</b></p><p><b>Drug Tier ID</b>:<span title="Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS non-preferred-generic}">Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.</span></p><p><b>Prior Authorization</b>: false</p><p><b>Step Therapy Limit</b>: false</p><p><b>Quantity Limit</b>: false</p><p><b>Plan ID</b>: H8010</p><p><b>code</b>:<span title="Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000048}">DOXEPIN HCL CAP 10 MG</span></p></div>'
+                        extension:
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension
+                          valueCodeableConcept:
+                            coding:
+                            - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                              code: non-preferred-generic
+                              display: 'Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.'
+                            - system: https://www.cloverhealth.com/members/formulary/DrugTierLevel
+                              code: Tier 4
+                              display: Non-Preferred drugs
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension
+                          valueBoolean: false
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension
+                          valueBoolean: false
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension
+                          valueBoolean: false
+                        - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension
+                          valueString: H8010
+                        - url: https://www.cloverhealth.com/members/formulary
+                          valueString: 00021187
+                        code:
+                          coding:
+                          - system: http://www.nlm.nih.gov/research/umls/rxnorm
+                            code: '1000048'
+                            display: DOXEPIN HCL CAP 10 MG
+                      search:
+                        mode: match
+                  summary: JSON Example
+                  description: '
+
+                    MedicationKnowledgeBundle
+
+
+                    Contains a collection of resources
+
+
+                    - Rule: total only when a search or history
+
+                    - Rule: entry.search only when a search
+
+                    - Rule: entry.request mandatory for batch/transaction/history, otherwise prohibited
+
+                    - Rule: entry.response mandatory for batch-response/transaction-response/history, otherwise prohibited
+
+                    - Rule: FullUrl must be unique in a bundle, or else entries with the same fullUrl must have different meta.versionId (except in history bundles)
+
+                    - Rule: A document must have an identifier with a system and a value
+
+                    - Rule: A document must have a date
+
+                    - Rule: A document must have a Composition as the first resource
+
+                    - Rule: A message must have a MessageHeader as the first resource Elements defined in Ancestors: id, meta, implicitRules, language
+
+                    '
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FormularyMedicationKnowledgeResponse'
+              examples:
+                XMLExample:
+                  value: "<?xml version='1.0' encoding='UTF-8'?>\n<Bundle xmlns=\"http://hl7.org/fhir\">\n  <id value=\"81938911-5263-4dd4-8400-cd6ee0074c91\"/>\n  <meta>\n    <lastUpdated value=\"2021-05-27T12:11:16.631+08:00\"/>\n  </meta>\n  <type value=\"searchset\"/>\n  <total value=\"2\"/>\n  <link>\n    <relation value=\"self\"/>\n    <url value=\"https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge\"/>\n  </link>\n  <entry>\n    <fullUrl value=\"https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge/000211871000001\"/>\n    <resource>\n      <MedicationKnowledge xmlns=\"http://hl7.org/fhir\">\n        <id value=\"000211871000001\"/>\n        <meta>\n          <lastUpdated value=\"2021-05-27T12:11:16.626+08:00\"/>\n        </meta>\n        <text>\n          <status value=\"generated\"/>\n          <div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;p>&lt;b>Generated Narrative&lt;/b>&lt;/p>&lt;p>&lt;b>Drug Tier ID&lt;/b>:&lt;span title=\"Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS preferred-generic}\">Preferred Generic: Commonly prescribed generic drugs.&lt;/span>&lt;/p>&lt;p>&lt;b>Prior Authorization&lt;/b>: false&lt;/p>&lt;p>&lt;b>Step Therapy Limit&lt;/b>: false&lt;/p>&lt;p>&lt;b>Quantity Limit&lt;/b>: true&lt;/p>&lt;p>&lt;b>Plan ID&lt;/b>: H5141&lt;/p>&lt;p>&lt;b>code&lt;/b>:&lt;span title=\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000001}\">OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG&lt;/span>&lt;/p>&lt;/div></div>\n        </text>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension\">\n          <valueCodeableConcept>\n            <coding>\n              <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n              <code value=\"preferred-generic\"/>\n              <display value=\"Preferred Generic: Commonly prescribed generic drugs.\"/>\n            </coding>\n            <coding>\n              <system value=\"https://www.cloverhealth.com/members/formulary/DrugTierLevel\"/>\n              <code value=\"Tier 1\"/>\n              <display value=\"Preferred Generic drugs\"/>\n            </coding>\n          </valueCodeableConcept>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension\">\n          <valueBoolean value=\"false\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension\">\n          <valueBoolean value=\"false\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension\">\n          <valueBoolean value=\"true\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension\">\n          <valueString value=\"H5141\"/>\n        </extension>\n        <extension url=\"https://www.cloverhealth.com/members/formulary\">\n          <valueString value=\"00021187\"/>\n        </extension>\n        <code>\n          <coding>\n            <system value=\"http://www.nlm.nih.gov/research/umls/rxnorm\"/>\n            <code value=\"1000001\"/>\n            <display value=\"OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG\"/>\n          </coding>\n        </code>\n      </MedicationKnowledge>\n    </resource>\n    <search>\n      <mode value=\"match\"/>\n    </search>\n  </entry>\n  <entry>\n    <fullUrl value=\"https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge/000211871000048\"/>\n    <resource>\n      <MedicationKnowledge xmlns=\"http://hl7.org/fhir\">\n        <id value=\"000211871000048\"/>\n        <meta>\n          <lastUpdated value=\"2021-05-27T12:11:16.632+08:00\"/>\n        </meta>\n        <text>\n          <status value=\"generated\"/>\n          <div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;p>&lt;b>Generated Narrative&lt;/b>&lt;/p>&lt;p>&lt;b>Drug Tier ID&lt;/b>:&lt;span title=\"Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS non-preferred-generic}\">Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.&lt;/span>&lt;/p>&lt;p>&lt;b>Prior Authorization&lt;/b>: false&lt;/p>&lt;p>&lt;b>Step Therapy Limit&lt;/b>: false&lt;/p>&lt;p>&lt;b>Quantity Limit&lt;/b>: false&lt;/p>&lt;p>&lt;b>Plan ID&lt;/b>: H8010&lt;/p>&lt;p>&lt;b>code&lt;/b>:&lt;span title=\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000048}\">DOXEPIN HCL CAP 10 MG&lt;/span>&lt;/p>&lt;/div></div>\n        </text>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension\">\n          <valueCodeableConcept>\n            <coding>\n              <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n              <code value=\"non-preferred-generic\"/>\n              <display value=\"Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.\"/>\n            </coding>\n            <coding>\n              <system value=\"https://www.cloverhealth.com/members/formulary/DrugTierLevel\"/>\n              <code value=\"Tier 4\"/>\n              <display value=\"Non-Preferred drugs\"/>\n            </coding>\n          </valueCodeableConcept>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension\">\n          <valueBoolean value=\"false\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension\">\n          <valueBoolean value=\"false\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension\">\n          <valueBoolean value=\"false\"/>\n        </extension>\n        <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension\">\n          <valueString value=\"H8010\"/>\n        </extension>\n        <extension url=\"https://www.cloverhealth.com/members/formulary\">\n          <valueString value=\"00021187\"/>\n        </extension>\n        <code>\n          <coding>\n            <system value=\"http://www.nlm.nih.gov/research/umls/rxnorm\"/>\n            <code value=\"1000048\"/>\n            <display value=\"DOXEPIN HCL CAP 10 MG\"/>\n          </coding>\n        </code>\n      </MedicationKnowledge>\n    </resource>\n    <search>\n      <mode value=\"match\"/>\n    </search>\n  </entry>\n</Bundle>"
+                  summary: XML Example
+                  description: '
+
+                    MedicationKnowledgeBundle
+
+
+                    Contains a collection of resources
+
+
+                    - Rule: total only when a search or history
+
+                    - Rule: entry.search only when a search
+
+                    - Rule: entry.request mandatory for batch/transaction/history, otherwise prohibited
+
+                    - Rule: entry.response mandatory for batch-response/transaction-response/history, otherwise prohibited
+
+                    - Rule: FullUrl must be unique in a bundle, or else entries with the same fullUrl must have different meta.versionId (except in history bundles)
+
+                    - Rule: A document must have an identifier with a system and a value
+
+                    - Rule: A document must have a date
+
+                    - Rule: A document must have a Composition as the first resource
+
+                    - Rule: A message must have a MessageHeader as the first resource Elements defined in Ancestors: id, meta, implicitRules, language
+
+                    '
+          description: ''
+  /formulary/api/MedicationKnowledge/{id}:
+    get:
+      operationId: get_medication_knowledge
+      description: The read interaction accesses the current contents of a resource.
+      summary: The read interaction accesses the current contents of a resource.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - fhir-r4-formulary-api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FormularyMedicationKnowledgeItemResponse'
+              examples:
+                JSONExample:
+                  value:
+                    resourceType: MedicationKnowledge
+                    id: 000211871000001
+                    meta:
+                      profile:
+                      - http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug
+                    text:
+                      status: generated
+                      div: '<div xmlns="http://www.w3.org/1999/xhtml"><p><b>Generated Narrative</b></p><p><b>Drug Tier ID</b>:<span title="Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS preferred-generic}">Preferred Generic: Commonly prescribed generic drugs.</span></p><p><b>Prior Authorization</b>: false</p><p><b>Step Therapy Limit</b>: false</p><p><b>Quantity Limit</b>: true</p><p><b>Plan ID</b>: H8010</p><p><b>code</b>:<span title="Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000001}">OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG</span></p></div>'
+                    extension:
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension
+                      valueCodeableConcept:
+                        coding:
+                        - system: http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS
+                          code: preferred-generic
+                          display: 'Preferred Generic: Commonly prescribed generic drugs.'
+                        - system: https://www.cloverhealth.com/members/formulary/DrugTierLevel
+                          code: Tier 1
+                          display: Preferred Generic drugs
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension
+                      valueBoolean: false
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension
+                      valueBoolean: false
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension
+                      valueBoolean: true
+                    - url: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension
+                      valueString: H8010
+                    - url: https://www.cloverhealth.com/members/formulary
+                      valueString: 00021187
+                    code:
+                      coding:
+                      - system: http://www.nlm.nih.gov/research/umls/rxnorm
+                        code: '1000001'
+                        display: OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG
+                  summary: JSON Example
+                  description: 'MedicationKnowledge
+
+
+                    Definition of Medication Knowledge Elements defined in Ancestors: id, meta, implicitRules, language, text, contained, extension, modifierExtension'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FormularyMedicationKnowledgeItemResponse'
+              examples:
+                XMLExample:
+                  value: "<?xml version='1.0' encoding='UTF-8'?>\n<MedicationKnowledge xmlns=\"http://hl7.org/fhir\">\n  <id value=\"000211871000001\"/>\n  <meta>\n    <lastUpdated value=\"2021-05-27T12:11:51.038+08:00\"/>\n  </meta>\n  <text>\n    <status value=\"generated\"/>\n    <div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;div xmlns=\"http://www.w3.org/1999/xhtml\">&lt;p>&lt;b>Generated Narrative&lt;/b>&lt;/p>&lt;p>&lt;b>Drug Tier ID&lt;/b>:&lt;span title=\"Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS preferred-generic}\">Preferred Generic: Commonly prescribed generic drugs.&lt;/span>&lt;/p>&lt;p>&lt;b>Prior Authorization&lt;/b>: false&lt;/p>&lt;p>&lt;b>Step Therapy Limit&lt;/b>: false&lt;/p>&lt;p>&lt;b>Quantity Limit&lt;/b>: true&lt;/p>&lt;p>&lt;b>Plan ID&lt;/b>: H8010&lt;/p>&lt;p>&lt;b>code&lt;/b>:&lt;span title=\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000001}\">OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG&lt;/span>&lt;/p>&lt;/div></div>\n  </text>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension\">\n    <valueCodeableConcept>\n      <coding>\n        <system value=\"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\"/>\n        <code value=\"preferred-generic\"/>\n        <display value=\"Preferred Generic: Commonly prescribed generic drugs.\"/>\n      </coding>\n      <coding>\n        <system value=\"https://www.cloverhealth.com/members/formulary/DrugTierLevel\"/>\n        <code value=\"Tier 1\"/>\n        <display value=\"Preferred Generic drugs\"/>\n      </coding>\n    </valueCodeableConcept>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension\">\n    <valueBoolean value=\"false\"/>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension\">\n    <valueBoolean value=\"false\"/>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension\">\n    <valueBoolean value=\"true\"/>\n  </extension>\n  <extension url=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension\">\n    <valueString value=\"H8010\"/>\n  </extension>\n  <extension url=\"https://www.cloverhealth.com/members/formulary\">\n    <valueString value=\"00021187\"/>\n  </extension>\n  <code>\n    <coding>\n      <system value=\"http://www.nlm.nih.gov/research/umls/rxnorm\"/>\n      <code value=\"1000001\"/>\n      <display value=\"OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG\"/>\n    </coding>\n  </code>\n</MedicationKnowledge>"
+                  summary: XML Example
+                  description: 'MedicationKnowledge
+
+
+                    Definition of Medication Knowledge Elements defined in Ancestors: id, meta, implicitRules, language, text, contained, extension, modifierExtension'
+          description: ''
+  /formulary/api/metadata:
+    get:
+      operationId: get_formulary_api_metadata
+      description: Get the capability statement of the formulary API
+      summary: Get the capability statement of the formulary API
+      tags:
+      - fhir-r4-formulary-api
+      security:
+      - cookieAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/fhir+json:
+              schema:
+                $ref: '#/components/schemas/FHIRCapabilityStatement'
+              examples:
+                JSONExample:
+                  value:
+                    resourceType: CapabilityStatement
+                    id: usdf-server
+                    text:
+                      status: additional
+                      div: '<div xmlns="http://www.w3.org/1999/xhtml"><h2 id="title">USDFServerCapabilityStatement</h2> <p>This Section describes the expected capabilities of the US Drug Formulary Server actor which is responsible for providing responses to the queries submitted by the US Drug Formulary Requestors. The complete list of FHIR profiles, RESTful operations, and search parameters supported by US Drug Formulary Server are defined. </p> <table> <tr> <td>Mode:</td> <td>SERVER</td> </tr> <tr> <td>Description:</td> <td>The US Drug Formulary Server **SHALL**: <ol> <li>Support the US Drug Formulary CoveragePlan (List) and FormularyDrug (MedicationKnowledge) resource profile.</li> <li>Implement the RESTful behavior according to the FHIR specification.</li> <li>Return the following response classes: <ul> <li>(Status 400): invalid parameter</li> <li>(Status 401/4xx): unauthorized request</li> <li>(Status 403): insufficient scope</li> <li>Status 404): unknown resource</li> <li>(Status 410): deleted resource</li> </ul> </li>      <li>Support json source formats for all US Drug Formulary interactions.</li> </ol> </td>     </tr>     <tr>     <td>    </td>     <td> The US Drug Formulary  Server **SHOULD**: <ol> <li>Support xml source formats for all US Drug Formulary interactions.</li> </ol> </td></tr> <tr>     <td>    </td>     <td>The US Drug Formulary Server supports the following transactions:     <ul>         <li>CoveragePlan (List) Resource             <ul>                 <li>**SHALL**: search-type, read,   </li>                 <li>**SHOULD** : vread, history-instance</li>                  <li>**MAY** : create, update, patch, delete, history-type</li>             </ul>         </li>         <li>FormularyDrug (MedicationKnowledge) Resource             <ul>                 <li>**SHALL**: search-type, read,   </li>                 <li>**SHOULD** : vread, history-instance</li>                 <li>**MAY** : create, update, patch, delete, history-type</li>             </ul>         </li>         </ul>   </td> </tr> <tr>     <td>    </td>     <td>The US Drug Formulary Server **SHALL** support the following searchParameters individually and in combination:     <ul>          <li>FormularyDrug (MedicationKnowledge) Resource             <ul>                 <li>DrugName </li>                 <li>DrugPlan </li>                 <li>DrugTier </li>                 <li>code</li>             </ul>         </li>     </ul>     </td> </tr> </table> </div>'
+                    version: 1.0.0
+                    status: active
+                    date: '2020-01-08T00:00:00+10:00'
+                    publisher: Clover Health
+                    description: 'This Section describes the expected capabilities of the US Drug Formulary Server actor which is responsible for providing responses to the queries submitted by the US Drug Formulary Requestors. The complete list of FHIR profiles, RESTful operations, and search parameters supported by US Drug Formulary Server are defined. '
+                    kind: instance
+                    software:
+                      name: Clover Health FHIR R4 Formulary API
+                      version: 4.2.0
+                    implementation:
+                      description: DaVinci PDex US Drug Formulary
+                      url: https://build.fhir.org/ig/HL7/davinci-pdex-formulary/
+                    fhirVersion: 4.0.1
+                    format:
+                    - application/fhir+xml
+                    - application/fhir+json
+                    rest:
+                    - mode: server
+                      resource:
+                      - type: Bundle
+                        profile: http://hl7.org/fhir/StructureDefinition/Bundle
+                        interaction:
+                        - code: read
+                      - type: List
+                        profile: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan
+                        interaction:
+                        - code: read
+                        - code: search-type
+                        searchParam:
+                        - name: _profile
+                          type: string
+                          documentation: An URL of profile in structured definition
+                        - name: _count
+                          type: number
+                          documentation: Maximum number of results to be returned
+                        - name: identifier
+                          type: string
+                          documentation: CoveragePlan identifier. It can be in the type of CloverHealth's identifier (E.g. 001, 002) or the plan ID (E.g. H5141)
+                        - name: status
+                          type: string
+                        - name: item
+                          type: string
+                          documentation: The identifier of the associated FormularyDrug (also known as MedicationKnowledge) under the CoveragePlan
+                      - type: MedicationKnowledge
+                        profile: http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug
+                        interaction:
+                        - code: read
+                        - code: search-type
+                        searchParam:
+                        - name: _profile
+                          type: string
+                          documentation: An URL of profile in structured definition
+                        - name: _count
+                          type: number
+                          documentation: Maximum number of results to be returned
+                        - name: DrugName
+                          type: string
+                          documentation: Name of the drug
+                        - name: DrugPlan
+                          type: string
+                          documentation: Plan of the drug
+                        - name: DrugTier
+                          type: token
+                          documentation: Drug tier of the drug
+                        - name: code
+                          type: string
+                          documentation: Rx code of the drug
+                  summary: JSON Example
+                  description: 'Any instance of data is allowed.
+
+
+                    The API file specifies body for this request but it does not specify the data model.'
+            application/fhir+xml:
+              schema:
+                $ref: '#/components/schemas/FHIRCapabilityStatement'
+              examples:
+                XMLExample:
+                  value: "<?xml version='1.0' encoding='utf-8'?>\n  <CapabilityStatement xmlns=\"http://hl7.org/fhir\">\n    <id value=\"usdf-server\"/>\n    <text>\n      <status value=\"additional\"/>\n      <div xmlns=\"http://www.w3.org/1999/xhtml\">\n        <h2 id=\"title\">USDFServerCapabilityStatement</h2>\n        <p>This Section describes the expected capabilities of the US Drug Formulary Server actor which is responsible for providing responses to the queries submitted by the US Drug Formulary Requestors. The complete list of FHIR profiles, RESTful operations, and search parameters supported by US Drug Formulary Server are defined. </p>\n        <table>\n          <tr>\n            <td>Mode:</td>\n            <td>SERVER</td>\n          </tr>\n          <tr>\n            <td>Description:</td>\n            <td>\n              The US Drug Formulary Server **SHALL**:\n              <ol>\n                <li>Support the US Drug Formulary CoveragePlan (List) and FormularyDrug (MedicationKnowledge) resource profile.</li>\n                <li>Implement the RESTful behavior according to the FHIR specification.</li>\n                <li>\n                  Return the following response classes:\n                  <ul>\n                    <li>(Status 400): invalid parameter</li>\n                    <li>(Status 401/4xx): unauthorized request</li>\n                    <li>(Status 403): insufficient scope</li>\n                    <li>Status 404): unknown resource</li>\n                    <li>(Status 410): deleted resource</li>\n                  </ul>\n                </li>\n                <li>Support json source formats for all US Drug Formulary interactions.</li>\n              </ol>\n            </td>\n          </tr>\n          <tr>\n            <td>\n            </td>\n            <td>\n               The US Drug Formulary  Server **SHOULD**:\n              <ol>\n                <li>Support xml source formats for all US Drug Formulary interactions.</li>\n              </ol>\n            </td>\n          </tr>\n          <tr>\n            <td>\n            </td>\n            <td>\n              The US Drug Formulary Server supports the following transactions:\n              <ul>\n                <li>\n                  CoveragePlan (List) Resource\n                  <ul>\n                    <li>**SHALL**: search-type, read,   </li>\n                    <li>**SHOULD** : vread, history-instance</li>\n                    <li>**MAY** : create, update, patch, delete, history-type</li>\n                  </ul>\n                </li>\n                <li>\n                  FormularyDrug (MedicationKnowledge) Resource\n                  <ul>\n                    <li>**SHALL**: search-type, read,   </li>\n                    <li>**SHOULD** : vread, history-instance</li>\n                    <li>**MAY** : create, update, patch, delete, history-type</li>\n                  </ul>\n                </li>\n              </ul>\n            </td>\n          </tr>\n          <tr>\n            <td>\n            </td>\n            <td>\n              The US Drug Formulary Server **SHALL** support the following searchParameters individually and in combination:\n              <ul>\n                <li>\n                  FormularyDrug (MedicationKnowledge) Resource\n                  <ul>\n                    <li>DrugName </li>\n                    <li>DrugPlan </li>\n                    <li>DrugTier </li>\n                    <li>code</li>\n                  </ul>\n                </li>\n              </ul>\n            </td>\n          </tr>\n        </table>\n      </div>\n    </text>\n    <version value=\"1.0.0\"/>\n    <status value=\"active\"/>\n    <date value=\"2020-01-08T00:00:00+10:00\"/>\n    <publisher value=\"Clover Health\"/>\n    <description value=\"This Section describes the expected capabilities of the US Drug Formulary Server actor which is responsible for providing responses to the queries submitted by the US Drug Formulary Requestors. The complete list of FHIR profiles, RESTful operations, and search parameters supported by US Drug Formulary Server are defined. \"/>\n    <kind value=\"instance\"/>\n    <software>\n      <name value=\"Clover Health FHIR R4 Formulary API\"/>\n      <version value=\"4.2.0\"/>\n    </software>\n    <implementation>\n      <description value=\"DaVinci PDex US Drug Formulary\"/>\n      <url value=\"https://build.fhir.org/ig/HL7/davinci-pdex-formulary/\"/>\n    </implementation>\n    <fhirVersion value=\"4.0.1\"/>\n    <format value=\"application/fhir+xml\"/>\n    <format value=\"application/fhir+json\"/>\n    <rest>\n      <mode value=\"server\"/>\n      <resource>\n        <type value=\"Bundle\"/>\n        <profile value=\"http://hl7.org/fhir/StructureDefinition/Bundle\"/>\n        <interaction>\n          <code value=\"read\"/>\n        </interaction>\n      </resource>\n      <resource>\n        <type value=\"List\"/>\n        <profile value=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan\"/>\n        <interaction>\n          <code value=\"read\"/>\n        </interaction>\n        <interaction>\n          <code value=\"search-type\"/>\n        </interaction>\n        <searchParam>\n          <name value=\"_profile\"/>\n          <type value=\"string\"/>\n          <documentation value=\"An URL of profile in structured definition\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"_count\"/>\n          <type value=\"number\"/>\n          <documentation value=\"Maximum number of results to be returned\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"identifier\"/>\n          <type value=\"string\"/>\n          <documentation value=\"CoveragePlan identifier. It can be in the type of CloverHealth's identifier (E.g. 001, 002) or the plan ID (E.g. H5141)\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"status\"/>\n          <type value=\"string\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"item\"/>\n          <type value=\"string\"/>\n          <documentation value=\"The identifier of the associated FormularyDrug (also known as MedicationKnowledge) under the CoveragePlan\"/>\n        </searchParam>\n      </resource>\n      <resource>\n        <type value=\"MedicationKnowledge\"/>\n        <profile value=\"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug\"/>\n        <interaction>\n          <code value=\"read\"/>\n        </interaction>\n        <interaction>\n          <code value=\"search-type\"/>\n        </interaction>\n        <searchParam>\n          <name value=\"_profile\"/>\n          <type value=\"string\"/>\n          <documentation value=\"An URL of profile in structured definition\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"_count\"/>\n          <type value=\"number\"/>\n          <documentation value=\"Maximum number of results to be returned\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"DrugName\"/>\n          <type value=\"string\"/>\n          <documentation value=\"Name of the drug\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"DrugPlan\"/>\n          <type value=\"string\"/>\n          <documentation value=\"Plan of the drug\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"DrugTier\"/>\n          <type value=\"token\"/>\n          <documentation value=\"Drug tier of the drug\"/>\n        </searchParam>\n        <searchParam>\n          <name value=\"code\"/>\n          <type value=\"string\"/>\n          <documentation value=\"Rx code of the drug\"/>\n        </searchParam>\n      </resource>\n    </rest>\n  </CapabilityStatement>"
+                  summary: XML Example
+                  description: 'Any instance of data is allowed.
+
+
+                    The API file specifies body for this request but it does not specify the data model.'
+          description: ''
+components:
+  schemas:
+    FormularyListItemExtensionExtensionvalueCodeableConcept:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListItemExtensionExtensionvalueCodeableConceptCoding'
+      required:
+      - coding
+    FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConceptCoding'
+      required:
+      - coding
+    FormularyMedicationKnowledgeItemExtensionvalueCodeableConceptCoding:
+      type: object
+      properties:
+        system:
+          type: string
+        code:
+          type: string
+        display:
+          type: string
+      required:
+      - code
+      - display
+      - system
+    FormularyListResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: Bundle
+        id:
+          type: string
+          description: Logical id of this artifact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleMeta'
+          description: Metadata about the resource
+        type:
+          $ref: '#/components/schemas/TypeF76Enum'
+        total:
+          type: integer
+          minimum: 0
+          description: If search, the total number of matches
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseBundleLink'
+          description: Links related to this Bundle
+        timestamp:
+          type: string
+          format: date-time
+          description: When the bundle was assembled
+        signature:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSignature'
+          description: Digital Signature
+        identifier:
+          description: Persistent identifier for the bundle
+        language:
+          type: string
+          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
+        implicitRules:
+          type: string
+          description: A set of rules under which this content was created
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListEntry'
+          description: 'Entry in the bundle - will have a resource or information
+
+            Rule: must be a resource unless there''s a request or response
+
+            Rule: fullUrl cannot be a version specific reference This repeating element order: For bundles of type ''document'' and ''message'', the first resource is special (must be Composition or MessageHeader respectively). For all bundles, the meaning of the order of entries depends on the bundle type'
+      required:
+      - entry
+      - id
+      - link
+      - meta
+      - resourceType
+      - total
+      - type
+    FormularyListItemEntry:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/FormularyListItemEntryItem'
+      required:
+      - item
+    FormularyMedicationKnowledgeItemResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemMeta'
+        text:
+          allOf:
+          - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemText'
+          description: Text summary of the resource, for human interpretation
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValue'
+        code:
+          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept'
+      required:
+      - code
+      - extension
+      - id
+      - meta
+      - resourceType
+      - text
+    FormularyMedicationKnowledgeEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/FormularyMedicationKnowledgeEntrySearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
+    FormularyMedicationKnowledgeItemText:
+      type: object
+      properties:
+        status:
+          type: string
+        div:
+          type: string
+      required:
+      - div
+      - status
+    FormularyMedicationKnowledgeResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: Bundle
+        id:
+          type: string
+          description: Logical id of this artifact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleMeta'
+          description: Metadata about the resource
+        type:
+          $ref: '#/components/schemas/TypeF76Enum'
+        total:
+          type: integer
+          minimum: 0
+          description: If search, the total number of matches
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseBundleLink'
+          description: Links related to this Bundle
+        timestamp:
+          type: string
+          format: date-time
+          description: When the bundle was assembled
+        signature:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSignature'
+          description: Digital Signature
+        identifier:
+          description: Persistent identifier for the bundle
+        language:
+          type: string
+          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
+        implicitRules:
+          type: string
+          description: A set of rules under which this content was created
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyMedicationKnowledgeEntry'
+      required:
+      - entry
+      - id
+      - link
+      - meta
+      - resourceType
+      - total
+      - type
+    FormularyListItemResponseStatusEnum:
+      enum:
+      - current
+      - retired
+      - entered-in-error
+      type: string
+      description: '* `current` - current
+
+        * `retired` - retired
+
+        * `entered-in-error` - entered-in-error'
+    FormularyMedicationKnowledgeEntrySearch:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchModeEnum'
+      required:
+      - mode
+    FormularyListItemExtensionExtensionValueCodeableConcept:
+      type: object
+      properties:
+        url:
+          type: string
+        valueCodeableConcept:
+          $ref: '#/components/schemas/FormularyListItemExtensionExtensionvalueCodeableConcept'
+      required:
+      - url
+      - valueCodeableConcept
+    FHIRCapabilityStatementSoftware:
+      type: object
+      properties:
+        name:
+          type: string
+          description: A name the software is known by
+        version:
+          type: string
+          description: Version covered by this statement
+        releaseDate:
+          type: string
+          format: date-time
+          description: Date this version was released
+    FormularyListItemExtensionExtensionValueString:
+      type: object
+      properties:
+        url:
+          type: string
+        valueString:
+          type: string
+      required:
+      - url
+      - valueString
+    FHIRCapabilityStatementRestResource:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A resource type that is supported
+        profile:
+          type: string
+          description: System-wide profile
+        interaction:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCapabilityStatementInteractionCode'
+        searchInclude:
+          type: array
+          items:
+            type: string
+          description: _include values supported by the server
+        searchRevInclude:
+          type: array
+          items:
+            type: string
+          description: _revinclude values supported by the server
+      required:
+      - searchInclude
+      - searchRevInclude
+      - type
+    FormularyListEntrySearch:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchModeEnum'
+      required:
+      - mode
+    BaseBundleMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+      required:
+      - lastUpdated
+    FormularyListItemExtensionExtensionValueBoolean:
+      type: object
+      properties:
+        url:
+          type: string
+        valueBoolean:
+          type: boolean
+      required:
+      - url
+      - valueBoolean
+    BaseBundleSignature:
+      type: object
+      properties:
+        when:
+          type: string
+          format: date-time
+          description: When the signature was created
+        who:
+          type: string
+          description: Who signed
+        targetFormat:
+          type: string
+          description: The technical format of the signed resources
+        sigFormat:
+          type: string
+          description: The technical format of the signature
+        onBehalfOf:
+          type: string
+          description: The party represented
+        type:
+          type: array
+          items: {}
+          description: Indication of the reason the entity signed the object(s)
+        data:
+          type: string
+          description: The actual signature content (XML DigSig. JWT, picture, etc.)
+      required:
+      - data
+      - type
+      - when
+    PublicationStatusEnum:
+      enum:
+      - draft
+      - active
+      - retired
+      - unknown
+      type: string
+      description: '* `draft` - draft
+
+        * `active` - active
+
+        * `retired` - retired
+
+        * `unknown` - unknown'
+    FormularyMedicationKnowledgeItemExtensionValueBoolean:
+      type: object
+      properties:
+        url:
+          type: string
+        valueBoolean:
+          type: boolean
+      required:
+      - url
+      - valueBoolean
+    FHIRCapabilityStatement:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          default: CapabilityStatement
+        id:
+          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseResourceMeta'
+          description: Metadata about a resource
+        status:
+          $ref: '#/components/schemas/PublicationStatusEnum'
+        date:
+          type: string
+          format: date-time
+          description: Date last changed
+        publisher:
+          type: string
+          description: Name of the publisher/steward
+        kind:
+          $ref: '#/components/schemas/KindEnum'
+        software:
+          allOf:
+          - $ref: '#/components/schemas/FHIRCapabilityStatementSoftware'
+          description: Software that is covered by this capability statement
+        fhirVersion:
+          type: string
+          description: FHIR Version the system supports
+        format:
+          type: array
+          items:
+            type: string
+          description: formats supported (xml | json | ttl | mime type)
+        rest:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCapabilityStatementRest'
+          description: "\tIf the endpoint is a RESTful one"
+      required:
+      - date
+      - fhirVersion
+      - format
+      - kind
+      - meta
+      - status
+    CodeEnum:
+      enum:
+      - read
+      - vread
+      - update
+      - patch
+      - delete
+      - history-instance
+      - history-type
+      - create
+      - search-type
+      type: string
+      description: '* `read` - read
+
+        * `vread` - vread
+
+        * `update` - update
+
+        * `patch` - patch
+
+        * `delete` - delete
+
+        * `history-instance` - history-instance
+
+        * `history-type` - history-type
+
+        * `create` - create
+
+        * `search-type` - search-type'
+    ResponseModeEnum:
+      enum:
+      - working
+      - snapshot
+      - changes
+      type: string
+      description: '* `working` - working
+
+        * `snapshot` - snapshot
+
+        * `changes` - changes'
+    BaseResourceMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+          description: When the resource version last changed
+        profile:
+          type: array
+          items: {}
+          description: Profiles this resource claims to conform to
+        versionId:
+          type: string
+          description: Version specific identifier
+        source:
+          type: string
+          description: Identifies where the resource comes from
+      required:
+      - profile
+    TypeF76Enum:
+      enum:
+      - document
+      - message
+      - transaction
+      - transaction - response
+      - batch
+      - batch - response
+      - history
+      - searchset
+      - collection
+      type: string
+      description: '* `document` - document
+
+        * `message` - message
+
+        * `transaction` - transaction
+
+        * `transaction - response` - transaction - response
+
+        * `batch` - batch
+
+        * `batch - response` - batch - response
+
+        * `history` - history
+
+        * `searchset` - searchset
+
+        * `collection` - collection'
+    FHIRCapabilityStatementInteractionCode:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/CodeEnum'
+      required:
+      - code
+    FormularyListItemExtensionExtensionvalueCodeableConceptCoding:
+      type: object
+      properties:
+        system:
+          type: string
+        code:
+          type: string
+        display:
+          type: string
+      required:
+      - code
+      - display
+      - system
+    FormularyListItemResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/FormularyListItemMeta'
+        identifier:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListItemIdentifier'
+        status:
+          $ref: '#/components/schemas/FormularyListItemResponseStatusEnum'
+        mode:
+          $ref: '#/components/schemas/ResponseModeEnum'
+        title:
+          type: string
+        date:
+          type: string
+          format: date-time
+        extension:
+          $ref: '#/components/schemas/FormularyListItemExtension'
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListItemEntry'
+      required:
+      - date
+      - entry
+      - extension
+      - id
+      - identifier
+      - meta
+      - mode
+      - resourceType
+      - status
+      - title
+    FormularyListItemEntryItem:
+      type: object
+      properties:
+        reference:
+          type: string
+      required:
+      - reference
+    FHIRCapabilityStatementRestModeEnum:
+      enum:
+      - client
+      - server
+      type: string
+      description: '* `client` - client
+
+        * `server` - server'
+    FormularyMedicationKnowledgeItemExtensionValue:
+      oneOf:
+      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueCodeableConcept'
+      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueBoolean'
+      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueString'
+      discriminator:
+        propertyName: type
+        mapping:
+          valueCodeableConcept: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueCodeableConcept'
+          valueBoolean: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueBoolean'
+          valueString: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueString'
+    FormularyMedicationKnowledgeItemExtensionValueCodeableConcept:
+      type: object
+      properties:
+        url:
+          type: string
+        valueCodeableConcept:
+          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept'
+      required:
+      - url
+      - valueCodeableConcept
+    FormularyMedicationKnowledgeItemMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+        profile:
+          type: array
+          items: {}
+      required:
+      - profile
+    FormularyListEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/FormularyListEntrySearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/FormularyListItemResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
+    FormularyListItemMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+        profile:
+          type: array
+          items: {}
+      required:
+      - lastUpdated
+      - profile
+    BaseBundleLink:
+      type: object
+      properties:
+        relation:
+          type: string
+        url:
+          type: string
+          description: Reference details for the link
+      required:
+      - relation
+      - url
+    KindEnum:
+      enum:
+      - instance
+      - capability
+      - requirements
+      type: string
+      description: '* `instance` - instance
+
+        * `capability` - capability
+
+        * `requirements` - requirements'
+    SearchModeEnum:
+      enum:
+      - match
+      - include
+      - outcome
+      type: string
+      description: '* `match` - match
+
+        * `include` - include
+
+        * `outcome` - outcome'
+    FormularyListItemIdentifier:
+      type: object
+      properties:
+        system:
+          type: string
+        value:
+          type: string
+      required:
+      - value
+    FHIRCapabilityStatementRest:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/FHIRCapabilityStatementRestModeEnum'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCapabilityStatementRestResource'
+          description: Resource served on the REST interface
+      required:
+      - mode
+      - resource
+    FormularyListItemExtensionValue:
+      oneOf:
+      - $ref: '#/components/schemas/FormularyListItemExtensionExtensionValueCodeableConcept'
+      - $ref: '#/components/schemas/FormularyListItemExtensionExtensionValueBoolean'
+      - $ref: '#/components/schemas/FormularyListItemExtensionExtensionValueString'
+      discriminator:
+        propertyName: type
+        mapping:
+          valueCodeableConcept: '#/components/schemas/FormularyListItemExtensionExtensionValueCodeableConcept'
+          valueBoolean: '#/components/schemas/FormularyListItemExtensionExtensionValueBoolean'
+          valueString: '#/components/schemas/FormularyListItemExtensionExtensionValueString'
+    FormularyMedicationKnowledgeItemExtensionValueString:
+      type: object
+      properties:
+        url:
+          type: string
+        valueString:
+          type: string
+      required:
+      - url
+      - valueString
+    FormularyListItemExtension:
+      type: object
+      properties:
+        url:
+          type: string
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListItemExtensionValue'
+      required:
+      - extension
+      - url
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: sessionid
