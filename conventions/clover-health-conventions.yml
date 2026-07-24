@@ -1,0 +1,56 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/clover-health-fhir-openapi-original.yml + https://www.cloverhealth.com/developers
+# Cross-cutting request/response semantics for the Clover Health public FHIR API.
+# Derived from the OpenAPI plus FHIR R4 conventions. This is a read-only
+# (GET-only) search/read API, so there is no idempotency-key contract to
+# document and no Idempotency pointer is emitted.
+authentication:
+  style: HTTP Basic and session cookie
+  schemes:
+    - basicAuth (HTTP Basic)
+    - cookieAuth (apiKey in cookie `sessionid`)
+  cross_ref: authentication/clover-health-authentication.yml
+  notes: Registration and credentials are issued after developer approval; the Patient Access API is separately authorized through CareEvolution with member consent.
+idempotency:
+  supported: false
+  reason: All published operations are safe HTTP GET reads (search/read); no state-changing methods, so no idempotency key is defined.
+pagination:
+  style: FHIR Bundle paging
+  request_params:
+    - _count   # page size (default 20, max 10000)
+    - _offset  # zero-based offset into the result set
+  response_fields:
+    - Bundle.total
+    - Bundle.link (relation self / next)
+  notes: Search operations return a FHIR searchset Bundle; follow Bundle.link[relation=next] to page forward.
+search:
+  style: FHIR search parameters as query string
+  common_params:
+    - _profile
+    - identifier
+    - status
+  notes: Each resource type supports its FHIR R4 search parameters; single-resource reads use /{resource}/{id}.
+content_negotiation:
+  request: Accept header
+  formats:
+    - application/fhir+json
+    - application/fhir+xml
+  default: application/fhir+json
+versioning:
+  scheme: spec-version
+  current: '1.0.0'
+  fhir_release: R4
+  cross_ref: lifecycle/clover-health-lifecycle.yml
+error_envelope:
+  shape: FHIR OperationOutcome
+  format: application/fhir+json
+  notes: Errors are returned as a FHIR OperationOutcome resource (issue[].severity / code / diagnostics) rather than RFC 9457 problem+json.
+rate_limit_signaling:
+  documented: false
+  notes: No rate-limit headers are documented on the public developer portal.
+metadata_endpoints:
+  endpoints:
+    - /formulary/api/metadata
+    - /providerdirectory/api/metadata
+  notes: Each service exposes a FHIR CapabilityStatement at its metadata endpoint.

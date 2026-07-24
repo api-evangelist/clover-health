@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Clover Health FHIR API
+  version: 1.0.0
+# Enhancements the API Evangelist pipeline layers over the harvested spec.
+# The original spec ships no servers[] block and no top-level security; the
+# production base host and the HTTP Basic / session-cookie auth are documented
+# by Clover Health's developer portal and are asserted here without mutating
+# the harvested openapi/clover-health-fhir-openapi-original.yml.
+extends: openapi/clover-health-fhir-openapi-original.yml
+actions:
+  - target: $
+    update:
+      servers:
+        - url: https://public-api.cloverhealth.com
+          description: Clover Health public FHIR API (Formulary and Provider Directory)
+  - target: $
+    update:
+      security:
+        - basicAuth: []
+        - cookieAuth: []
+  - target: $.info
+    update:
+      x-apievangelist-enriched: true
+      x-apievangelist-fhir-version: R4
+      x-apievangelist-api-class: Payer Provider Directory + Formulary (CMS interoperability)
+      contact:
+        name: Clover Health API Support
+        email: api-support@cloverhealth.com
+        url: https://www.cloverhealth.com/developers

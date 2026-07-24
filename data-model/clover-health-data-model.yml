@@ -1,0 +1,128 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/clover-health-fhir-openapi-original.yml
+# Entity-relationship graph derived from the FHIR R4 resources exposed by the
+# Clover Health Formulary and Provider Directory API and their standard FHIR
+# reference fields. Relationships reflect FHIR reference semantics.
+entities:
+  - name: List
+    domain: formulary
+    id_read: /formulary/api/List/{id}
+    description: A curated FHIR List resource grouping covered drugs (formulary tier list).
+  - name: MedicationKnowledge
+    domain: formulary
+    id_read: /formulary/api/MedicationKnowledge/{id}
+    description: Drug coverage, tier, and utilization-management detail for a covered medication.
+  - name: InsurancePlan
+    domain: provider-directory
+    id_read: /providerdirectory/api/InsurancePlan/{id}
+    description: A Clover Health insurance plan (Medicare Advantage) offered in a service area.
+  - name: Organization
+    domain: provider-directory
+    id_read: /providerdirectory/api/Organization/{id}
+    description: A healthcare organization, group, or facility.
+  - name: OrganizationAffiliation
+    domain: provider-directory
+    id_read: /providerdirectory/api/OrganizationAffiliation/{id}
+    description: A relationship/affiliation between two organizations in the network.
+  - name: Practitioner
+    domain: provider-directory
+    id_read: /providerdirectory/api/Practitioner/{id}
+    description: An individual healthcare provider (doctor, nurse, clinician).
+  - name: PractitionerRole
+    domain: provider-directory
+    id_read: /providerdirectory/api/PractitionerRole/{id}
+    description: The role, location, and services a practitioner provides for an organization.
+  - name: Location
+    domain: provider-directory
+    id_read: /providerdirectory/api/Location/{id}
+    description: A physical place where services are provided.
+  - name: HealthcareService
+    domain: provider-directory
+    id_read: /providerdirectory/api/HealthcareService/{id}
+    description: A service offered by an organization at a location.
+  - name: Endpoint
+    domain: provider-directory
+    id_read: /providerdirectory/api/Endpoint/{id}
+    description: A technical connection endpoint for electronic exchange with an organization.
+relationships:
+  - from: PractitionerRole
+    to: Practitioner
+    type: belongs_to
+    via: practitioner
+  - from: PractitionerRole
+    to: Organization
+    type: belongs_to
+    via: organization
+  - from: PractitionerRole
+    to: Location
+    type: has_many
+    via: location
+  - from: PractitionerRole
+    to: HealthcareService
+    type: has_many
+    via: healthcareService
+  - from: PractitionerRole
+    to: Endpoint
+    type: has_many
+    via: endpoint
+  - from: OrganizationAffiliation
+    to: Organization
+    type: belongs_to
+    via: organization
+  - from: OrganizationAffiliation
+    to: Organization
+    type: belongs_to
+    via: participatingOrganization
+  - from: OrganizationAffiliation
+    to: HealthcareService
+    type: has_many
+    via: healthcareService
+  - from: OrganizationAffiliation
+    to: Location
+    type: has_many
+    via: location
+  - from: Organization
+    to: Organization
+    type: belongs_to
+    via: partOf
+  - from: Organization
+    to: Endpoint
+    type: has_many
+    via: endpoint
+  - from: Location
+    to: Organization
+    type: belongs_to
+    via: managingOrganization
+  - from: Location
+    to: Endpoint
+    type: has_many
+    via: endpoint
+  - from: HealthcareService
+    to: Organization
+    type: belongs_to
+    via: providedBy
+  - from: HealthcareService
+    to: Location
+    type: has_many
+    via: location
+  - from: HealthcareService
+    to: Endpoint
+    type: has_many
+    via: endpoint
+  - from: InsurancePlan
+    to: Organization
+    type: belongs_to
+    via: ownedBy
+  - from: InsurancePlan
+    to: Organization
+    type: belongs_to
+    via: administeredBy
+  - from: InsurancePlan
+    to: Location
+    type: has_many
+    via: coverageArea
+  - from: List
+    to: MedicationKnowledge
+    type: has_many
+    via: entry.item

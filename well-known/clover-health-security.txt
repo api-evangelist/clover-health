@@ -1,0 +1,4 @@
+Canonical: https://www.cloverhealth.com/.well-known/security.txt
+Contact: mailto:security@cloverhealth.com
+Hiring: https://www.cloverhealth.com/about-us/careers
+Expires: 2026-01-01T00:00:00.000Z

@@ -1,0 +1,16 @@
+{
+  "provider": "clover-health",
+  "sources": [
+    "clover-health-fhir-r4-formulary-api-api-openapi.yml",
+    "clover-health-fhir-r4-providerdirectory-api-api-openapi.yml"
+  ],
+  "outputs": [
+    "clover-health-fhir-r4-formulary-api-api-openapi.yml",
+    "clover-health-fhir-r4-providerdirectory-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

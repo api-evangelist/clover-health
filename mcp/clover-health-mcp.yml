@@ -1,0 +1,76 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/clover-health-fhir-openapi-original.yml
+status: candidate
+server:
+  name: clover-health-fhir
+  transport: http
+  note: No official hosted MCP server found; tools derived from the public FHIR Formulary & Provider Directory
+    OpenAPI.
+tools:
+- name: list_formulary
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#list_formulary
+- name: list_formulary_item
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#list_formulary_item
+- name: search_medication_knowledge
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_medication_knowledge
+- name: get_medication_knowledge
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_medication_knowledge
+- name: get_formulary_api_metadata
+  description: Get the capability statement of the formulary API
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_formulary_api_metadata
+- name: search_endpoint
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_endpoint
+- name: get_endpoint
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_endpoint
+- name: search_healthcare_service
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_healthcare_service
+- name: get_healthcare_service
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_healthcare_service
+- name: search_insurance_plan
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_insurance_plan
+- name: get_insurance_plan
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_insurance_plan
+- name: search_location
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_location
+- name: get_location
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_location
+- name: search_organization
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_organization
+- name: get_organization
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_organization
+- name: search_organization_affiliation
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_organization_affiliation
+- name: get_organization_affiliation
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_organization_affiliation
+- name: search_practitioner
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_practitioner
+- name: get_practitioner
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_practitioner
+- name: search_practitioner_role
+  description: This interaction searches a set of resources based on some filter criteria.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#search_practitioner_role
+- name: get_practitioner_role
+  description: The read interaction accesses the current contents of a resource.
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_practitioner_role
+- name: get_metadata
+  description: This interaction searches a set of resources based on some filter criteria..
+  source_operation: openapi/clover-health-fhir-openapi-original.yml#get_metadata

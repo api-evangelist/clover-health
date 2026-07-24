@@ -1,0 +1,27 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/clover-health-fhir-openapi-original.yml
+skills:
+  - file: clover-health-provider-directory-search.md
+    name: Find an in-network provider (Clover Health)
+    api: openapi/clover-health-fhir-openapi-original.yml
+    operations:
+      - search_practitioner
+      - get_practitioner
+      - search_practitioner_role
+      - get_practitioner_role
+      - search_organization
+      - get_organization
+      - search_location
+      - get_location
+      - search_insurance_plan
+      - get_insurance_plan
+  - file: clover-health-formulary-lookup.md
+    name: Check drug coverage in the Clover Health formulary
+    api: openapi/clover-health-fhir-openapi-original.yml
+    operations:
+      - list_formulary
+      - list_formulary_item
+      - search_medication_knowledge
+      - get_medication_knowledge
+      - get_formulary_api_metadata

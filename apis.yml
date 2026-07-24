@@ -1,8 +1,28 @@
 aid: clover-health
 name: Clover Health
-description: 'Clover Health is a company surfaced as a portfolio company of first-round-capital, gv, social-capital
-  and added to the API Evangelist network as a stub for enrichment. Sector: healthcare. This profile is
-  a lead awaiting the enrichment pipeline.'
+description: >-
+  Clover Health is a Medicare Advantage health insurer that runs a public developer program
+  built on healthcare interoperability standards. Its public FHIR R4 API exposes a Formulary
+  service (covered drugs, tiers, and utilization management) and a Provider Directory service
+  (practitioners, organizations, locations, healthcare services, and insurance plans), and a
+  separate consent-based Patient Access API delivers a member's clinical and claims data in
+  FHIR-native format via CareEvolution. The APIs implement the CMS Interoperability and Patient
+  Access final rule (CMS-9115-F); Clover was the first payer to go live on a CMS-aligned/TEFCA
+  network. Developers register for approved credentials and authenticate with HTTP Basic or a
+  session cookie.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://cdn.cloverhealth.com/filer_cloudrun_public/img/live-tile-large-310x310.png
 url: https://raw.githubusercontent.com/api-evangelist/clover-health/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -14,16 +34,102 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
 tags:
 - Company
 - Healthcare
-apis: []
+- Health Insurance
+- Medicare Advantage
+- FHIR
+- Interoperability
+- Provider Directory
+- Formulary
+- Patient Access
+- Payer
+apis:
+- aid: clover-health:clover-health-fhir-r4-formulary-api-api
+  name: Clover Health fhir-r4-formulary-api API
+  description: >-
+    The fhir-r4-formulary-api API from Clover Health — 5 operation(s) for fhir-r4-formulary-api.
+  humanURL: https://www.cloverhealth.com/developers
+  baseURL: https://public-api.cloverhealth.com
+  tags:
+  - fhir-r4-formulary-api
+  properties:
+  - type: OpenAPI
+    url: openapi/clover-health-fhir-r4-formulary-api-api-openapi.yml
+  - type: Documentation
+    url: https://public-api.cloverhealth.com/swagger
+- aid: clover-health:clover-health-fhir-r4-providerdirectory-api-api
+  name: Clover Health FHIR R4 ProviderDirectory API API
+  description: >-
+    The FHIR R4 ProviderDirectory API API from Clover Health — 17 operation(s) for fhir r4 providerdirectory
+    api.
+  humanURL: https://www.cloverhealth.com/developers
+  baseURL: https://public-api.cloverhealth.com
+  tags:
+  - FHIR R4 ProviderDirectory API
+  properties:
+  - type: OpenAPI
+    url: openapi/clover-health-fhir-r4-providerdirectory-api-api-openapi.yml
+  - type: Documentation
+    url: https://public-api.cloverhealth.com/swagger
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://www.cloverhealth.com/developers
+- type: Documentation
+  url: https://public-api.cloverhealth.com/swagger
+- type: APIReference
+  url: https://public-api.cloverhealth.com/swagger
+- type: SignUp
+  url: https://docs.google.com/forms/d/1qhbMWXYYn3lpBg8026mW20rxGHE9SL2sHNLzVoyOS0g/edit
+- type: TermsOfService
+  url: https://www.cloverhealth.com/developers/termsofuse
+- type: PrivacyPolicy
+  url: https://www.cloverhealth.com/privacy-policy
+- type: Support
+  url: mailto:api-support@cloverhealth.com
+- type: GitHubOrganization
+  url: https://github.com/CloverHealth
+- type: OpenAPI
+  url: openapi/clover-health-fhir-openapi-original.yml
+- type: Overlay
+  url: overlays/clover-health-fhir-overlay.yaml
+- type: Authentication
+  url: authentication/clover-health-authentication.yml
+- type: Conventions
+  url: conventions/clover-health-conventions.yml
+- type: DataModel
+  url: data-model/clover-health-data-model.yml
+- type: Conformance
+  url: conformance/clover-health-conformance.yml
+- type: Lifecycle
+  url: lifecycle/clover-health-lifecycle.yml
+- type: MCPServer
+  url: mcp/clover-health-mcp.yml
+- type: LLMsTxt
+  url: llms/clover-health-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: WellKnown
+  url: well-known/clover-health-well-known.yml
+- type: SecurityTxt
+  url: well-known/clover-health-security.txt
+- type: VulnerabilityDisclosure
+  url: security/clover-health-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.cloverhealth.com/.well-known/security.txt
+- type: DomainSecurity
+  url: security/clover-health-domain-security.yml
 - type: Website
   url: https://www.cloverhealth.com
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

@@ -1,0 +1,24 @@
+generated: '2026-07-18'
+method: searched
+source: https://www.cloverhealth.com/developers
+# Lifecycle posture for the Clover Health public API. No public status page and
+# no formal deprecation policy were found, so no StatusPage / Deprecation
+# pointers are emitted (absence is honest data).
+versioning:
+  scheme: spec-version
+  current: '1.0.0'
+  fhir_release: R4
+  docs: https://public-api.cloverhealth.com/swagger
+access:
+  registration_required: true
+  registration_url: https://docs.google.com/forms/d/1qhbMWXYYn3lpBg8026mW20rxGHE9SL2sHNLzVoyOS0g/edit
+  review_sla: Applications reviewed within 3 business days; Patient Access API (CareEvolution) adds ~5 business days.
+  access_revocation: Members can revoke via account unlinking; access is disabled if member data is not actively used within three months.
+deprecation:
+  policy_url: null
+  sunset_header: false
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+deprecated_operations: []
