@@ -97,7 +97,7 @@ common:
 - type: GitHubOrganization
   url: https://github.com/CloverHealth
 - type: OpenAPI
-  url: openapi/clover-health-fhir-openapi-original.yml
+  url: openapi/_original/clover-health-fhir-openapi-original.yml
 - type: Overlay
   url: overlays/clover-health-fhir-overlay.yaml
 - type: Authentication
