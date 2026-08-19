@@ -74,3 +74,9 @@ tools:
 - name: get_metadata
   description: This interaction searches a set of resources based on some filter criteria..
   source_operation: openapi/clover-health-fhir-openapi-original.yml#get_metadata
+deployment:
+  mode: none
+  verified: derived
+  tools: 22
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,889 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FHIR fhir-r4-formulary-api FHIR R4 ProviderDirectory API API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "FHIR R4 ProviderDirectory API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Endpoint",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_include",
+                "value": "",
+                "type": "query",
+                "description": "Return resources related to the search results (E.g. Endpoint:organization)\n\n* `Endpoint:organization` - Endpoint:organization"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "Select Endpoints managed by the specified organization"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Endpoint/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/HealthcareService",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_include",
+                "value": "",
+                "type": "query",
+                "description": "Include resources related to the search results Supported(HealthcareService:location, HealthcareService:coverage-area, HealthcareService:organization, HealthcareService:endpoint)\n\n* `HealthcareService:location` - HealthcareService:location\n* `HealthcareService:coverage-area` - HealthcareService:coverage-area\n* `HealthcareService:organization` - HealthcareService:organization\n* `HealthcareService:endpoint` - HealthcareService:endpoint"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "_revinclude",
+                "value": "",
+                "type": "query",
+                "description": "Include resource includes this location Supported(PractitionerRole:service, OrganizationAffiliation:service)\n\n* `PractitionerRole:service` - PractitionerRole:service\n* `OrganizationAffiliation:service` - OrganizationAffiliation:service"
+              },
+              {
+                "name": "coverage-area",
+                "value": "",
+                "type": "query",
+                "description": "The coverage area of the Healthcare Service"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "NPI for the Healthcare Service"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "The location of the Healthcare Service"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "A portion of the Healthcare service name"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The identity of the organization the healthcare service belong to."
+              },
+              {
+                "name": "service-category",
+                "value": "",
+                "type": "query",
+                "description": "Service Category of the Healthcare Service"
+              },
+              {
+                "name": "service-type",
+                "value": "",
+                "type": "query",
+                "description": "Service Type of the Healthcare Service"
+              },
+              {
+                "name": "specialty",
+                "value": "",
+                "type": "query",
+                "description": "Specialty of the Healthcare Service"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/HealthcareService/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/InsurancePlan",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_include",
+                "value": "",
+                "type": "query",
+                "description": "Include resources related to the search results Supported(InsurancePlan:administered-by, InsurancePlan:owned-by, InsurancePlan:coverage-area)\n\n* `InsurancePlan:administered-by` - InsurancePlan:administered-by\n* `InsurancePlan:owned-by` - InsurancePlan:owned-by\n* `InsurancePlan:coverage-area` - InsurancePlan:coverage-area"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "administered-by",
+                "value": "",
+                "type": "query",
+                "description": "The organization that administer the plan."
+              },
+              {
+                "name": "coverage-area",
+                "value": "",
+                "type": "query",
+                "description": "The coverage area of the plan."
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "Clover Healthc plan id."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "A portion of the plan name"
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "The network of the plan"
+              },
+              {
+                "name": "owned-by",
+                "value": "",
+                "type": "query",
+                "description": "An organization that owns the plan."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the plan."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/InsurancePlan/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Location",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_include",
+                "value": "",
+                "type": "query",
+                "description": "Include resources related to the search results Supported(Location:organization, Location:partof)\n\n* `Location:endpoint` - Location:endpoint\n* `Location:organization` - Location:organization\n* `Location:partof` - Location:partof"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "_revinclude",
+                "value": "",
+                "type": "query",
+                "description": "Include resource includes this location Supported(HealthcareService:location, InsurancePlan:coverage-area, OrganizationAffiliation:location, PractitionerRole:location)\n\n* `HealthcareService:location` - HealthcareService:location\n* `InsurancePlan:coverage-area` - InsurancePlan:coverage-area\n* `OrganizationAffiliation:location` - OrganizationAffiliation:location\n* `PractitionerRole:location` - PractitionerRole:location"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "A (part of the) address of the location"
+              },
+              {
+                "name": "address-city",
+                "value": "",
+                "type": "query",
+                "description": "A city specified in an address"
+              },
+              {
+                "name": "address-postalcode",
+                "value": "",
+                "type": "query",
+                "description": "A state specified in an address"
+              },
+              {
+                "name": "address-state",
+                "value": "",
+                "type": "query",
+                "description": "A postalCode specified in an address"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the location"
+              },
+              {
+                "name": "near",
+                "value": "",
+                "type": "query",
+                "description": "Search for locations where the location.position is near to, or within a specified distance of, the provided coordinates expressed as [latitude]|[longitude]|[distance]|[units] (using the WGS84 datum, see notes). If the units are omitted, then kms should be assumed. If the distance is omitted, then the server can use its own discretion as to what distances should be considered near (and units are irrelevant) Servers may search using various techniques that might have differing accuracies, depending on implementation efficiency. Requires the near-distance parameter to be provided also"
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The identity of the organization the location belong to."
+              },
+              {
+                "name": "partof",
+                "value": "",
+                "type": "query",
+                "description": "The id of the location that the matched one is physically part of."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of the location."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Location/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Organization",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_include",
+                "value": "",
+                "type": "query",
+                "description": "Return resources related to the search results (E.g. Organization:partof, Organization:endpoint and Organization:coverage-area (Not effective))\n\n* `Organization:partof` - Organization:partof\n* `Organization:endpoint` - Organization:endpoint\n* `Organization:coverage-area` - Organization:coverage-area"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "_revinclude",
+                "value": "",
+                "type": "query",
+                "description": "Return resources filtered by the search results (E.g. Endpoint:Organization, HealthcareService:organization, InsurancePlan:administered-by (Not effective), InsurancePlan:owned-by (Not effective), PractitionerRole:organization, PractitionerRole:network, OrganizationAffiliation:primary-organization, OrganizationAffiliation:participating-organization)\n\n* `Endpoint:organization` - Endpoint:organization\n* `HealthcareService:organization` - HealthcareService:organization\n* `InsurancePlan:administered-by` - InsurancePlan:administered-by\n* `InsurancePlan:owned-by` - InsurancePlan:owned-by\n* `OrganizationAffiliation:primary-organization` - OrganizationAffiliation:primary-organization\n* `OrganizationAffiliation:participating-organization` - OrganizationAffiliation:participating-organization\n* `PractitionerRole:organization` - PractitionerRole:organization\n* `PractitionerRole:network` - PractitionerRole:network"
+              },
+              {
+                "name": "address",
+                "value": "",
+                "type": "query",
+                "description": "Select organizations with the specified address (matches any of the string elements of an address) (case insensitive)"
+              },
+              {
+                "name": "coverage-area",
+                "value": "",
+                "type": "query",
+                "description": "(Not effective due to lack of data) Select health insurance provider networks available in a region described by the specified location"
+              },
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query",
+                "description": "Select organizations with the specified endpoint (in terms of endpoint ID)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Select organizations with the specified name (matches any of portion of the name) (case insensitive)"
+              },
+              {
+                "name": "partof",
+                "value": "",
+                "type": "query",
+                "description": "Select organizations that are part of the organization (in terms of organization ID)"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Select organizations of the specified type (E.g. fac, prvgrp, ins, ntwk)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Organization/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/OrganizationAffiliation",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_include",
+                "value": "",
+                "type": "query",
+                "description": "Return resources related to the search results (E.g. OrganizationAffiliation:location, OrganizationAffiliation:service, OrganizationAffiliation:network and OrganizationAffiliation:endpoint (Not effective))\n\n* `OrganizationAffiliation:primary-organization` - OrganizationAffiliation:primary-organization\n* `OrganizationAffiliation:participating-organization` - OrganizationAffiliation:participating-organization\n* `OrganizationAffiliation:location` - OrganizationAffiliation:location\n* `OrganizationAffiliation:service` - OrganizationAffiliation:service\n* `OrganizationAffiliation:endpoint` - OrganizationAffiliation:endpoint\n* `OrganizationAffiliation:network` - OrganizationAffiliation:network"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query",
+                "description": "(Not effective) Select OrganizationAffiliations with the specified endpoint"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Select OrganizationAffiliations available at the specified location (in terms of location ID)"
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "Select roles where the organization is a member of the specified health insurance provider network (in terms of organization ID)"
+              },
+              {
+                "name": "participating-organization",
+                "value": "",
+                "type": "query",
+                "description": "Select roles filled by the specified organization (in terms of organization ID)"
+              },
+              {
+                "name": "primary-organization",
+                "value": "",
+                "type": "query",
+                "description": "Select roles offered by the specified organization (in terms of organization ID)"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "Select OrganizationAffiliations with the specified role code"
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "Select OrganizationAffiliations providing the specified service (in terms of healthcare service ID)"
+              },
+              {
+                "name": "specialty",
+                "value": "",
+                "type": "query",
+                "description": "Select OrganizationAffiliations associated with the specified specialty code"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/OrganizationAffiliation/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Practitioner",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "_revinclude",
+                "value": "",
+                "type": "query",
+                "description": "Include resources related to the search results Supported(PractitionerRole:practitioner)\n\n* `PractitionerRole:practitioner` - PractitionerRole:practitioner"
+              },
+              {
+                "name": "family",
+                "value": "",
+                "type": "query",
+                "description": "Practitioner's family name"
+              },
+              {
+                "name": "given",
+                "value": "",
+                "type": "query",
+                "description": "Practitioner's given name"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "A practitioner's Identifier (NPI)"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/Practitioner/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/PractitionerRole",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_id",
+                "value": "",
+                "type": "query",
+                "description": "Resource id (not a full URL)"
+              },
+              {
+                "name": "_include",
+                "value": "",
+                "type": "query",
+                "description": "Include resources related to the search results (Supported: PractitionerRole:practitioner, PractitionerRole:organization, PractitionerRole:location, PractitionerRole:service, PractitionerRole:network, PractitionerRole:endpoint)\n\n* `PractitionerRole:practitioner` - PractitionerRole:practitioner\n* `PractitionerRole:organization` - PractitionerRole:organization\n* `PractitionerRole:location` - PractitionerRole:location\n* `PractitionerRole:service` - PractitionerRole:service\n* `PractitionerRole:network` - PractitionerRole:network\n* `PractitionerRole:endpoint` - PractitionerRole:endpoint"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Location that the practitioner provider services at."
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "Network that the practitioner is a part of."
+              },
+              {
+                "name": "organization",
+                "value": "",
+                "type": "query",
+                "description": "The identity of the organization the practitioner represents / acts on behalf of"
+              },
+              {
+                "name": "practitioner",
+                "value": "",
+                "type": "query",
+                "description": "Practitioner that is able to provide the defined services for the organization"
+              },
+              {
+                "name": "role",
+                "value": "",
+                "type": "query",
+                "description": "The practitioner can perform this role at for the organization"
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "Service that the practitioner provides."
+              },
+              {
+                "name": "specialty",
+                "value": "",
+                "type": "query",
+                "description": "The practitioner has this specialty at an organization"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/PractitionerRole/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria..",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/providerdirectory/api/metadata",
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria.."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

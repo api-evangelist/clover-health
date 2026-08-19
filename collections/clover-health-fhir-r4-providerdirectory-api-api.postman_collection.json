@@ -1,0 +1,2691 @@
+{
+  "item": [
+    {
+      "id": "1f487202-a7dc-454f-81d6-870be2e76701",
+      "name": "FHIR R4 ProviderDirectory API",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b92292f7-3bbd-4ebb-ba0f-6915a3ad37dd",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Endpoint"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_include",
+                  "value": "<string>",
+                  "description": "Return resources related to the search results (E.g. Endpoint:organization)\n\n* `Endpoint:organization` - Endpoint:organization"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<string>",
+                  "description": "Select Endpoints managed by the specified organization"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1383a7e6-b7e2-496d-98c3-8040f36f51fc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Endpoint"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"58704f4b-b975-4357-aa25-54eeb0083bc5\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-11T07:58:26.312Z\",\n    \"profile\": [\n      \"http://hl7.org/fhir/StructureDefinition/Bundle\"\n    ]\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/providerdirectory/api/Endpoint\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/Endpoint/6d179858-2560-5ec6-a162-2205ab32f378\",\n      \"resource\": {\n        \"resourceType\": \"Endpoint\",\n        \"id\": \"6d179858-2560-5ec6-a162-2205ab32f378\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-10T00:00:00.000+00:00\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Endpoint\"\n          ]\n        },\n        \"status\": \"active\",\n        \"connectionType\": {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/endpoint-connection-type\",\n          \"code\": \"hl7-fhir-rest\"\n        },\n        \"managingOrganization\": {\n          \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n        },\n        \"payloadType\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/EndpointPayloadTypeCS\",\n                \"code\": \"NA\"\n              }\n            ]\n          }\n        ],\n        \"address\": \"https://public-api.cloverhealth.com/providerdirectory/api/Location\"\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/Endpoint/d440e938-30ab-5d46-8005-5ba41160e098\",\n      \"resource\": {\n        \"resourceType\": \"Endpoint\",\n        \"id\": \"d440e938-30ab-5d46-8005-5ba41160e098\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-10T00:00:00.000+00:00\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Endpoint\"\n          ]\n        },\n        \"status\": \"active\",\n        \"connectionType\": {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/endpoint-connection-type\",\n          \"code\": \"hl7-fhir-rest\"\n        },\n        \"managingOrganization\": {\n          \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n        },\n        \"payloadType\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/EndpointPayloadTypeCS\",\n                \"code\": \"NA\"\n              }\n            ]\n          }\n        ],\n        \"address\": \"https://public-api.cloverhealth.com/providerdirectory/api/PractitionerRole\"\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d79d4d78-bb26-413a-b042-9505efbe9ae6",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Endpoint",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da5a52fa-7124-4cb9-b8b2-05bae65c2bc0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Endpoint",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Endpoint\",\n  \"id\": \"6d179858-2560-5ec6-a162-2205ab32f378\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-10T00:00:00.000+00:00\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Endpoint\"\n    ]\n  },\n  \"status\": \"active\",\n  \"connectionType\": {\n    \"system\": \"http://terminology.hl7.org/CodeSystem/endpoint-connection-type\",\n    \"code\": \"hl7-fhir-rest\"\n  },\n  \"managingOrganization\": {\n    \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n  },\n  \"payloadType\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/EndpointPayloadTypeCS\",\n          \"code\": \"NA\"\n        }\n      ]\n    }\n  ],\n  \"address\": \"https://public-api.cloverhealth.com/providerdirectory/api/Location\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "71ec875f-2174-487e-b90e-772302fe9802",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "HealthcareService"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_include",
+                  "value": "<string>",
+                  "description": "Include resources related to the search results Supported(HealthcareService:location, HealthcareService:coverage-area, HealthcareService:organization, HealthcareService:endpoint)\n\n* `HealthcareService:location` - HealthcareService:location\n* `HealthcareService:coverage-area` - HealthcareService:coverage-area\n* `HealthcareService:organization` - HealthcareService:organization\n* `HealthcareService:endpoint` - HealthcareService:endpoint"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "_revinclude",
+                  "value": "<string>",
+                  "description": "Include resource includes this location Supported(PractitionerRole:service, OrganizationAffiliation:service)\n\n* `PractitionerRole:service` - PractitionerRole:service\n* `OrganizationAffiliation:service` - OrganizationAffiliation:service"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage-area",
+                  "value": "<string>",
+                  "description": "The coverage area of the Healthcare Service"
+                },
+                {
+                  "disabled": false,
+                  "key": "identifier",
+                  "value": "<string>",
+                  "description": "NPI for the Healthcare Service"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "The location of the Healthcare Service"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "A portion of the Healthcare service name"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<string>",
+                  "description": "The identity of the organization the healthcare service belong to."
+                },
+                {
+                  "disabled": false,
+                  "key": "service-category",
+                  "value": "<string>",
+                  "description": "Service Category of the Healthcare Service"
+                },
+                {
+                  "disabled": false,
+                  "key": "service-type",
+                  "value": "<string>",
+                  "description": "Service Type of the Healthcare Service"
+                },
+                {
+                  "disabled": false,
+                  "key": "specialty",
+                  "value": "<string>",
+                  "description": "Specialty of the Healthcare Service"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bc9fdd37-e1a7-4c05-b0dc-ec7c7006f7a9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "HealthcareService"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_revinclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage-area",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service-category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service-type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"f686a47e-d199-4071-98e0-16891cd2cd55\",\n  \"meta\": {\n    \"lastUpdated\": \"2022-12-30T04:30:36.982Z\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/providerdirectory/api/HealthcareService\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/HealthcareService/00001c05-d3c7-5094-8ac3-fea55830942d\",\n      \"resource\": {\n        \"resourceType\": \"HealthcareService\",\n        \"id\": \"00001c05-d3c7-5094-8ac3-fea55830942d\",\n        \"meta\": {\n          \"lastUpdated\": \"2022-12-25T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-HealthcareService\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"value\": \"1144513540\",\n            \"system\": \"http://hl7.org/fhir/sid/us-npi\"\n          }\n        ],\n        \"active\": true,\n        \"extension\": [\n          {\n            \"extension\": [\n              {\n                \"url\": \"type\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/DeliveryMethodCS\"\n                    }\n                  ]\n                }\n              }\n            ],\n            \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/delivery-method\"\n          }\n        ],\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/HealthcareServiceCategoryCS\",\n                \"code\": \"prov\"\n              }\n            ]\n          }\n        ],\n        \"type\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/service-type\",\n                \"code\": \"349\"\n              }\n            ]\n          }\n        ],\n        \"location\": [\n          {\n            \"reference\": \"Location/e1578c9c-a885-5bed-9263-60b92fea4b44\"\n          }\n        ],\n        \"name\": \"Moyosoye Folayan Oyeyinka\",\n        \"telecom\": [\n          {\n            \"extension\": [\n              {\n                \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary\",\n                \"valueReference\": {\n                  \"reference\": \"Location/e1578c9c-a885-5bed-9263-60b92fea4b44\"\n                }\n              }\n            ]\n          }\n        ],\n        \"specialty\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://nucc.org/provider-taxonomy\",\n                \"code\": \"207R00000X\"\n              }\n            ]\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/HealthcareService/00001c2f-35a7-5118-bb2c-3756317fa0db\",\n      \"resource\": {\n        \"resourceType\": \"HealthcareService\",\n        \"id\": \"00001c2f-35a7-5118-bb2c-3756317fa0db\",\n        \"meta\": {\n          \"lastUpdated\": \"2022-12-25T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-HealthcareService\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"value\": \"1952337263\",\n            \"system\": \"http://hl7.org/fhir/sid/us-npi\"\n          }\n        ],\n        \"active\": true,\n        \"extension\": [\n          {\n            \"extension\": [\n              {\n                \"url\": \"type\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/DeliveryMethodCS\"\n                    }\n                  ]\n                }\n              }\n            ],\n            \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/delivery-method\"\n          }\n        ],\n        \"category\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/HealthcareServiceCategoryCS\",\n                \"code\": \"outpat\"\n              }\n            ]\n          }\n        ],\n        \"type\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/service-type\",\n                \"code\": \"335\"\n              }\n            ]\n          }\n        ],\n        \"location\": [\n          {\n            \"reference\": \"Location/c263b088-f3e8-5114-9971-0e8ff6226c74\"\n          }\n        ],\n        \"providedBy\": {\n          \"reference\": \"Organization/54b466ed-7ea1-59d0-9437-2afe7354470d\"\n        },\n        \"name\": \"South Texas Rural Health Services Inc\",\n        \"telecom\": [\n          {\n            \"extension\": [\n              {\n                \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary\",\n                \"valueReference\": {\n                  \"reference\": \"Location/c263b088-f3e8-5114-9971-0e8ff6226c74\"\n                }\n              }\n            ]\n          }\n        ],\n        \"specialty\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://nucc.org/provider-taxonomy\",\n                \"code\": \"261QM1300X\"\n              }\n            ]\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "abfca286-143c-4a0a-b532-612debeb79bb",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "HealthcareService",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "87199a1c-fc6d-4475-a8e2-ba0bb085a6bc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "HealthcareService",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"HealthcareService\",\n  \"id\": \"00001c05-d3c7-5094-8ac3-fea55830942d\",\n  \"meta\": {\n    \"lastUpdated\": \"2022-12-25T00:00:00Z\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-HealthcareService\"\n    ]\n  },\n  \"identifier\": [\n    {\n      \"value\": \"1144513540\",\n      \"system\": \"http://hl7.org/fhir/sid/us-npi\"\n    }\n  ],\n  \"active\": true,\n  \"extension\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"type\",\n          \"valueCodeableConcept\": {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/DeliveryMethodCS\"\n              }\n            ]\n          }\n        }\n      ],\n      \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/delivery-method\"\n    }\n  ],\n  \"category\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/HealthcareServiceCategoryCS\",\n          \"code\": \"prov\"\n        }\n      ]\n    }\n  ],\n  \"type\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/service-type\",\n          \"code\": \"349\"\n        }\n      ]\n    }\n  ],\n  \"location\": [\n    {\n      \"reference\": \"Location/e1578c9c-a885-5bed-9263-60b92fea4b44\"\n    }\n  ],\n  \"name\": \"Moyosoye Folayan Oyeyinka\",\n  \"telecom\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary\",\n          \"valueReference\": {\n            \"reference\": \"Location/e1578c9c-a885-5bed-9263-60b92fea4b44\"\n          }\n        }\n      ]\n    }\n  ],\n  \"specialty\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://nucc.org/provider-taxonomy\",\n          \"code\": \"207R00000X\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "26f1fa12-cfab-4dfe-afae-60f32b06d932",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "InsurancePlan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_include",
+                  "value": "<string>",
+                  "description": "Include resources related to the search results Supported(InsurancePlan:administered-by, InsurancePlan:owned-by, InsurancePlan:coverage-area)\n\n* `InsurancePlan:administered-by` - InsurancePlan:administered-by\n* `InsurancePlan:owned-by` - InsurancePlan:owned-by\n* `InsurancePlan:coverage-area` - InsurancePlan:coverage-area"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "administered-by",
+                  "value": "<string>",
+                  "description": "The organization that administer the plan."
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage-area",
+                  "value": "<string>",
+                  "description": "The coverage area of the plan."
+                },
+                {
+                  "disabled": false,
+                  "key": "identifier",
+                  "value": "<string>",
+                  "description": "Clover Healthc plan id."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "A portion of the plan name"
+                },
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<string>",
+                  "description": "The network of the plan"
+                },
+                {
+                  "disabled": false,
+                  "key": "owned-by",
+                  "value": "<string>",
+                  "description": "An organization that owns the plan."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of the plan."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "59d5000d-5270-47a3-ae2f-7742bd41e857",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "InsurancePlan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "administered-by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage-area",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "network",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "owned-by",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"9db60664-0830-4308-8463-25aee122b0e9\",\n  \"meta\": {\n    \"lastUpdated\": \"2023-01-04T02:41:05.527Z\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/providerdirectory/api/InsurancePlan\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/InsurancePlan/1a18601c-8d0d-516b-98c0-d2b2e22333ef\",\n      \"resource\": {\n        \"resourceType\": \"InsurancePlan\",\n        \"id\": \"1a18601c-8d0d-516b-98c0-d2b2e22333ef\",\n        \"meta\": {\n          \"lastUpdated\": \"2023-01-01T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"system\": \"https://www.cloverhealth.com/plans\",\n            \"value\": \"025\"\n          }\n        ],\n        \"status\": \"active\",\n        \"type\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS\",\n                \"code\": \"mediadv\"\n              }\n            ]\n          }\n        ],\n        \"ownedBy\": {\n          \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n        },\n        \"administeredBy\": {\n          \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n        },\n        \"network\": [\n          {\n            \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n          }\n        ],\n        \"coverageArea\": [\n          {\n            \"reference\": \"Location/0168d57c-c36a-5fd3-b75f-ee126728d852\"\n          },\n          {\n            \"reference\": \"Location/40e711c5-c4c0-57db-a36e-17eb48c5d49e\"\n          },\n          {\n            \"reference\": \"Location/415eddd7-40aa-5bd9-aa31-07be1eb01225\"\n          },\n          {\n            \"reference\": \"Location/43d6521e-d2d4-5968-8b94-15a43030e027\"\n          },\n          {\n            \"reference\": \"Location/7e6f3e39-1e5c-52e8-b860-6b882dcb10af\"\n          },\n          {\n            \"reference\": \"Location/be5c8d0c-893f-5b27-8501-6b1f6ea8685a\"\n          },\n          {\n            \"reference\": \"Location/f03c0028-4e46-5adb-b39b-0b83efe8d9a6\"\n          }\n        ],\n        \"name\": \"Clover Health Choice (PPO)\"\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/InsurancePlan/2017b48f-bb3f-5c13-9499-eed6f0c68049\",\n      \"resource\": {\n        \"resourceType\": \"InsurancePlan\",\n        \"id\": \"2017b48f-bb3f-5c13-9499-eed6f0c68049\",\n        \"meta\": {\n          \"lastUpdated\": \"2023-01-01T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"system\": \"https://www.cloverhealth.com/plans\",\n            \"value\": \"007\"\n          }\n        ],\n        \"status\": \"active\",\n        \"type\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS\",\n                \"code\": \"mediadv\"\n              }\n            ]\n          }\n        ],\n        \"ownedBy\": {\n          \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n        },\n        \"administeredBy\": {\n          \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n        },\n        \"network\": [\n          {\n            \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n          }\n        ],\n        \"coverageArea\": [\n          {\n            \"reference\": \"Location/2ca7813e-9c8a-5dc5-90cd-e5c17020dc82\"\n          },\n          {\n            \"reference\": \"Location/3b619aa6-e10f-5530-8282-a3965a8d668a\"\n          },\n          {\n            \"reference\": \"Location/43f446d2-0507-53ad-9ce9-7621343f168e\"\n          },\n          {\n            \"reference\": \"Location/481e6ae8-1961-59a5-8e5f-8231fdf31fc5\"\n          },\n          {\n            \"reference\": \"Location/51d056a7-2dbf-520c-ad85-6d9e2233be43\"\n          },\n          {\n            \"reference\": \"Location/646dfb92-f112-5261-98aa-689a0cb4f7ec\"\n          },\n          {\n            \"reference\": \"Location/98181050-9066-5ae8-a21c-fc356931d502\"\n          },\n          {\n            \"reference\": \"Location/a284c28a-b5b5-532a-8eda-9b74a9825b04\"\n          },\n          {\n            \"reference\": \"Location/a38eb4f4-1696-582b-a3f9-afd430932521\"\n          },\n          {\n            \"reference\": \"Location/c24b5a32-ac0b-5bb9-a60b-4021970fbeae\"\n          },\n          {\n            \"reference\": \"Location/cc5549d6-68ef-5565-80f0-941bea2cc482\"\n          },\n          {\n            \"reference\": \"Location/d5a0240f-1a2d-51a2-bc37-1bcbe748c3e7\"\n          }\n        ],\n        \"name\": \"Clover Health Choice Value (PPO)\"\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ccb7849-221c-4db2-aaa6-fd0dfb1fc610",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "InsurancePlan",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1a96ba9d-94ba-4ba0-8beb-549febc33b55",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "InsurancePlan",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"InsurancePlan\",\n  \"id\": \"1a18601c-8d0d-516b-98c0-d2b2e22333ef\",\n  \"meta\": {\n    \"lastUpdated\": \"2023-01-01T00:00:00Z\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-InsurancePlan\"\n    ]\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://www.cloverhealth.com/plans\",\n      \"value\": \"025\"\n    }\n  ],\n  \"status\": \"active\",\n  \"type\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/InsuranceProductTypeCS\",\n          \"code\": \"mediadv\"\n        }\n      ]\n    }\n  ],\n  \"ownedBy\": {\n    \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n  },\n  \"administeredBy\": {\n    \"reference\": \"Organization/c6672acb-ea60-5431-802d-c637901772d3\"\n  },\n  \"network\": [\n    {\n      \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n    }\n  ],\n  \"coverageArea\": [\n    {\n      \"reference\": \"Location/0168d57c-c36a-5fd3-b75f-ee126728d852\"\n    },\n    {\n      \"reference\": \"Location/40e711c5-c4c0-57db-a36e-17eb48c5d49e\"\n    },\n    {\n      \"reference\": \"Location/415eddd7-40aa-5bd9-aa31-07be1eb01225\"\n    },\n    {\n      \"reference\": \"Location/43d6521e-d2d4-5968-8b94-15a43030e027\"\n    },\n    {\n      \"reference\": \"Location/7e6f3e39-1e5c-52e8-b860-6b882dcb10af\"\n    },\n    {\n      \"reference\": \"Location/be5c8d0c-893f-5b27-8501-6b1f6ea8685a\"\n    },\n    {\n      \"reference\": \"Location/f03c0028-4e46-5adb-b39b-0b83efe8d9a6\"\n    }\n  ],\n  \"name\": \"Clover Health Choice (PPO)\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70ffeea7-01ea-476a-bf69-2b4d1da9f7e7",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Location"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_include",
+                  "value": "<string>",
+                  "description": "Include resources related to the search results Supported(Location:organization, Location:partof)\n\n* `Location:endpoint` - Location:endpoint\n* `Location:organization` - Location:organization\n* `Location:partof` - Location:partof"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "_revinclude",
+                  "value": "<string>",
+                  "description": "Include resource includes this location Supported(HealthcareService:location, InsurancePlan:coverage-area, OrganizationAffiliation:location, PractitionerRole:location)\n\n* `HealthcareService:location` - HealthcareService:location\n* `InsurancePlan:coverage-area` - InsurancePlan:coverage-area\n* `OrganizationAffiliation:location` - OrganizationAffiliation:location\n* `PractitionerRole:location` - PractitionerRole:location"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "A (part of the) address of the location"
+                },
+                {
+                  "disabled": false,
+                  "key": "address-city",
+                  "value": "<string>",
+                  "description": "A city specified in an address"
+                },
+                {
+                  "disabled": false,
+                  "key": "address-postalcode",
+                  "value": "<string>",
+                  "description": "A state specified in an address"
+                },
+                {
+                  "disabled": false,
+                  "key": "address-state",
+                  "value": "<string>",
+                  "description": "A postalCode specified in an address"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the location"
+                },
+                {
+                  "disabled": false,
+                  "key": "near",
+                  "value": "<string>",
+                  "description": "Search for locations where the location.position is near to, or within a specified distance of, the provided coordinates expressed as [latitude]|[longitude]|[distance]|[units] (using the WGS84 datum, see notes). If the units are omitted, then kms should be assumed. If the distance is omitted, then the server can use its own discretion as to what distances should be considered near (and units are irrelevant) Servers may search using various techniques that might have differing accuracies, depending on implementation efficiency. Requires the near-distance parameter to be provided also"
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<string>",
+                  "description": "The identity of the organization the location belong to."
+                },
+                {
+                  "disabled": false,
+                  "key": "partof",
+                  "value": "<string>",
+                  "description": "The id of the location that the matched one is physically part of."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of the location."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "96f158b0-80d6-441f-a052-5f3050c3885d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Location"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_revinclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-city",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-postalcode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address-state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "near",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partof",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"82dfaff0-fa91-4522-a566-a7c91dcf3500\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-14T16:35:52.135Z\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/providerdirectory/api/Location\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/Location/00003100-fe74-568b-b7c8-47db031b508d\",\n      \"resource\": {\n        \"resourceType\": \"Location\",\n        \"id\": \"00003100-fe74-568b-b7c8-47db031b508d\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">WALGREENS</div>\"\n        },\n        \"status\": \"active\",\n        \"name\": \"WALGREENS\",\n        \"type\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleCode\",\n                \"code\": \"PHARM\"\n              }\n            ]\n          }\n        ],\n        \"telecom\": [\n          {\n            \"system\": \"phone\",\n            \"value\": \"615-781-6489\",\n            \"use\": \"work\"\n          }\n        ],\n        \"address\": {\n          \"line\": [\n            \"5429 Nolensville Pike\"\n          ],\n          \"city\": \"Nashville\",\n          \"state\": \"TN\",\n          \"postalCode\": \"37211\"\n        },\n        \"position\": {\n          \"longitude\": -86.71516,\n          \"latitude\": 36.04969\n        },\n        \"partOf\": {\n          \"reference\": \"Location/2938bd9d-9c51-5fe7-a2ed-62247ddc7c8f\"\n        }\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/Location/0000997d-a1d5-5bad-94d9-6d0823863b76\",\n      \"resource\": {\n        \"resourceType\": \"Location\",\n        \"id\": \"0000997d-a1d5-5bad-94d9-6d0823863b76\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Chattanooga Hamilton County Hospital Authority</div>\"\n        },\n        \"status\": \"active\",\n        \"name\": \"Chattanooga Hamilton County Hospital Authority\",\n        \"type\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleCode\",\n                \"code\": \"HOSP\"\n              }\n            ]\n          }\n        ],\n        \"telecom\": [\n          {\n            \"system\": \"phone\",\n            \"value\": \"4237782867\",\n            \"use\": \"work\"\n          }\n        ],\n        \"address\": {\n          \"line\": [\n            \"979 E 3rd St Ste A440\"\n          ],\n          \"city\": \"Chattanooga\",\n          \"state\": \"TN\",\n          \"postalCode\": \"37403\"\n        },\n        \"position\": {\n          \"longitude\": -85.29039,\n          \"latitude\": 35.0478\n        },\n        \"managingOrganization\": {\n          \"reference\": \"Organization/216fed38-1f68-552a-9e24-db0b52fd9d71\"\n        },\n        \"partOf\": {\n          \"reference\": \"Location/cf2e814e-8393-5d56-bb32-33fdb45b1f97\"\n        }\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8128ba8-c25c-4564-a9a6-2caa6a4aa6a0",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Location",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2bb106dd-2c47-4f16-8b82-a4d4284bd4a7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Location",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Location\",\n  \"id\": \"00003100-fe74-568b-b7c8-47db031b508d\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">WALGREENS</div>\"\n  },\n  \"status\": \"active\",\n  \"name\": \"WALGREENS\",\n  \"type\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/v3-RoleCode\",\n          \"code\": \"PHARM\"\n        }\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"615-781-6489\",\n      \"use\": \"work\"\n    }\n  ],\n  \"address\": {\n    \"line\": [\n      \"5429 Nolensville Pike\"\n    ],\n    \"city\": \"Nashville\",\n    \"state\": \"TN\",\n    \"postalCode\": \"37211\"\n  },\n  \"position\": {\n    \"longitude\": -86.71516,\n    \"latitude\": 36.04969\n  },\n  \"partOf\": {\n    \"reference\": \"Location/2938bd9d-9c51-5fe7-a2ed-62247ddc7c8f\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3622e60c-e4a3-4d35-a3e4-ea721d6857e7",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Organization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_include",
+                  "value": "<string>",
+                  "description": "Return resources related to the search results (E.g. Organization:partof, Organization:endpoint and Organization:coverage-area (Not effective))\n\n* `Organization:partof` - Organization:partof\n* `Organization:endpoint` - Organization:endpoint\n* `Organization:coverage-area` - Organization:coverage-area"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "_revinclude",
+                  "value": "<string>",
+                  "description": "Return resources filtered by the search results (E.g. Endpoint:Organization, HealthcareService:organization, InsurancePlan:administered-by (Not effective), InsurancePlan:owned-by (Not effective), PractitionerRole:organization, PractitionerRole:network, OrganizationAffiliation:primary-organization, OrganizationAffiliation:participating-organization)\n\n* `Endpoint:organization` - Endpoint:organization\n* `HealthcareService:organization` - HealthcareService:organization\n* `InsurancePlan:administered-by` - InsurancePlan:administered-by\n* `InsurancePlan:owned-by` - InsurancePlan:owned-by\n* `OrganizationAffiliation:primary-organization` - OrganizationAffiliation:primary-organization\n* `OrganizationAffiliation:participating-organization` - OrganizationAffiliation:participating-organization\n* `PractitionerRole:organization` - PractitionerRole:organization\n* `PractitionerRole:network` - PractitionerRole:network"
+                },
+                {
+                  "disabled": false,
+                  "key": "address",
+                  "value": "<string>",
+                  "description": "Select organizations with the specified address (matches any of the string elements of an address) (case insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "coverage-area",
+                  "value": "<string>",
+                  "description": "(Not effective due to lack of data) Select health insurance provider networks available in a region described by the specified location"
+                },
+                {
+                  "disabled": false,
+                  "key": "endpoint",
+                  "value": "<string>",
+                  "description": "Select organizations with the specified endpoint (in terms of endpoint ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Select organizations with the specified name (matches any of portion of the name) (case insensitive)"
+                },
+                {
+                  "disabled": false,
+                  "key": "partof",
+                  "value": "<string>",
+                  "description": "Select organizations that are part of the organization (in terms of organization ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Select organizations of the specified type (E.g. fac, prvgrp, ins, ntwk)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a6246e63-6c28-4ca4-8f67-1a9c147f6800",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Organization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_revinclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "address",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "coverage-area",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "endpoint",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "partof",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"e2100c91-eb92-48ff-8bd6-4bee39c5156d\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-11T00:48:03.465+08:00\",\n    \"profile\": [\n      \"http://hl7.org/fhir/StructureDefinition/Bundle\"\n    ]\n  },\n  \"type\": \"searchset\",\n  \"total\": 1,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/providerdirectory/api/Organization\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/Organization/c6672acb-ea60-5431-802d-c637901772d3\",\n      \"resource\": {\n        \"resourceType\": \"Organization\",\n        \"id\": \"c6672acb-ea60-5431-802d-c637901772d3\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-10T00:00:00.000+00:00\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization\"\n          ]\n        },\n        \"active\": true,\n        \"type\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/organization-type\",\n                \"code\": \"ins\"\n              }\n            ]\n          }\n        ],\n        \"name\": \"Clover Health\",\n        \"telecom\": [\n          {\n            \"system\": \"phone\",\n            \"value\": \"1-800-836-6890 (TTY 711)\"\n          }\n        ],\n        \"endpoint\": [\n          {\n            \"reference\": \"Endpoint/6d179858-2560-5ec6-a162-2205ab32f378\"\n          },\n          {\n            \"reference\": \"Endpoint/d440e938-30ab-5d46-8005-5ba41160e098\"\n          },\n          {\n            \"reference\": \"Endpoint/d0ad6fdc-e3c3-5e4e-9e58-ba03f0890acf\"\n          },\n          {\n            \"reference\": \"Endpoint/6de7294f-0c82-58b3-aa63-ed25a48e71eb\"\n          },\n          {\n            \"reference\": \"Endpoint/4e9e6ab5-acf5-568b-b186-c81a81f9f859\"\n          },\n          {\n            \"reference\": \"Endpoint/0dfc6e13-bb9f-562c-8954-35c426feea0b\"\n          },\n          {\n            \"reference\": \"Endpoint/8fcc05e9-2b5d-59be-86af-2fc0b4910ce0\"\n          },\n          {\n            \"reference\": \"Endpoint/ea64c0b3-b041-51cd-9ac8-b9f230cccfa7\"\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff6ed142-c8ae-4b60-b03a-4cfe26773b71",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Organization",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d43526d3-1a2c-4b7f-9557-ddc6f1991d50",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Organization",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Organization\",\n  \"id\": \"c6672acb-ea60-5431-802d-c637901772d3\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-10T00:00:00.000+00:00\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization\"\n    ]\n  },\n  \"active\": true,\n  \"type\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/organization-type\",\n          \"code\": \"ins\"\n        }\n      ]\n    }\n  ],\n  \"name\": \"Clover Health\",\n  \"telecom\": [\n    {\n      \"system\": \"phone\",\n      \"value\": \"1-800-836-6890 (TTY 711)\"\n    }\n  ],\n  \"endpoint\": [\n    {\n      \"reference\": \"Endpoint/6d179858-2560-5ec6-a162-2205ab32f378\"\n    },\n    {\n      \"reference\": \"Endpoint/d440e938-30ab-5d46-8005-5ba41160e098\"\n    },\n    {\n      \"reference\": \"Endpoint/d0ad6fdc-e3c3-5e4e-9e58-ba03f0890acf\"\n    },\n    {\n      \"reference\": \"Endpoint/6de7294f-0c82-58b3-aa63-ed25a48e71eb\"\n    },\n    {\n      \"reference\": \"Endpoint/4e9e6ab5-acf5-568b-b186-c81a81f9f859\"\n    },\n    {\n      \"reference\": \"Endpoint/0dfc6e13-bb9f-562c-8954-35c426feea0b\"\n    },\n    {\n      \"reference\": \"Endpoint/8fcc05e9-2b5d-59be-86af-2fc0b4910ce0\"\n    },\n    {\n      \"reference\": \"Endpoint/ea64c0b3-b041-51cd-9ac8-b9f230cccfa7\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95b656f7-c889-42d7-a5df-75e43f163bff",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "OrganizationAffiliation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_include",
+                  "value": "<string>",
+                  "description": "Return resources related to the search results (E.g. OrganizationAffiliation:location, OrganizationAffiliation:service, OrganizationAffiliation:network and OrganizationAffiliation:endpoint (Not effective))\n\n* `OrganizationAffiliation:primary-organization` - OrganizationAffiliation:primary-organization\n* `OrganizationAffiliation:participating-organization` - OrganizationAffiliation:participating-organization\n* `OrganizationAffiliation:location` - OrganizationAffiliation:location\n* `OrganizationAffiliation:service` - OrganizationAffiliation:service\n* `OrganizationAffiliation:endpoint` - OrganizationAffiliation:endpoint\n* `OrganizationAffiliation:network` - OrganizationAffiliation:network"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "endpoint",
+                  "value": "<string>",
+                  "description": "(Not effective) Select OrganizationAffiliations with the specified endpoint"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Select OrganizationAffiliations available at the specified location (in terms of location ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<string>",
+                  "description": "Select roles where the organization is a member of the specified health insurance provider network (in terms of organization ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "participating-organization",
+                  "value": "<string>",
+                  "description": "Select roles filled by the specified organization (in terms of organization ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "primary-organization",
+                  "value": "<string>",
+                  "description": "Select roles offered by the specified organization (in terms of organization ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "Select OrganizationAffiliations with the specified role code"
+                },
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "Select OrganizationAffiliations providing the specified service (in terms of healthcare service ID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "specialty",
+                  "value": "<string>",
+                  "description": "Select OrganizationAffiliations associated with the specified specialty code"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0c1bea10-3912-499a-8072-453b07396489",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "OrganizationAffiliation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "endpoint",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "network",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "participating-organization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "primary-organization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"a3c5d710-1777-4cef-a27b-85b52adde720\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-11T08:15:57.387Z\",\n    \"profile\": [\n      \"http://hl7.org/fhir/StructureDefinition/Bundle\"\n    ]\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/providerdirectory/api/OrganizationAffiliation\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/OrganizationAffiliation/aefac026-bbfc-5545-b6d6-21d30063ae02\",\n      \"resource\": {\n        \"resourceType\": \"OrganizationAffiliation\",\n        \"id\": \"aefac026-bbfc-5545-b6d6-21d30063ae02\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-11T00:00:00.000+00:00\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-OrganizationAffiliation\"\n          ]\n        },\n        \"active\": true,\n        \"period\": {\n          \"start\": \"2013-01-01\"\n        },\n        \"organization\": {\n          \"reference\": \"Organization/d9110c8e-2f8a-5966-b52b-0e08aab0767c\",\n          \"display\": \"University Physician Associates of New Jersey Inc\"\n        },\n        \"participatingOrganization\": {\n          \"reference\": \"Organization/10f286ae-8f33-50e4-bd4b-ba8270cc0f7d\",\n          \"display\": \"ARMEHTAMD PAINANDDISABILITYINSTITUTE PC\"\n        },\n        \"network\": [\n          {\n            \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n          }\n        ],\n        \"code\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrganizationAffiliationRoleCS\",\n                \"code\": \"bt\"\n              }\n            ]\n          }\n        ],\n        \"specialty\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://nucc.org/provider-taxonomy\",\n                \"code\": \"208100000X\"\n              }\n            ]\n          }\n        ],\n        \"location\": [\n          {\n            \"reference\": \"Location/a5454e38-857d-5f3e-b1a7-0b917b563762\"\n          },\n          {\n            \"reference\": \"Location/686d41ce-6486-5e13-b211-23417e86a8b9\"\n          }\n        ],\n        \"healthcareService\": [\n          {\n            \"reference\": \"HealthcareService/7553cbe1-b26f-5255-b0c2-42029e66d368\"\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/OrganizationAffiliation/9d9c8b8a-c490-5dd1-b550-f5b0d1b4fc3a\",\n      \"resource\": {\n        \"resourceType\": \"OrganizationAffiliation\",\n        \"id\": \"9d9c8b8a-c490-5dd1-b550-f5b0d1b4fc3a\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-11T00:00:00.000+00:00\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-OrganizationAffiliation\"\n          ]\n        },\n        \"active\": true,\n        \"period\": {\n          \"start\": \"2018-03-21\"\n        },\n        \"organization\": {\n          \"reference\": \"Organization/09f01493-5f3a-5db0-afaf-e8b789371e7c\",\n          \"display\": \"University Rehabilitation Associates\"\n        },\n        \"participatingOrganization\": {\n          \"reference\": \"Organization/10f286ae-8f33-50e4-bd4b-ba8270cc0f7d\",\n          \"display\": \"ARMEHTAMD PAINANDDISABILITYINSTITUTE PC\"\n        },\n        \"network\": [\n          {\n            \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n          }\n        ],\n        \"code\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrganizationAffiliationRoleCS\",\n                \"code\": \"bt\"\n              }\n            ]\n          }\n        ],\n        \"specialty\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://nucc.org/provider-taxonomy\",\n                \"code\": \"208100000X\"\n              }\n            ]\n          }\n        ],\n        \"location\": [\n          {\n            \"reference\": \"Location/e33dd5aa-613e-5731-ad69-4a7bb9c659c1\"\n          },\n          {\n            \"reference\": \"Location/686d41ce-6486-5e13-b211-23417e86a8b9\"\n          }\n        ],\n        \"healthcareService\": [\n          {\n            \"reference\": \"HealthcareService/7553cbe1-b26f-5255-b0c2-42029e66d368\"\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f431e0bb-9f1a-48e1-9ad7-a0e154d42b88",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "OrganizationAffiliation",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7c10eda-80c8-4fae-b228-e182574788df",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "OrganizationAffiliation",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"OrganizationAffiliation\",\n  \"id\": \"aefac026-bbfc-5545-b6d6-21d30063ae02\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-11T00:00:00.000+00:00\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-OrganizationAffiliation\"\n    ]\n  },\n  \"active\": true,\n  \"period\": {\n    \"start\": \"2013-01-01\"\n  },\n  \"organization\": {\n    \"reference\": \"Organization/d9110c8e-2f8a-5966-b52b-0e08aab0767c\",\n    \"display\": \"University Physician Associates of New Jersey Inc\"\n  },\n  \"participatingOrganization\": {\n    \"reference\": \"Organization/10f286ae-8f33-50e4-bd4b-ba8270cc0f7d\",\n    \"display\": \"ARMEHTAMD PAINANDDISABILITYINSTITUTE PC\"\n  },\n  \"network\": [\n    {\n      \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n    }\n  ],\n  \"code\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/OrganizationAffiliationRoleCS\",\n          \"code\": \"bt\"\n        }\n      ]\n    }\n  ],\n  \"specialty\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://nucc.org/provider-taxonomy\",\n          \"code\": \"208100000X\"\n        }\n      ]\n    }\n  ],\n  \"location\": [\n    {\n      \"reference\": \"Location/a5454e38-857d-5f3e-b1a7-0b917b563762\"\n    },\n    {\n      \"reference\": \"Location/686d41ce-6486-5e13-b211-23417e86a8b9\"\n    }\n  ],\n  \"healthcareService\": [\n    {\n      \"reference\": \"HealthcareService/7553cbe1-b26f-5255-b0c2-42029e66d368\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e04e312-5c73-4876-b133-f61b960aa0d5",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Practitioner"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "_revinclude",
+                  "value": "<string>",
+                  "description": "Include resources related to the search results Supported(PractitionerRole:practitioner)\n\n* `PractitionerRole:practitioner` - PractitionerRole:practitioner"
+                },
+                {
+                  "disabled": false,
+                  "key": "family",
+                  "value": "<string>",
+                  "description": "Practitioner's family name"
+                },
+                {
+                  "disabled": false,
+                  "key": "given",
+                  "value": "<string>",
+                  "description": "Practitioner's given name"
+                },
+                {
+                  "disabled": false,
+                  "key": "identifier",
+                  "value": "<string>",
+                  "description": "A practitioner's Identifier (NPI)"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "A server defined search that may match any of the string fields in the HumanName, including family, give, prefix, suffix, suffix, and/or text"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b1b95ef-1026-4b32-bf93-693c193c7810",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Practitioner"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_revinclude",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "family",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "given",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"53d6ab1b-50fe-4140-8586-4e388e1890c2\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-14T16:31:35.904Z\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/provider-directory/api/Practitioner\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/provider-directory/api/Practitioner/15d1c138-91e4-5c7e-bcde-b0cbafa0dffa\",\n      \"resource\": {\n        \"resourceType\": \"Practitioner\",\n        \"id\": \"15d1c138-91e4-5c7e-bcde-b0cbafa0dffa\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Chantal M Brazeau</div>\"\n        },\n        \"identifier\": [\n          {\n            \"system\": \"http://hl7.org/fhir/sid/us-npi\",\n            \"value\": \"1780796193\"\n          }\n        ],\n        \"active\": true,\n        \"name\": [\n          {\n            \"family\": \"Brazeau\",\n            \"given\": [\n              \"Chantal\"\n            ]\n          }\n        ],\n        \"telecom\": [\n          {\n            \"extension\": [\n              {\n                \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary\",\n                \"id\": \"8e6bd9c8-61db-5296-a270-c090a19e871b\",\n                \"valueReference\": {\n                  \"reference\": \"Location/8e6bd9c8-61db-5296-a270-c090a19e871b\"\n                }\n              },\n              {\n                \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary\",\n                \"id\": \"f72c3f05-75c6-56da-8bec-3a9433f78b29\",\n                \"valueReference\": {\n                  \"reference\": \"Location/f72c3f05-75c6-56da-8bec-3a9433f78b29\"\n                }\n              }\n            ]\n          }\n        ],\n        \"gender\": \"male\",\n        \"communication\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/iso639-3\",\n                \"code\": \"eng\"\n              }\n            ],\n            \"text\": \"eng\"\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/provider-directory/api/Practitioner/47ba253a-33cb-5681-8406-0050edcaec83\",\n      \"resource\": {\n        \"resourceType\": \"Practitioner\",\n        \"id\": \"47ba253a-33cb-5681-8406-0050edcaec83\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Ira M Brooks</div>\"\n        },\n        \"identifier\": [\n          {\n            \"system\": \"http://hl7.org/fhir/sid/us-npi\",\n            \"value\": \"1437172111\"\n          }\n        ],\n        \"active\": true,\n        \"name\": [\n          {\n            \"family\": \"Brooks\",\n            \"given\": [\n              \"Ira\"\n            ]\n          }\n        ],\n        \"telecom\": [\n          {\n            \"extension\": [\n              {\n                \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary\",\n                \"id\": \"1cdaedef-a9cf-5166-83f3-3c5a03f2ef90\",\n                \"valueReference\": {\n                  \"reference\": \"Location/1cdaedef-a9cf-5166-83f3-3c5a03f2ef90\"\n                }\n              }\n            ]\n          }\n        ],\n        \"gender\": \"male\",\n        \"communication\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/iso639-3\",\n                \"code\": \"eng\"\n              }\n            ],\n            \"text\": \"eng\"\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b8ccdfd-60a6-4d7d-8fac-d0291dff25d6",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "Practitioner",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "051364f9-bc6b-44e2-a223-6747e0a3b1a0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "Practitioner",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Practitioner\",\n  \"id\": \"47ba253a-33cb-5681-8406-0050edcaec83\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Ira M Brooks</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"http://hl7.org/fhir/sid/us-npi\",\n      \"value\": \"1437172111\"\n    }\n  ],\n  \"active\": true,\n  \"name\": [\n    {\n      \"family\": \"Brooks\",\n      \"given\": [\n        \"Ira\"\n      ]\n    }\n  ],\n  \"telecom\": [\n    {\n      \"extension\": [\n        {\n          \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/via-intermediary\",\n          \"id\": \"1cdaedef-a9cf-5166-83f3-3c5a03f2ef90\",\n          \"valueReference\": {\n            \"reference\": \"Location/1cdaedef-a9cf-5166-83f3-3c5a03f2ef90\"\n          }\n        }\n      ]\n    }\n  ],\n  \"gender\": \"male\",\n  \"communication\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/iso639-3\",\n          \"code\": \"eng\"\n        }\n      ],\n      \"text\": \"eng\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "822d578e-d0fc-4761-be9a-fdaf0de8ffa2",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "PractitionerRole"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_id",
+                  "value": "<string>",
+                  "description": "Resource id (not a full URL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "_include",
+                  "value": "<string>",
+                  "description": "Include resources related to the search results (Supported: PractitionerRole:practitioner, PractitionerRole:organization, PractitionerRole:location, PractitionerRole:service, PractitionerRole:network, PractitionerRole:endpoint)\n\n* `PractitionerRole:practitioner` - PractitionerRole:practitioner\n* `PractitionerRole:organization` - PractitionerRole:organization\n* `PractitionerRole:location` - PractitionerRole:location\n* `PractitionerRole:service` - PractitionerRole:service\n* `PractitionerRole:network` - PractitionerRole:network\n* `PractitionerRole:endpoint` - PractitionerRole:endpoint"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Location that the practitioner provider services at."
+                },
+                {
+                  "disabled": false,
+                  "key": "network",
+                  "value": "<string>",
+                  "description": "Network that the practitioner is a part of."
+                },
+                {
+                  "disabled": false,
+                  "key": "organization",
+                  "value": "<string>",
+                  "description": "The identity of the organization the practitioner represents / acts on behalf of"
+                },
+                {
+                  "disabled": false,
+                  "key": "practitioner",
+                  "value": "<string>",
+                  "description": "Practitioner that is able to provide the defined services for the organization"
+                },
+                {
+                  "disabled": false,
+                  "key": "role",
+                  "value": "<string>",
+                  "description": "The practitioner can perform this role at for the organization"
+                },
+                {
+                  "disabled": false,
+                  "key": "service",
+                  "value": "<string>",
+                  "description": "Service that the practitioner provides."
+                },
+                {
+                  "disabled": false,
+                  "key": "specialty",
+                  "value": "<string>",
+                  "description": "The practitioner has this specialty at an organization"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2ab40a31-5c53-48d8-9fc1-29b4673af02f",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "PractitionerRole"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "network",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "organization",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "practitioner",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "role",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "service",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "specialty",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"be7670b9-3105-4874-8e84-a592f22ca05c\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-14T16:30:36.366Z\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/providerdirectory/api/PractitionerRole\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/PractitionerRole/bfcec0d0-a895-5aea-91f3-1948598b9bdd\",\n      \"resource\": {\n        \"resourceType\": \"PractitionerRole\",\n        \"id\": \"bfcec0d0-a895-5aea-91f3-1948598b9bdd\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Scott Sundick</div>\"\n        },\n        \"identifier\": [\n          {\n            \"system\": \"http://hl7.org/fhir/sid/us-npi\",\n            \"value\": \"1649449687\"\n          }\n        ],\n        \"active\": true,\n        \"extension\": [\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients\",\n            \"extension\": [\n              {\n                \"url\": \"acceptingPatients\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS\",\n                      \"code\": \"newpt\"\n                    }\n                  ]\n                }\n              }\n            ]\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference\",\n            \"valueReference\": {\n              \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n            }\n          }\n        ],\n        \"practitioner\": {\n          \"reference\": \"Practitioner/367921f5-2436-5897-96bb-09611da4c51e\",\n          \"display\": \"Scott Sundick\"\n        },\n        \"organization\": {\n          \"reference\": \"Organization/3d0a9886-5edc-5c2b-9976-9a88712509bb\",\n          \"display\": \"Cardiovascular Care Group PC\"\n        },\n        \"location\": [\n          {\n            \"reference\": \"Location/3767a8b8-4a84-56f7-89b6-2af63a737a7c\"\n          }\n        ],\n        \"healthcareService\": [\n          {\n            \"reference\": \"HealthcareService/86f22c44-882b-5ae6-a21d-3f58d89a6813\"\n          }\n        ],\n        \"code\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/practitioner-role\",\n                \"code\": \"doctor\"\n              }\n            ]\n          }\n        ],\n        \"specialty\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://nucc.org/provider-taxonomy\",\n                \"code\": \"2086S0129X\"\n              }\n            ]\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/providerdirectory/api/PractitionerRole/43bc140f-395b-505c-96d5-37f0b5bcf52f\",\n      \"resource\": {\n        \"resourceType\": \"PractitionerRole\",\n        \"id\": \"43bc140f-395b-505c-96d5-37f0b5bcf52f\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Scott Sundick</div>\"\n        },\n        \"identifier\": [\n          {\n            \"system\": \"http://hl7.org/fhir/sid/us-npi\",\n            \"value\": \"1649449687\"\n          }\n        ],\n        \"active\": true,\n        \"extension\": [\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients\",\n            \"extension\": [\n              {\n                \"url\": \"acceptingPatients\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS\",\n                      \"code\": \"newpt\"\n                    }\n                  ]\n                }\n              }\n            ]\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference\",\n            \"valueReference\": {\n              \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n            }\n          }\n        ],\n        \"practitioner\": {\n          \"reference\": \"Practitioner/367921f5-2436-5897-96bb-09611da4c51e\",\n          \"display\": \"Scott Sundick\"\n        },\n        \"organization\": {\n          \"reference\": \"Organization/3d0a9886-5edc-5c2b-9976-9a88712509bb\",\n          \"display\": \"Cardiovascular Care Group PC\"\n        },\n        \"location\": [\n          {\n            \"reference\": \"Location/2d7062f2-eb7e-516e-91e5-fd107b1fe104\"\n          }\n        ],\n        \"healthcareService\": [\n          {\n            \"reference\": \"HealthcareService/d83e1d95-3a94-5fa0-9f27-affe8dda4aea\"\n          }\n        ],\n        \"code\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://terminology.hl7.org/CodeSystem/practitioner-role\",\n                \"code\": \"doctor\"\n              }\n            ]\n          }\n        ],\n        \"specialty\": [\n          {\n            \"coding\": [\n              {\n                \"system\": \"http://nucc.org/provider-taxonomy\",\n                \"code\": \"2086S0129X\"\n              }\n            ]\n          }\n        ]\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3aa8f05-19ef-4cda-ace0-25274cb2b144",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "PractitionerRole",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae272881-7b61-40bd-87fe-896eca5286e8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "PractitionerRole",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"PractitionerRole\",\n  \"id\": \"bfcec0d0-a895-5aea-91f3-1948598b9bdd\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-06-14T00:00:00Z\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\">Scott Sundick</div>\"\n  },\n  \"identifier\": [\n    {\n      \"system\": \"http://hl7.org/fhir/sid/us-npi\",\n      \"value\": \"1649449687\"\n    }\n  ],\n  \"active\": true,\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients\",\n      \"extension\": [\n        {\n          \"url\": \"acceptingPatients\",\n          \"valueCodeableConcept\": {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/CodeSystem/AcceptingPatientsCS\",\n                \"code\": \"newpt\"\n              }\n            ]\n          }\n        }\n      ]\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/network-reference\",\n      \"valueReference\": {\n        \"reference\": \"Organization/9204cbaf-34e9-5d49-9d5d-1f2ce87d7056\"\n      }\n    }\n  ],\n  \"practitioner\": {\n    \"reference\": \"Practitioner/367921f5-2436-5897-96bb-09611da4c51e\",\n    \"display\": \"Scott Sundick\"\n  },\n  \"organization\": {\n    \"reference\": \"Organization/3d0a9886-5edc-5c2b-9976-9a88712509bb\",\n    \"display\": \"Cardiovascular Care Group PC\"\n  },\n  \"location\": [\n    {\n      \"reference\": \"Location/3767a8b8-4a84-56f7-89b6-2af63a737a7c\"\n    }\n  ],\n  \"healthcareService\": [\n    {\n      \"reference\": \"HealthcareService/86f22c44-882b-5ae6-a21d-3f58d89a6813\"\n    }\n  ],\n  \"code\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://terminology.hl7.org/CodeSystem/practitioner-role\",\n          \"code\": \"doctor\"\n        }\n      ]\n    }\n  ],\n  \"specialty\": [\n    {\n      \"coding\": [\n        {\n          \"system\": \"http://nucc.org/provider-taxonomy\",\n          \"code\": \"2086S0129X\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2f5505c-5220-4fc8-937b-645d0789e94c",
+          "name": "This interaction searches a set of resources based on some filter criteria..",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria..",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria..",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "providerdirectory",
+                "api",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "94dff24a-bc90-42ab-984d-b1101a1dd546",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "providerdirectory",
+                    "api",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"CapabilityStatement\",\n  \"id\": \"1933611\",\n  \"meta\": {\n    \"versionId\": \"1\",\n    \"lastUpdated\": \"2021-03-08T19:27:59.034+00:00\",\n    \"source\": \"#jURcAPyvWNKEoveb\"\n  },\n  \"status\": \"active\",\n  \"date\": \"2021-03-08T16:17:22-03:00\",\n  \"publisher\": \"Clover Health\",\n  \"kind\": \"instance\",\n  \"software\": {\n    \"name\": \"Clover Health FHIR R4 Provider Directory API\",\n    \"version\": \"4.2.0\"\n  },\n  \"implementation\": {\n    \"description\": \"DaVinci PDEX Plan Net\",\n    \"url\": \"https://build.fhir.org/ig/HL7/davinci-pdex-plan-net/\"\n  },\n  \"fhirVersion\": \"4.0.1\",\n  \"format\": [\n    \"application/fhir+xml\",\n    \"application/fhir+json\"\n  ],\n  \"rest\": [\n    {\n      \"mode\": \"server\",\n      \"resource\": [\n        {\n          \"type\": \"Bundle\",\n          \"profile\": \"http://hl7.org/fhir/StructureDefinition/Bundle\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            }\n          ]\n        },\n        {\n          \"type\": \"HealthcareService\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-HealthcareService\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ],\n          \"searchRevInclude\": [\n            \"PractitionerRole:practitioner\"\n          ],\n          \"searchInclude\": [\n            \"HealthcareService:location\",\n            \"HealthcareService:coverage-area\",\n            \"HealthcareService:organization\",\n            \"HealthcareService:endpoint\"\n          ],\n          \"searchParam\": [\n            {\n              \"name\": \"identifier\",\n              \"type\": \"token\",\n              \"documentation\": \"A healthcare service's Identifier (NPI)\"\n            },\n            {\n              \"name\": \"location\",\n              \"type\": \"reference\",\n              \"documentation\": \"The location of a healthcare service\"\n            },\n            {\n              \"name\": \"coverage-area\",\n              \"type\": \"reference\",\n              \"documentation\": \"The coverage-area of a healthcare service\"\n            },\n            {\n              \"name\": \"organization\",\n              \"type\": \"reference\",\n              \"documentation\": \"The organization that the healthcare service belongs to\"\n            },\n            {\n              \"name\": \"service-category\",\n              \"type\": \"string\",\n              \"documentation\": \"The category of a healthcare service\"\n            },\n            {\n              \"name\": \"service-type\",\n              \"type\": \"string\",\n              \"documentation\": \"The type of a healthcare service\"\n            },\n            {\n              \"name\": \"name\",\n              \"type\": \"string\",\n              \"documentation\": \"The name of a healthcare service\"\n            },\n            {\n              \"name\": \"specialty\",\n              \"type\": \"string\",\n              \"documentation\": \"The specialty of a healthcare service\"\n            }\n          ]\n        },\n        {\n          \"type\": \"Practitioner\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Practitioner\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ],\n          \"searchRevInclude\": [\n            \"PractitionerRole:practitioner\"\n          ],\n          \"searchParam\": [\n            {\n              \"name\": \"identifier\",\n              \"type\": \"token\",\n              \"documentation\": \"A practitioner's Identifier (NPI)\"\n            },\n            {\n              \"name\": \"name\",\n              \"type\": \"string\",\n              \"documentation\": \"A practitioner's name\"\n            },\n            {\n              \"name\": \"family\",\n              \"type\": \"string\",\n              \"documentation\": \"A practitioner's family name\"\n            },\n            {\n              \"name\": \"given\",\n              \"type\": \"string\",\n              \"documentation\": \"A practitioner's given name\"\n            }\n          ]\n        },\n        {\n          \"type\": \"PractitionerRole\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-PractitionerRole\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ],\n          \"searchInclude\": [\n            \"PractitionerRole:organization\",\n            \"PractitionerRole:practitioner\",\n            \"PractitionerRole:location\",\n            \"PractitionerRole:service\",\n            \"PractitionerRole:network\"\n          ],\n          \"searchParam\": [\n            {\n              \"name\": \"organization\",\n              \"type\": \"reference\",\n              \"documentation\": \"The identity of the organization the practitioner represents / acts on behalf of\"\n            },\n            {\n              \"name\": \"practitioner\",\n              \"type\": \"reference\",\n              \"documentation\": \"Practitioner that is able to provide the defined services for the organization\"\n            },\n            {\n              \"name\": \"network\",\n              \"type\": \"reference\",\n              \"documentation\": \"The network work that the practitioner is in.\"\n            },\n            {\n              \"name\": \"location\",\n              \"type\": \"reference\",\n              \"documentation\": \"The location that the practitioner provide service at.\"\n            },\n            {\n              \"name\": \"service\",\n              \"type\": \"reference\",\n              \"documentation\": \"The healthcare service the practitioner provides.\"\n            },\n            {\n              \"name\": \"specialty\",\n              \"type\": \"string\",\n              \"documentation\": \"The specialties of practitioner\"\n            },\n            {\n              \"name\": \"role\",\n              \"type\": \"string\",\n              \"documentation\": \"The credential type of a practitioner\"\n            }\n          ]\n        },\n        {\n          \"type\": \"Location\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Location\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ],\n          \"searchRevInclude\": [\n            \"HealthcareService:location\",\n            \"InsurancePlan:coverage-area\",\n            \"OrganizationAffiliation:location\",\n            \"PractitionerRole:location\"\n          ],\n          \"searchInclude\": [\n            \"Location:organization\",\n            \"Location:partof\"\n          ],\n          \"searchParam\": [\n            {\n              \"name\": \"name\",\n              \"type\": \"string\",\n              \"documentation\": \"The name of the location\"\n            },\n            {\n              \"name\": \"near\",\n              \"type\": \"special\",\n              \"documentation\": \"Geo information (longitude, latitude) of the location\"\n            },\n            {\n              \"name\": \"identifier\",\n              \"type\": \"token\",\n              \"documentation\": \"NPI of the location\"\n            },\n            {\n              \"name\": \"partOf\",\n              \"type\": \"reference\",\n              \"documentation\": \"The location that a location is physically part of.\"\n            },\n            {\n              \"name\": \"organization\",\n              \"type\": \"reference\",\n              \"documentation\": \"The organization that a location belongs to.\"\n            },\n            {\n              \"name\": \"type\",\n              \"type\": \"string\",\n              \"documentation\": \"The type of a location\"\n            },\n            {\n              \"name\": \"address\",\n              \"type\": \"string\",\n              \"documentation\": \"Address of the location\"\n            },\n            {\n              \"name\": \"address-city\",\n              \"type\": \"string\",\n              \"documentation\": \"City of the location\"\n            },\n            {\n              \"name\": \"address-state\",\n              \"type\": \"string\",\n              \"documentation\": \"State of the location\"\n            },\n            {\n              \"name\": \"address-postalCode\",\n              \"type\": \"string\",\n              \"documentation\": \"Postal code of the location\"\n            }\n          ]\n        },\n        {\n          \"type\": \"Endpoint\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Endpoint\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ]\n        },\n        {\n          \"type\": \"Organization\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-Organization\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ]\n        },\n        {\n          \"type\": \"OrganizationAffiliation\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/plannet-OrganizationAffiliation\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ada3ea86-fe31-40c0-b19f-5545f55b346a",
+    "name": "FHIR fhir-r4-formulary-api FHIR R4 ProviderDirectory API API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Formulary and Provider Directory API",
+      "type": "text/plain"
+    }
+  }
+}

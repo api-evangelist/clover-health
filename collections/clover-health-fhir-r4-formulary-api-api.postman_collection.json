@@ -1,0 +1,687 @@
+{
+  "item": [
+    {
+      "id": "b878f9a6-2d7f-40c3-a5cb-f1d81eb886aa",
+      "name": "fhir-r4-formulary-api",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b02141aa-ffac-41ad-a6a8-3a3024b01f3a",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "formulary",
+                "api",
+                "List"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "_profile",
+                  "value": "<string>",
+                  "description": "An URL of profile in structured definition"
+                },
+                {
+                  "disabled": false,
+                  "key": "identifier",
+                  "value": "<string>",
+                  "description": "CoveragePlan identifier. It can be in the type of CloverHealth's identifier (E.g. 001, 002) or the plan ID (E.g. H5141)"
+                },
+                {
+                  "disabled": false,
+                  "key": "item",
+                  "value": "<string>",
+                  "description": "The identifier of the associated FormularyDrug (also known as MedicationKnowledge) under the CoveragePlan"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "* `current` - current\n* `retired` - retired\n* `entered-in-error` - entered-in-error"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c0b524af-3380-43a0-be52-1f1dff63e37c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formulary",
+                    "api",
+                    "List"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "identifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "item",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"14f5b0a7-2d8b-43fb-a46e-b6c7d92aa59e\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-05-27T03:30:14.877Z\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 1,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/formulary/api/List\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/formulary/api/List/a1bf521c-7fe0-5329-b1bb-8858a52cd807\",\n      \"search\": {\n        \"mode\": \"match\"\n      },\n      \"resource\": {\n        \"resourceType\": \"List\",\n        \"id\": \"a1bf521c-7fe0-5329-b1bb-8858a52cd807\",\n        \"meta\": {\n          \"lastUpdated\": \"2021-05-18T10:18:01.162981+00:00\",\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan\"\n          ]\n        },\n        \"identifier\": [\n          {\n            \"system\": \"https://www.cloverhealth.com/plans\",\n            \"value\": \"001\"\n          },\n          {\n            \"system\": \"https://www.cloverhealth.com/plans\",\n            \"value\": \"002\"\n          },\n          {\n            \"value\": \"H5141\"\n          }\n        ],\n        \"status\": \"current\",\n        \"mode\": \"snapshot\",\n        \"title\": \"H5141\",\n        \"date\": \"2021-05-18T10:18:01.162981+00:00\",\n        \"extension\": [\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n            \"extension\": [\n              {\n                \"url\": \"drugTierID\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                      \"code\": \"preferred-brand\",\n                      \"display\": \"Preferred Brand: Brand name drugs\"\n                    }\n                  ]\n                }\n              },\n              {\n                \"url\": \"mailOrder\",\n                \"valueBoolean\": true\n              }\n            ]\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n            \"extension\": [\n              {\n                \"url\": \"drugTierID\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                      \"code\": \"specialty\",\n                      \"display\": \"Specialty: Drugs used to treat complex conditions like cancer and multiple sclerosis.They can be generic or brand name, and are typically the most expensive drugs on the formulary.\"\n                    }\n                  ]\n                }\n              },\n              {\n                \"url\": \"mailOrder\",\n                \"valueBoolean\": true\n              }\n            ]\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n            \"extension\": [\n              {\n                \"url\": \"drugTierID\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                      \"code\": \"non-preferred-generic\",\n                      \"display\": \"Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.\"\n                    }\n                  ]\n                }\n              },\n              {\n                \"url\": \"mailOrder\",\n                \"valueBoolean\": true\n              }\n            ]\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n            \"extension\": [\n              {\n                \"url\": \"drugTierID\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                      \"code\": \"generic\",\n                      \"display\": \"Generic: Commonly prescribed generic drugs that cost more than drugs in the ‘preferred generic’ tier.\"\n                    }\n                  ]\n                }\n              },\n              {\n                \"url\": \"mailOrder\",\n                \"valueBoolean\": true\n              }\n            ]\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n            \"extension\": [\n              {\n                \"url\": \"drugTierID\",\n                \"valueCodeableConcept\": {\n                  \"coding\": [\n                    {\n                      \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                      \"code\": \"non-preferred-brand\",\n                      \"display\": \"Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.\"\n                    }\n                  ]\n                }\n              },\n              {\n                \"url\": \"mailOrder\",\n                \"valueBoolean\": true\n              }\n            ]\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Network-extension\",\n            \"valueString\": \"Not Applicable\"\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-SummaryURL-extension\",\n            \"valueString\": \"https://cdn.cloverhealth.com/filer_public/d0/b6/d0b6294a-2e6b-4504-b9d4-bf65a4753210/76207_nj_eng_ch_nj_cy21_5t_gs_core_april_21.pdf\"\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanIDType-extension\",\n            \"valueString\": \"HIOS-PLAN-ID\"\n          }\n        ],\n        \"entry\": [\n          {\n            \"item\": {\n              \"reference\": \"MedicationKnowledge/000212621243033\"\n            }\n          },\n          {\n            \"item\": {\n              \"reference\": \"MedicationKnowledge/000212621923056\"\n            }\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b554814a-6bc1-4fae-bfe2-f70b37a29b6d",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "formulary",
+                "api",
+                "List",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e81de2cf-b88a-47a5-babd-0e7a755be853",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formulary",
+                    "api",
+                    "List",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"List\",\n  \"id\": \"a1bf521c-7fe0-5329-b1bb-8858a52cd807\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-05-18T10:18:01.162981+00:00\",\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan\"\n    ]\n  },\n  \"identifier\": [\n    {\n      \"system\": \"https://www.cloverhealth.com/plans\",\n      \"value\": \"001\"\n    },\n    {\n      \"system\": \"https://www.cloverhealth.com/plans\",\n      \"value\": \"002\"\n    },\n    {\n      \"value\": \"H5141\"\n    }\n  ],\n  \"status\": \"current\",\n  \"mode\": \"snapshot\",\n  \"title\": \"H5141\",\n  \"date\": \"2021-05-18T10:18:01.162981+00:00\",\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n      \"extension\": [\n        {\n          \"url\": \"drugTierID\",\n          \"valueCodeableConcept\": {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                \"code\": \"preferred-generic\",\n                \"display\": \"Preferred Generic: Commonly prescribed generic drugs.\"\n              }\n            ]\n          }\n        },\n        {\n          \"url\": \"mailOrder\",\n          \"valueBoolean\": true\n        }\n      ]\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n      \"extension\": [\n        {\n          \"url\": \"drugTierID\",\n          \"valueCodeableConcept\": {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                \"code\": \"non-preferred-generic\",\n                \"display\": \"Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.\"\n              }\n            ]\n          }\n        },\n        {\n          \"url\": \"mailOrder\",\n          \"valueBoolean\": true\n        }\n      ]\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierDefinition-extension\",\n      \"extension\": [\n        {\n          \"url\": \"drugTierID\",\n          \"valueCodeableConcept\": {\n            \"coding\": [\n              {\n                \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                \"code\": \"non-preferred-brand\",\n                \"display\": \"Non-preferred Brand: Brand name drugs that cost more than ‘brand’ drugs.\"\n              }\n            ]\n          }\n        },\n        {\n          \"url\": \"mailOrder\",\n          \"valueBoolean\": true\n        }\n      ]\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-Network-extension\",\n      \"valueString\": \"Not Applicable\"\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-SummaryURL-extension\",\n      \"valueString\": \"https://cdn.cloverhealth.com/filer_public/d0/b6/d0b6294a-2e6b-4504-b9d4-bf65a4753210/76207_nj_eng_ch_nj_cy21_5t_gs_core_april_21.pdf\"\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanIDType-extension\",\n      \"valueString\": \"HIOS-PLAN-ID\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"item\": {\n        \"reference\": \"MedicationKnowledge/000212621000001\"\n      }\n    },\n    {\n      \"item\": {\n        \"reference\": \"MedicationKnowledge/000212621000048\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf4a7a97-8503-45e4-bc0f-b28ba8c457c1",
+          "name": "This interaction searches a set of resources based on some filter criteria.",
+          "request": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "description": {
+              "content": "This interaction searches a set of resources based on some filter criteria.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "formulary",
+                "api",
+                "MedicationKnowledge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "DrugName",
+                  "value": "<string>",
+                  "description": "Name of the drug"
+                },
+                {
+                  "disabled": false,
+                  "key": "DrugPlan",
+                  "value": "<string>",
+                  "description": "Plan of the drug"
+                },
+                {
+                  "disabled": false,
+                  "key": "DrugTier",
+                  "value": "<string>",
+                  "description": "Drug tier of the drug"
+                },
+                {
+                  "disabled": false,
+                  "key": "_count",
+                  "value": "20",
+                  "description": "Maximum number of results to be returned"
+                },
+                {
+                  "disabled": false,
+                  "key": "_offset",
+                  "value": "0",
+                  "description": "Number of results to be offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "_profile",
+                  "value": "<string>",
+                  "description": "An URL of profile in structured definition"
+                },
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "Rx code of the drug"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "070a4f18-9664-4ffd-8df9-1f15e22e1cc1",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formulary",
+                    "api",
+                    "MedicationKnowledge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "DrugName",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DrugPlan",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "DrugTier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "_count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "_offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "_profile",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"Bundle\",\n  \"id\": \"2f6e91d0-60ea-41b6-96cb-354ec38697ad\",\n  \"meta\": {\n    \"lastUpdated\": \"2021-05-27T12:10:37.416+08:00\"\n  },\n  \"type\": \"searchset\",\n  \"total\": 2,\n  \"link\": [\n    {\n      \"relation\": \"self\",\n      \"url\": \"https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge\"\n    }\n  ],\n  \"entry\": [\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge/000211871000001\",\n      \"resource\": {\n        \"resourceType\": \"MedicationKnowledge\",\n        \"id\": 211871000001,\n        \"meta\": {\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p><b>Generated Narrative</b></p><p><b>Drug Tier ID</b>:<span title=\\\"Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS preferred-generic}\\\">Preferred Generic: Commonly prescribed generic drugs.</span></p><p><b>Prior Authorization</b>: false</p><p><b>Step Therapy Limit</b>: false</p><p><b>Quantity Limit</b>: true</p><p><b>Plan ID</b>: H5141</p><p><b>code</b>:<span title=\\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000001}\\\">OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG</span></p></div>\"\n        },\n        \"extension\": [\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension\",\n            \"valueCodeableConcept\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                  \"code\": \"preferred-generic\",\n                  \"display\": \"Preferred Generic: Commonly prescribed generic drugs.\"\n                },\n                {\n                  \"system\": \"https://www.cloverhealth.com/members/formulary/DrugTierLevel\",\n                  \"code\": \"Tier 1\",\n                  \"display\": \"Preferred Generic drugs\"\n                }\n              ]\n            }\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension\",\n            \"valueBoolean\": false\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension\",\n            \"valueBoolean\": false\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension\",\n            \"valueBoolean\": true\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension\",\n            \"valueString\": \"H5141\"\n          },\n          {\n            \"url\": \"https://www.cloverhealth.com/members/formulary\",\n            \"valueString\": 21187\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://www.nlm.nih.gov/research/umls/rxnorm\",\n              \"code\": \"1000001\",\n              \"display\": \"OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG\"\n            }\n          ]\n        }\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    },\n    {\n      \"fullUrl\": \"https://public-api.cloverhealth.com/formulary/api/MedicationKnowledge/000211871000048\",\n      \"resource\": {\n        \"resourceType\": \"MedicationKnowledge\",\n        \"id\": 211871000048,\n        \"meta\": {\n          \"profile\": [\n            \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug\"\n          ]\n        },\n        \"text\": {\n          \"status\": \"generated\",\n          \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p><b>Generated Narrative</b></p><p><b>Drug Tier ID</b>:<span title=\\\"Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS non-preferred-generic}\\\">Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.</span></p><p><b>Prior Authorization</b>: false</p><p><b>Step Therapy Limit</b>: false</p><p><b>Quantity Limit</b>: false</p><p><b>Plan ID</b>: H8010</p><p><b>code</b>:<span title=\\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000048}\\\">DOXEPIN HCL CAP 10 MG</span></p></div>\"\n        },\n        \"extension\": [\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension\",\n            \"valueCodeableConcept\": {\n              \"coding\": [\n                {\n                  \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n                  \"code\": \"non-preferred-generic\",\n                  \"display\": \"Non-preferred Generic: Generic drugs that cost more than drugs in ‘generic’ tier.\"\n                },\n                {\n                  \"system\": \"https://www.cloverhealth.com/members/formulary/DrugTierLevel\",\n                  \"code\": \"Tier 4\",\n                  \"display\": \"Non-Preferred drugs\"\n                }\n              ]\n            }\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension\",\n            \"valueBoolean\": false\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension\",\n            \"valueBoolean\": false\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension\",\n            \"valueBoolean\": false\n          },\n          {\n            \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension\",\n            \"valueString\": \"H8010\"\n          },\n          {\n            \"url\": \"https://www.cloverhealth.com/members/formulary\",\n            \"valueString\": 21187\n          }\n        ],\n        \"code\": {\n          \"coding\": [\n            {\n              \"system\": \"http://www.nlm.nih.gov/research/umls/rxnorm\",\n              \"code\": \"1000048\",\n              \"display\": \"DOXEPIN HCL CAP 10 MG\"\n            }\n          ]\n        }\n      },\n      \"search\": {\n        \"mode\": \"match\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b476549-0215-4d3f-982c-517671eccf62",
+          "name": "The read interaction accesses the current contents of a resource.",
+          "request": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "description": {
+              "content": "The read interaction accesses the current contents of a resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "formulary",
+                "api",
+                "MedicationKnowledge",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "433e4ba9-39af-441e-a7dc-6133f0d559c5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formulary",
+                    "api",
+                    "MedicationKnowledge",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"MedicationKnowledge\",\n  \"id\": 211871000001,\n  \"meta\": {\n    \"profile\": [\n      \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug\"\n    ]\n  },\n  \"text\": {\n    \"status\": \"generated\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><p><b>Generated Narrative</b></p><p><b>Drug Tier ID</b>:<span title=\\\"Codes: {http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS preferred-generic}\\\">Preferred Generic: Commonly prescribed generic drugs.</span></p><p><b>Prior Authorization</b>: false</p><p><b>Step Therapy Limit</b>: false</p><p><b>Quantity Limit</b>: true</p><p><b>Plan ID</b>: H8010</p><p><b>code</b>:<span title=\\\"Codes: {http://www.nlm.nih.gov/research/umls/rxnorm 1000001}\\\">OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG</span></p></div>\"\n  },\n  \"extension\": [\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-DrugTierID-extension\",\n      \"valueCodeableConcept\": {\n        \"coding\": [\n          {\n            \"system\": \"http://hl7.org/fhir/us/davinci-drug-formulary/CodeSystem/usdf-DrugTierCS\",\n            \"code\": \"preferred-generic\",\n            \"display\": \"Preferred Generic: Commonly prescribed generic drugs.\"\n          },\n          {\n            \"system\": \"https://www.cloverhealth.com/members/formulary/DrugTierLevel\",\n            \"code\": \"Tier 1\",\n            \"display\": \"Preferred Generic drugs\"\n          }\n        ]\n      }\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PriorAuthorization-extension\",\n      \"valueBoolean\": false\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-StepTherapyLimit-extension\",\n      \"valueBoolean\": false\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-QuantityLimit-extension\",\n      \"valueBoolean\": true\n    },\n    {\n      \"url\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-PlanID-extension\",\n      \"valueString\": \"H8010\"\n    },\n    {\n      \"url\": \"https://www.cloverhealth.com/members/formulary\",\n      \"valueString\": 21187\n    }\n  ],\n  \"code\": {\n    \"coding\": [\n      {\n        \"system\": \"http://www.nlm.nih.gov/research/umls/rxnorm\",\n        \"code\": \"1000001\",\n        \"display\": \"OLMESARTAN-AMLODIPINE-HYDROCHLOROTHIAZIDE TAB 40-5-25 MG\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7d099cb4-1ea1-4f34-af7c-9e6e1853ee32",
+          "name": "Get the capability statement of the formulary API",
+          "request": {
+            "name": "Get the capability statement of the formulary API",
+            "description": {
+              "content": "Get the capability statement of the formulary API",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "formulary",
+                "api",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/fhir+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "sessionid"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "446da9c5-cf03-469d-8c59-562e985d86c7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "formulary",
+                    "api",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "sessionid",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/fhir+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/fhir+json"
+                }
+              ],
+              "body": "{\n  \"resourceType\": \"CapabilityStatement\",\n  \"id\": \"usdf-server\",\n  \"text\": {\n    \"status\": \"additional\",\n    \"div\": \"<div xmlns=\\\"http://www.w3.org/1999/xhtml\\\"><h2 id=\\\"title\\\">USDFServerCapabilityStatement</h2> <p>This Section describes the expected capabilities of the US Drug Formulary Server actor which is responsible for providing responses to the queries submitted by the US Drug Formulary Requestors. The complete list of FHIR profiles, RESTful operations, and search parameters supported by US Drug Formulary Server are defined. </p> <table> <tr> <td>Mode:</td> <td>SERVER</td> </tr> <tr> <td>Description:</td> <td>The US Drug Formulary Server **SHALL**: <ol> <li>Support the US Drug Formulary CoveragePlan (List) and FormularyDrug (MedicationKnowledge) resource profile.</li> <li>Implement the RESTful behavior according to the FHIR specification.</li> <li>Return the following response classes: <ul> <li>(Status 400): invalid parameter</li> <li>(Status 401/4xx): unauthorized request</li> <li>(Status 403): insufficient scope</li> <li>Status 404): unknown resource</li> <li>(Status 410): deleted resource</li> </ul> </li>      <li>Support json source formats for all US Drug Formulary interactions.</li> </ol> </td>     </tr>     <tr>     <td>    </td>     <td> The US Drug Formulary  Server **SHOULD**: <ol> <li>Support xml source formats for all US Drug Formulary interactions.</li> </ol> </td></tr> <tr>     <td>    </td>     <td>The US Drug Formulary Server supports the following transactions:     <ul>         <li>CoveragePlan (List) Resource             <ul>                 <li>**SHALL**: search-type, read,   </li>                 <li>**SHOULD** : vread, history-instance</li>                  <li>**MAY** : create, update, patch, delete, history-type</li>             </ul>         </li>         <li>FormularyDrug (MedicationKnowledge) Resource             <ul>                 <li>**SHALL**: search-type, read,   </li>                 <li>**SHOULD** : vread, history-instance</li>                 <li>**MAY** : create, update, patch, delete, history-type</li>             </ul>         </li>         </ul>   </td> </tr> <tr>     <td>    </td>     <td>The US Drug Formulary Server **SHALL** support the following searchParameters individually and in combination:     <ul>          <li>FormularyDrug (MedicationKnowledge) Resource             <ul>                 <li>DrugName </li>                 <li>DrugPlan </li>                 <li>DrugTier </li>                 <li>code</li>             </ul>         </li>     </ul>     </td> </tr> </table> </div>\"\n  },\n  \"version\": \"1.0.0\",\n  \"status\": \"active\",\n  \"date\": \"2020-01-08T00:00:00+10:00\",\n  \"publisher\": \"Clover Health\",\n  \"description\": \"This Section describes the expected capabilities of the US Drug Formulary Server actor which is responsible for providing responses to the queries submitted by the US Drug Formulary Requestors. The complete list of FHIR profiles, RESTful operations, and search parameters supported by US Drug Formulary Server are defined. \",\n  \"kind\": \"instance\",\n  \"software\": {\n    \"name\": \"Clover Health FHIR R4 Formulary API\",\n    \"version\": \"4.2.0\"\n  },\n  \"implementation\": {\n    \"description\": \"DaVinci PDex US Drug Formulary\",\n    \"url\": \"https://build.fhir.org/ig/HL7/davinci-pdex-formulary/\"\n  },\n  \"fhirVersion\": \"4.0.1\",\n  \"format\": [\n    \"application/fhir+xml\",\n    \"application/fhir+json\"\n  ],\n  \"rest\": [\n    {\n      \"mode\": \"server\",\n      \"resource\": [\n        {\n          \"type\": \"Bundle\",\n          \"profile\": \"http://hl7.org/fhir/StructureDefinition/Bundle\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            }\n          ]\n        },\n        {\n          \"type\": \"List\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-CoveragePlan\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ],\n          \"searchParam\": [\n            {\n              \"name\": \"_profile\",\n              \"type\": \"string\",\n              \"documentation\": \"An URL of profile in structured definition\"\n            },\n            {\n              \"name\": \"_count\",\n              \"type\": \"number\",\n              \"documentation\": \"Maximum number of results to be returned\"\n            },\n            {\n              \"name\": \"identifier\",\n              \"type\": \"string\",\n              \"documentation\": \"CoveragePlan identifier. It can be in the type of CloverHealth's identifier (E.g. 001, 002) or the plan ID (E.g. H5141)\"\n            },\n            {\n              \"name\": \"status\",\n              \"type\": \"string\"\n            },\n            {\n              \"name\": \"item\",\n              \"type\": \"string\",\n              \"documentation\": \"The identifier of the associated FormularyDrug (also known as MedicationKnowledge) under the CoveragePlan\"\n            }\n          ]\n        },\n        {\n          \"type\": \"MedicationKnowledge\",\n          \"profile\": \"http://hl7.org/fhir/us/davinci-drug-formulary/StructureDefinition/usdf-FormularyDrug\",\n          \"interaction\": [\n            {\n              \"code\": \"read\"\n            },\n            {\n              \"code\": \"search-type\"\n            }\n          ],\n          \"searchParam\": [\n            {\n              \"name\": \"_profile\",\n              \"type\": \"string\",\n              \"documentation\": \"An URL of profile in structured definition\"\n            },\n            {\n              \"name\": \"_count\",\n              \"type\": \"number\",\n              \"documentation\": \"Maximum number of results to be returned\"\n            },\n            {\n              \"name\": \"DrugName\",\n              \"type\": \"string\",\n              \"documentation\": \"Name of the drug\"\n            },\n            {\n              \"name\": \"DrugPlan\",\n              \"type\": \"string\",\n              \"documentation\": \"Plan of the drug\"\n            },\n            {\n              \"name\": \"DrugTier\",\n              \"type\": \"token\",\n              \"documentation\": \"Drug tier of the drug\"\n            },\n            {\n              \"name\": \"code\",\n              \"type\": \"string\",\n              \"documentation\": \"Rx code of the drug\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "24da33e9-953f-478c-b894-697b4b8c222b",
+    "name": "FHIR fhir-r4-formulary-api API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Formulary and Provider Directory API",
+      "type": "text/plain"
+    }
+  }
+}

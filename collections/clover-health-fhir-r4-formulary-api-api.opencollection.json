@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "FHIR fhir-r4-formulary-api API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "fhir-r4-formulary-api",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/formulary/api/List",
+            "params": [
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "_profile",
+                "value": "",
+                "type": "query",
+                "description": "An URL of profile in structured definition"
+              },
+              {
+                "name": "identifier",
+                "value": "",
+                "type": "query",
+                "description": "CoveragePlan identifier. It can be in the type of CloverHealth's identifier (E.g. 001, 002) or the plan ID (E.g. H5141)"
+              },
+              {
+                "name": "item",
+                "value": "",
+                "type": "query",
+                "description": "The identifier of the associated FormularyDrug (also known as MedicationKnowledge) under the CoveragePlan"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "* `current` - current\n* `retired` - retired\n* `entered-in-error` - entered-in-error"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/formulary/api/List/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "This interaction searches a set of resources based on some filter criteria.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/formulary/api/MedicationKnowledge",
+            "params": [
+              {
+                "name": "DrugName",
+                "value": "",
+                "type": "query",
+                "description": "Name of the drug"
+              },
+              {
+                "name": "DrugPlan",
+                "value": "",
+                "type": "query",
+                "description": "Plan of the drug"
+              },
+              {
+                "name": "DrugTier",
+                "value": "",
+                "type": "query",
+                "description": "Drug tier of the drug"
+              },
+              {
+                "name": "_count",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to be returned"
+              },
+              {
+                "name": "_offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to be offset"
+              },
+              {
+                "name": "_profile",
+                "value": "",
+                "type": "query",
+                "description": "An URL of profile in structured definition"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Rx code of the drug"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "This interaction searches a set of resources based on some filter criteria."
+        },
+        {
+          "info": {
+            "name": "The read interaction accesses the current contents of a resource.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/formulary/api/MedicationKnowledge/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "The read interaction accesses the current contents of a resource."
+        },
+        {
+          "info": {
+            "name": "Get the capability statement of the formulary API",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/formulary/api/metadata",
+            "auth": {
+              "type": "apikey",
+              "key": "sessionid",
+              "value": "{{sessionid}}",
+              "placement": "query"
+            }
+          },
+          "docs": "Get the capability statement of the formulary API"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
