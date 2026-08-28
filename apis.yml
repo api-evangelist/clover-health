@@ -10,6 +10,18 @@ description: >-
   Access final rule (CMS-9115-F); Clover was the first payer to go live on a CMS-aligned/TEFCA
   network. Developers register for approved credentials and authenticate with HTTP Basic or a
   session cookie.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
