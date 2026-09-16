@@ -1,15 +1,13 @@
 aid: clover-health
 name: Clover Health
-description: >-
-  Clover Health is a Medicare Advantage health insurer that runs a public developer program
-  built on healthcare interoperability standards. Its public FHIR R4 API exposes a Formulary
-  service (covered drugs, tiers, and utilization management) and a Provider Directory service
-  (practitioners, organizations, locations, healthcare services, and insurance plans), and a
-  separate consent-based Patient Access API delivers a member's clinical and claims data in
-  FHIR-native format via CareEvolution. The APIs implement the CMS Interoperability and Patient
-  Access final rule (CMS-9115-F); Clover was the first payer to go live on a CMS-aligned/TEFCA
-  network. Developers register for approved credentials and authenticate with HTTP Basic or a
-  session cookie.
+description: Clover Health is a Medicare Advantage health insurer that runs a public developer program
+  built on healthcare interoperability standards. Its public FHIR R4 API exposes a Formulary service (covered
+  drugs, tiers, and utilization management) and a Provider Directory service (practitioners, organizations,
+  locations, healthcare services, and insurance plans), and a separate consent-based Patient Access API
+  delivers a member's clinical and claims data in FHIR-native format via CareEvolution. The APIs implement
+  the CMS Interoperability and Patient Access final rule (CMS-9115-F); Clover was the first payer to go
+  live on a CMS-aligned/TEFCA network. Developers register for approved credentials and authenticate with
+  HTTP Basic or a session cookie.
 deliveryModel:
   model: saas
   open_source: false
@@ -47,7 +45,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-18'
+modified: '2026-09-16'
 tags:
 - Company
 - Healthcare
@@ -61,9 +59,8 @@ tags:
 - Payer
 apis:
 - aid: clover-health:clover-health-fhir-r4-formulary-api-api
-  name: Clover Health fhir-r4-formulary-api API
-  description: >-
-    The fhir-r4-formulary-api API from Clover Health — 5 operation(s) for fhir-r4-formulary-api.
+  name: Clover Health fhir-r4-formulary-api
+  description: The fhir-r4-formulary-api API from Clover Health — 5 operation(s) for fhir-r4-formulary-api.
   humanURL: https://www.cloverhealth.com/developers
   baseURL: https://public-api.cloverhealth.com
   tags:
@@ -74,10 +71,9 @@ apis:
   - type: Documentation
     url: https://public-api.cloverhealth.com/swagger
 - aid: clover-health:clover-health-fhir-r4-providerdirectory-api-api
-  name: Clover Health FHIR R4 ProviderDirectory API API
-  description: >-
-    The FHIR R4 ProviderDirectory API API from Clover Health — 17 operation(s) for fhir r4 providerdirectory
-    api.
+  name: Clover Health FHIR R4 ProviderDirectory API
+  description: The FHIR R4 ProviderDirectory API API from Clover Health — 17 operation(s) for fhir r4
+    providerdirectory api.
   humanURL: https://www.cloverhealth.com/developers
   baseURL: https://public-api.cloverhealth.com
   tags:
@@ -125,7 +121,10 @@ common:
   url: lifecycle/clover-health-lifecycle.yml
 - type: X-MCPServerCandidate
   url: mcp/clover-health-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/clover-health-llms.txt
 - type: AgentSkill
