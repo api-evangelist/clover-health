@@ -56,6 +56,17 @@ tags:
 - Provider Directory
 - Formulary
 - Patient Access
+- Payers
+tags_raw:
+- Company
+- Healthcare
+- Health Insurance
+- Medicare Advantage
+- FHIR
+- Interoperability
+- Provider Directory
+- Formulary
+- Patient Access
 - Payer
 apis:
 - aid: clover-health:clover-health-fhir-r4-formulary-api-api
