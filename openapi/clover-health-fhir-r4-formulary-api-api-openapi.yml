@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: FHIR fhir-r4-formulary-api API
+  title: Fhir R4 Formulary API
   version: 1.0.0
   description: Formulary and Provider Directory API
 tags:
@@ -10,7 +10,7 @@ paths:
     get:
       operationId: list_formulary
       description: This interaction searches a set of resources based on some filter criteria.
-      summary: This interaction searches a set of resources based on some filter criteria.
+      summary: This interaction searches a set of resources based on some filter criteria
       parameters:
       - in: query
         name: _count
@@ -236,7 +236,7 @@ paths:
     get:
       operationId: list_formulary_item
       description: The read interaction accesses the current contents of a resource.
-      summary: The read interaction accesses the current contents of a resource.
+      summary: The read interaction accesses the current contents of a resource
       parameters:
       - in: path
         name: id
@@ -359,7 +359,7 @@ paths:
     get:
       operationId: search_medication_knowledge
       description: This interaction searches a set of resources based on some filter criteria.
-      summary: This interaction searches a set of resources based on some filter criteria.
+      summary: This interaction searches a set of resources based on some filter criteria
       parameters:
       - in: query
         name: DrugName
@@ -575,7 +575,7 @@ paths:
     get:
       operationId: get_medication_knowledge
       description: The read interaction accesses the current contents of a resource.
-      summary: The read interaction accesses the current contents of a resource.
+      summary: The read interaction accesses the current contents of a resource
       parameters:
       - in: path
         name: id
@@ -650,7 +650,6 @@ paths:
   /formulary/api/metadata:
     get:
       operationId: get_formulary_api_metadata
-      description: Get the capability statement of the formulary API
       summary: Get the capability statement of the formulary API
       tags:
       - fhir-r4-formulary-api
@@ -758,24 +757,169 @@ paths:
           description: ''
 components:
   schemas:
-    FormularyListItemExtensionExtensionvalueCodeableConcept:
+    BaseBundleMeta:
       type: object
       properties:
-        coding:
-          type: array
-          items:
-            $ref: '#/components/schemas/FormularyListItemExtensionExtensionvalueCodeableConceptCoding'
+        lastUpdated:
+          type: string
+          format: date-time
       required:
-      - coding
-    FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept:
+      - lastUpdated
+    FormularyMedicationKnowledgeItemExtensionValueCodeableConcept:
       type: object
       properties:
-        coding:
+        url:
+          type: string
+        valueCodeableConcept:
+          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept'
+      required:
+      - url
+      - valueCodeableConcept
+    BaseBundleLink:
+      type: object
+      properties:
+        relation:
+          type: string
+        url:
+          type: string
+          description: Reference details for the link
+      required:
+      - relation
+      - url
+    FormularyMedicationKnowledgeResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: Bundle
+        id:
+          type: string
+          description: Logical id of this artifact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleMeta'
+          description: Metadata about the resource
+        type:
+          $ref: '#/components/schemas/TypeF76Enum'
+        total:
+          type: integer
+          minimum: 0
+          description: If search, the total number of matches
+        link:
           type: array
           items:
-            $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConceptCoding'
+            $ref: '#/components/schemas/BaseBundleLink'
+          description: Links related to this Bundle
+        timestamp:
+          type: string
+          format: date-time
+          description: When the bundle was assembled
+        signature:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSignature'
+          description: Digital Signature
+        identifier:
+          description: Persistent identifier for the bundle
+        language:
+          type: string
+          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
+        implicitRules:
+          type: string
+          description: A set of rules under which this content was created
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyMedicationKnowledgeEntry'
       required:
-      - coding
+      - entry
+      - id
+      - link
+      - meta
+      - resourceType
+      - total
+      - type
+    FHIRCapabilityStatementRestModeEnum:
+      enum:
+      - client
+      - server
+      type: string
+      description: '* `client` - client
+
+        * `server` - server'
+    FHIRCapabilityStatementSoftware:
+      type: object
+      properties:
+        name:
+          type: string
+          description: A name the software is known by
+        version:
+          type: string
+          description: Version covered by this statement
+        releaseDate:
+          type: string
+          format: date-time
+          description: Date this version was released
+    FormularyListItemMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+        profile:
+          type: array
+          items: {}
+      required:
+      - lastUpdated
+      - profile
+    CodeEnum:
+      enum:
+      - read
+      - vread
+      - update
+      - patch
+      - delete
+      - history-instance
+      - history-type
+      - create
+      - search-type
+      type: string
+      description: '* `read` - read
+
+        * `vread` - vread
+
+        * `update` - update
+
+        * `patch` - patch
+
+        * `delete` - delete
+
+        * `history-instance` - history-instance
+
+        * `history-type` - history-type
+
+        * `create` - create
+
+        * `search-type` - search-type'
+    FormularyListItemExtensionExtensionValueString:
+      type: object
+      properties:
+        url:
+          type: string
+        valueString:
+          type: string
+      required:
+      - url
+      - valueString
+    FormularyMedicationKnowledgeItemExtensionValueBoolean:
+      type: object
+      properties:
+        url:
+          type: string
+        valueBoolean:
+          type: boolean
+      required:
+      - url
+      - valueBoolean
     FormularyMedicationKnowledgeItemExtensionvalueCodeableConceptCoding:
       type: object
       properties:
@@ -789,6 +933,123 @@ components:
       - code
       - display
       - system
+    FHIRCapabilityStatementRestResource:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A resource type that is supported
+        profile:
+          type: string
+          description: System-wide profile
+        interaction:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCapabilityStatementInteractionCode'
+        searchInclude:
+          type: array
+          items:
+            type: string
+          description: _include values supported by the server
+        searchRevInclude:
+          type: array
+          items:
+            type: string
+          description: _revinclude values supported by the server
+      required:
+      - searchInclude
+      - searchRevInclude
+      - type
+    FormularyMedicationKnowledgeItemMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+        profile:
+          type: array
+          items: {}
+      required:
+      - profile
+    FormularyListItemExtensionExtensionvalueCodeableConcept:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListItemExtensionExtensionvalueCodeableConceptCoding'
+      required:
+      - coding
+    FormularyListItemExtensionExtensionValueCodeableConcept:
+      type: object
+      properties:
+        url:
+          type: string
+        valueCodeableConcept:
+          $ref: '#/components/schemas/FormularyListItemExtensionExtensionvalueCodeableConcept'
+      required:
+      - url
+      - valueCodeableConcept
+    FormularyListEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/FormularyListEntrySearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/FormularyListItemResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
+    ResponseModeEnum:
+      enum:
+      - working
+      - snapshot
+      - changes
+      type: string
+      description: '* `working` - working
+
+        * `snapshot` - snapshot
+
+        * `changes` - changes'
+    FormularyListItemIdentifier:
+      type: object
+      properties:
+        system:
+          type: string
+        value:
+          type: string
+      required:
+      - value
+    FormularyMedicationKnowledgeItemExtensionValue:
+      oneOf:
+      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueCodeableConcept'
+      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueBoolean'
+      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueString'
+      discriminator:
+        propertyName: type
+        mapping:
+          valueCodeableConcept: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueCodeableConcept'
+          valueBoolean: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueBoolean'
+          valueString: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueString'
+    SearchModeEnum:
+      enum:
+      - match
+      - include
+      - outcome
+      type: string
+      description: '* `match` - match
+
+        * `include` - include
+
+        * `outcome` - outcome'
     FormularyListResponse:
       type: object
       properties:
@@ -846,222 +1107,39 @@ components:
       - resourceType
       - total
       - type
-    FormularyListItemEntry:
-      type: object
-      properties:
-        item:
-          $ref: '#/components/schemas/FormularyListItemEntryItem'
-      required:
-      - item
-    FormularyMedicationKnowledgeItemResponse:
-      type: object
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-        meta:
-          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemMeta'
-        text:
-          allOf:
-          - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemText'
-          description: Text summary of the resource, for human interpretation
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValue'
-        code:
-          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept'
-      required:
-      - code
-      - extension
-      - id
-      - meta
-      - resourceType
-      - text
-    FormularyMedicationKnowledgeEntry:
-      type: object
-      properties:
-        fullUrl:
-          type: string
-          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
-        search:
-          allOf:
-          - $ref: '#/components/schemas/FormularyMedicationKnowledgeEntrySearch'
-          description: Search related information
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemResponse'
-          description: A resource in the bundle
-      required:
-      - fullUrl
-      - resource
-      - search
-    FormularyMedicationKnowledgeItemText:
-      type: object
-      properties:
-        status:
-          type: string
-        div:
-          type: string
-      required:
-      - div
-      - status
-    FormularyMedicationKnowledgeResponse:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          description: Bundle
-        id:
-          type: string
-          description: Logical id of this artifact
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleMeta'
-          description: Metadata about the resource
-        type:
-          $ref: '#/components/schemas/TypeF76Enum'
-        total:
-          type: integer
-          minimum: 0
-          description: If search, the total number of matches
-        link:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseBundleLink'
-          description: Links related to this Bundle
-        timestamp:
-          type: string
-          format: date-time
-          description: When the bundle was assembled
-        signature:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSignature'
-          description: Digital Signature
-        identifier:
-          description: Persistent identifier for the bundle
-        language:
-          type: string
-          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
-        implicitRules:
-          type: string
-          description: A set of rules under which this content was created
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/FormularyMedicationKnowledgeEntry'
-      required:
-      - entry
-      - id
-      - link
-      - meta
-      - resourceType
-      - total
-      - type
-    FormularyListItemResponseStatusEnum:
-      enum:
-      - current
-      - retired
-      - entered-in-error
-      type: string
-      description: '* `current` - current
-
-        * `retired` - retired
-
-        * `entered-in-error` - entered-in-error'
-    FormularyMedicationKnowledgeEntrySearch:
-      type: object
-      properties:
-        mode:
-          $ref: '#/components/schemas/SearchModeEnum'
-      required:
-      - mode
-    FormularyListItemExtensionExtensionValueCodeableConcept:
-      type: object
-      properties:
-        url:
-          type: string
-        valueCodeableConcept:
-          $ref: '#/components/schemas/FormularyListItemExtensionExtensionvalueCodeableConcept'
-      required:
-      - url
-      - valueCodeableConcept
-    FHIRCapabilityStatementSoftware:
-      type: object
-      properties:
-        name:
-          type: string
-          description: A name the software is known by
-        version:
-          type: string
-          description: Version covered by this statement
-        releaseDate:
-          type: string
-          format: date-time
-          description: Date this version was released
-    FormularyListItemExtensionExtensionValueString:
-      type: object
-      properties:
-        url:
-          type: string
-        valueString:
-          type: string
-      required:
-      - url
-      - valueString
-    FHIRCapabilityStatementRestResource:
-      type: object
-      properties:
-        type:
-          type: string
-          description: A resource type that is supported
-        profile:
-          type: string
-          description: System-wide profile
-        interaction:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRCapabilityStatementInteractionCode'
-        searchInclude:
-          type: array
-          items:
-            type: string
-          description: _include values supported by the server
-        searchRevInclude:
-          type: array
-          items:
-            type: string
-          description: _revinclude values supported by the server
-      required:
-      - searchInclude
-      - searchRevInclude
-      - type
-    FormularyListEntrySearch:
-      type: object
-      properties:
-        mode:
-          $ref: '#/components/schemas/SearchModeEnum'
-      required:
-      - mode
-    BaseBundleMeta:
+    BaseResourceMeta:
       type: object
       properties:
         lastUpdated:
           type: string
           format: date-time
-      required:
-      - lastUpdated
-    FormularyListItemExtensionExtensionValueBoolean:
-      type: object
-      properties:
-        url:
+          description: When the resource version last changed
+        profile:
+          type: array
+          items: {}
+          description: Profiles this resource claims to conform to
+        versionId:
           type: string
-        valueBoolean:
-          type: boolean
+          description: Version specific identifier
+        source:
+          type: string
+          description: Identifies where the resource comes from
       required:
-      - url
-      - valueBoolean
+      - profile
+    PublicationStatusEnum:
+      enum:
+      - draft
+      - active
+      - retired
+      - unknown
+      type: string
+      description: '* `draft` - draft
+
+        * `active` - active
+
+        * `retired` - retired
+
+        * `unknown` - unknown'
     BaseBundleSignature:
       type: object
       properties:
@@ -1092,30 +1170,101 @@ components:
       - data
       - type
       - when
-    PublicationStatusEnum:
-      enum:
-      - draft
-      - active
-      - retired
-      - unknown
-      type: string
-      description: '* `draft` - draft
-
-        * `active` - active
-
-        * `retired` - retired
-
-        * `unknown` - unknown'
-    FormularyMedicationKnowledgeItemExtensionValueBoolean:
+    FormularyListItemExtensionExtensionvalueCodeableConceptCoding:
       type: object
       properties:
-        url:
+        system:
           type: string
-        valueBoolean:
-          type: boolean
+        code:
+          type: string
+        display:
+          type: string
       required:
-      - url
-      - valueBoolean
+      - code
+      - display
+      - system
+    FormularyListItemEntryItem:
+      type: object
+      properties:
+        reference:
+          type: string
+      required:
+      - reference
+    FormularyListItemResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/FormularyListItemMeta'
+        identifier:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListItemIdentifier'
+        status:
+          $ref: '#/components/schemas/FormularyListItemResponseStatusEnum'
+        mode:
+          $ref: '#/components/schemas/ResponseModeEnum'
+        title:
+          type: string
+        date:
+          type: string
+          format: date-time
+        extension:
+          $ref: '#/components/schemas/FormularyListItemExtension'
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyListItemEntry'
+      required:
+      - date
+      - entry
+      - extension
+      - id
+      - identifier
+      - meta
+      - mode
+      - resourceType
+      - status
+      - title
+    TypeF76Enum:
+      enum:
+      - document
+      - message
+      - transaction
+      - transaction - response
+      - batch
+      - batch - response
+      - history
+      - searchset
+      - collection
+      type: string
+      description: '* `document` - document
+
+        * `message` - message
+
+        * `transaction` - transaction
+
+        * `transaction - response` - transaction - response
+
+        * `batch` - batch
+
+        * `batch - response` - batch - response
+
+        * `history` - history
+
+        * `searchset` - searchset
+
+        * `collection` - collection'
+    FormularyListItemEntry:
+      type: object
+      properties:
+        item:
+          $ref: '#/components/schemas/FormularyListItemEntryItem'
+      required:
+      - item
     FHIRCapabilityStatement:
       type: object
       properties:
@@ -1163,272 +1312,18 @@ components:
       - kind
       - meta
       - status
-    CodeEnum:
-      enum:
-      - read
-      - vread
-      - update
-      - patch
-      - delete
-      - history-instance
-      - history-type
-      - create
-      - search-type
-      type: string
-      description: '* `read` - read
-
-        * `vread` - vread
-
-        * `update` - update
-
-        * `patch` - patch
-
-        * `delete` - delete
-
-        * `history-instance` - history-instance
-
-        * `history-type` - history-type
-
-        * `create` - create
-
-        * `search-type` - search-type'
-    ResponseModeEnum:
-      enum:
-      - working
-      - snapshot
-      - changes
-      type: string
-      description: '* `working` - working
-
-        * `snapshot` - snapshot
-
-        * `changes` - changes'
-    BaseResourceMeta:
+    FormularyListItemExtension:
       type: object
       properties:
-        lastUpdated:
+        url:
           type: string
-          format: date-time
-          description: When the resource version last changed
-        profile:
-          type: array
-          items: {}
-          description: Profiles this resource claims to conform to
-        versionId:
-          type: string
-          description: Version specific identifier
-        source:
-          type: string
-          description: Identifies where the resource comes from
-      required:
-      - profile
-    TypeF76Enum:
-      enum:
-      - document
-      - message
-      - transaction
-      - transaction - response
-      - batch
-      - batch - response
-      - history
-      - searchset
-      - collection
-      type: string
-      description: '* `document` - document
-
-        * `message` - message
-
-        * `transaction` - transaction
-
-        * `transaction - response` - transaction - response
-
-        * `batch` - batch
-
-        * `batch - response` - batch - response
-
-        * `history` - history
-
-        * `searchset` - searchset
-
-        * `collection` - collection'
-    FHIRCapabilityStatementInteractionCode:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/CodeEnum'
-      required:
-      - code
-    FormularyListItemExtensionExtensionvalueCodeableConceptCoding:
-      type: object
-      properties:
-        system:
-          type: string
-        code:
-          type: string
-        display:
-          type: string
-      required:
-      - code
-      - display
-      - system
-    FormularyListItemResponse:
-      type: object
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-        meta:
-          $ref: '#/components/schemas/FormularyListItemMeta'
-        identifier:
-          type: array
-          items:
-            $ref: '#/components/schemas/FormularyListItemIdentifier'
-        status:
-          $ref: '#/components/schemas/FormularyListItemResponseStatusEnum'
-        mode:
-          $ref: '#/components/schemas/ResponseModeEnum'
-        title:
-          type: string
-        date:
-          type: string
-          format: date-time
         extension:
-          $ref: '#/components/schemas/FormularyListItemExtension'
-        entry:
           type: array
           items:
-            $ref: '#/components/schemas/FormularyListItemEntry'
+            $ref: '#/components/schemas/FormularyListItemExtensionValue'
       required:
-      - date
-      - entry
       - extension
-      - id
-      - identifier
-      - meta
-      - mode
-      - resourceType
-      - status
-      - title
-    FormularyListItemEntryItem:
-      type: object
-      properties:
-        reference:
-          type: string
-      required:
-      - reference
-    FHIRCapabilityStatementRestModeEnum:
-      enum:
-      - client
-      - server
-      type: string
-      description: '* `client` - client
-
-        * `server` - server'
-    FormularyMedicationKnowledgeItemExtensionValue:
-      oneOf:
-      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueCodeableConcept'
-      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueBoolean'
-      - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueString'
-      discriminator:
-        propertyName: type
-        mapping:
-          valueCodeableConcept: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueCodeableConcept'
-          valueBoolean: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueBoolean'
-          valueString: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValueString'
-    FormularyMedicationKnowledgeItemExtensionValueCodeableConcept:
-      type: object
-      properties:
-        url:
-          type: string
-        valueCodeableConcept:
-          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept'
-      required:
       - url
-      - valueCodeableConcept
-    FormularyMedicationKnowledgeItemMeta:
-      type: object
-      properties:
-        lastUpdated:
-          type: string
-          format: date-time
-        profile:
-          type: array
-          items: {}
-      required:
-      - profile
-    FormularyListEntry:
-      type: object
-      properties:
-        fullUrl:
-          type: string
-          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
-        search:
-          allOf:
-          - $ref: '#/components/schemas/FormularyListEntrySearch'
-          description: Search related information
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/FormularyListItemResponse'
-          description: A resource in the bundle
-      required:
-      - fullUrl
-      - resource
-      - search
-    FormularyListItemMeta:
-      type: object
-      properties:
-        lastUpdated:
-          type: string
-          format: date-time
-        profile:
-          type: array
-          items: {}
-      required:
-      - lastUpdated
-      - profile
-    BaseBundleLink:
-      type: object
-      properties:
-        relation:
-          type: string
-        url:
-          type: string
-          description: Reference details for the link
-      required:
-      - relation
-      - url
-    KindEnum:
-      enum:
-      - instance
-      - capability
-      - requirements
-      type: string
-      description: '* `instance` - instance
-
-        * `capability` - capability
-
-        * `requirements` - requirements'
-    SearchModeEnum:
-      enum:
-      - match
-      - include
-      - outcome
-      type: string
-      description: '* `match` - match
-
-        * `include` - include
-
-        * `outcome` - outcome'
-    FormularyListItemIdentifier:
-      type: object
-      properties:
-        system:
-          type: string
-        value:
-          type: string
-      required:
-      - value
     FHIRCapabilityStatementRest:
       type: object
       properties:
@@ -1442,6 +1337,132 @@ components:
       required:
       - mode
       - resource
+    FormularyMedicationKnowledgeEntrySearch:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchModeEnum'
+      required:
+      - mode
+    FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConceptCoding'
+      required:
+      - coding
+    FormularyListEntrySearch:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchModeEnum'
+      required:
+      - mode
+    FormularyMedicationKnowledgeItemResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+        meta:
+          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemMeta'
+        text:
+          allOf:
+          - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemText'
+          description: Text summary of the resource, for human interpretation
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionValue'
+        code:
+          $ref: '#/components/schemas/FormularyMedicationKnowledgeItemExtensionvalueCodeableConcept'
+      required:
+      - code
+      - extension
+      - id
+      - meta
+      - resourceType
+      - text
+    FormularyMedicationKnowledgeItemExtensionValueString:
+      type: object
+      properties:
+        url:
+          type: string
+        valueString:
+          type: string
+      required:
+      - url
+      - valueString
+    KindEnum:
+      enum:
+      - instance
+      - capability
+      - requirements
+      type: string
+      description: '* `instance` - instance
+
+        * `capability` - capability
+
+        * `requirements` - requirements'
+    FormularyListItemResponseStatusEnum:
+      enum:
+      - current
+      - retired
+      - entered-in-error
+      type: string
+      description: '* `current` - current
+
+        * `retired` - retired
+
+        * `entered-in-error` - entered-in-error'
+    FHIRCapabilityStatementInteractionCode:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/CodeEnum'
+      required:
+      - code
+    FormularyMedicationKnowledgeItemText:
+      type: object
+      properties:
+        status:
+          type: string
+        div:
+          type: string
+      required:
+      - div
+      - status
+    FormularyMedicationKnowledgeEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/FormularyMedicationKnowledgeEntrySearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/FormularyMedicationKnowledgeItemResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
+    FormularyListItemExtensionExtensionValueBoolean:
+      type: object
+      properties:
+        url:
+          type: string
+        valueBoolean:
+          type: boolean
+      required:
+      - url
+      - valueBoolean
     FormularyListItemExtensionValue:
       oneOf:
       - $ref: '#/components/schemas/FormularyListItemExtensionExtensionValueCodeableConcept'
@@ -1453,28 +1474,6 @@ components:
           valueCodeableConcept: '#/components/schemas/FormularyListItemExtensionExtensionValueCodeableConcept'
           valueBoolean: '#/components/schemas/FormularyListItemExtensionExtensionValueBoolean'
           valueString: '#/components/schemas/FormularyListItemExtensionExtensionValueString'
-    FormularyMedicationKnowledgeItemExtensionValueString:
-      type: object
-      properties:
-        url:
-          type: string
-        valueString:
-          type: string
-      required:
-      - url
-      - valueString
-    FormularyListItemExtension:
-      type: object
-      properties:
-        url:
-          type: string
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/FormularyListItemExtensionValue'
-      required:
-      - extension
-      - url
   securitySchemes:
     basicAuth:
       type: http
