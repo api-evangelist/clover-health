@@ -3093,42 +3093,24 @@ paths:
           description: ''
 components:
   schemas:
-    LocationGetResponseStatusEnum:
+    KindEnum:
       enum:
-      - active
-      - suspended
-      - inactive
+      - instance
+      - capability
+      - requirements
       type: string
-      description: '* `active` - active
+      description: '* `instance` - instance
 
-        * `suspended` - suspended
+        * `capability` - capability
 
-        * `inactive` - inactive'
-    FHIRCoding:
+        * `requirements` - requirements'
+    OrganizationGetTelecom:
       type: object
       properties:
-        system:
-          type: string
-          description: Identity of the terminology system
-        version:
-          type: string
-          description: Version of the system - if relevant
-        code:
-          type: string
-          description: Symbol in syntax defined by the system
-        display:
-          type: string
-          description: Representation defined by the system
-        userSelected:
-          type: string
-          description: If this coding was chosen directly by the user
-    PractitionerRoleItemHealthcareService:
-      type: object
-      properties:
-        reference:
-          type: string
-      required:
-      - reference
+        phone:
+          $ref: '#/components/schemas/FHIRContactPoint'
+        fax:
+          $ref: '#/components/schemas/FHIRContactPoint'
     FHIRIdentifierUseEnum:
       enum:
       - usual
@@ -3146,65 +3128,211 @@ components:
         * `secondary` - secondary
 
         * `old` - old'
-    BaseResourceMeta:
+    FHIRCapabilityStatementSoftware:
       type: object
       properties:
-        lastUpdated:
+        name:
+          type: string
+          description: A name the software is known by
+        version:
+          type: string
+          description: Version covered by this statement
+        releaseDate:
           type: string
           format: date-time
-          description: When the resource version last changed
-        profile:
-          type: array
-          items: {}
-          description: Profiles this resource claims to conform to
-        versionId:
+          description: Date this version was released
+    PractitionerRoleItemExtensionValue:
+      oneOf:
+      - $ref: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConcept'
+      - $ref: '#/components/schemas/PractitionerRoleItemExtensionValueReference'
+      discriminator:
+        propertyName: type
+        mapping:
+          valueCodeableConcept: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConcept'
+          valueReference: '#/components/schemas/PractitionerRoleItemExtensionValueReference'
+    PractitionerRoleItemHealthcareService:
+      type: object
+      properties:
+        reference:
           type: string
-          description: Version specific identifier
-        source:
-          type: string
-          description: Identifies where the resource comes from
       required:
-      - profile
-    PractitionerRoleItemIdentifier:
+      - reference
+    PractitionerRoleSearchResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: Bundle
+        id:
+          type: string
+          description: Logical id of this artifact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleMeta'
+          description: Metadata about the resource
+        type:
+          $ref: '#/components/schemas/TypeF76Enum'
+        total:
+          type: integer
+          minimum: 0
+          description: If search, the total number of matches
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseBundleLink'
+          description: Links related to this Bundle
+        timestamp:
+          type: string
+          format: date-time
+          description: When the bundle was assembled
+        signature:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSignature'
+          description: Digital Signature
+        identifier:
+          description: Persistent identifier for the bundle
+        language:
+          type: string
+          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
+        implicitRules:
+          type: string
+          description: A set of rules under which this content was created
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/PractitionerRoleSearchEntry'
+          description: "Entry in the bundle - will have a resource or information\n\n- Rule: must be a resource unless there's a request or response\n- Rule: fullUrl cannot be a version specific reference This repeating element order: For bundles of type 'document' and 'message', the first resource is special (must be Composition or MessageHeader respectively). For all bundles, the meaning of the order of entries depends on the bundle type\n    "
+      required:
+      - entry
+      - id
+      - link
+      - meta
+      - resourceType
+      - total
+      - type
+    GenderEnum:
+      enum:
+      - male
+      - female
+      - other
+      - unknown
+      type: string
+      description: '* `male` - male
+
+        * `female` - female
+
+        * `other` - other
+
+        * `unknown` - unknown'
+    FHIRCapabilityStatementRest:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/FHIRCapabilityStatementRestModeEnum'
+        resource:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCapabilityStatementRestResource'
+          description: Resource served on the REST interface
+      required:
+      - mode
+      - resource
+    HealthcareServiceGetResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseResourceMeta'
+          description: Metadata about the resource
+        identifier:
+          allOf:
+          - $ref: '#/components/schemas/FHIRIdentifier'
+          description: External identifiers for this item
+        active:
+          type: boolean
+          description: Whether this HealthcareService record is in active use
+        extension:
+          $ref: '#/components/schemas/HealthcareServiceGetExtension'
+        category:
+          $ref: '#/components/schemas/FHIRCodeableConcept'
+        type:
+          $ref: '#/components/schemas/FHIRCodeableConcept'
+        location:
+          $ref: '#/components/schemas/CommonReference'
+        coverageArea:
+          $ref: '#/components/schemas/CommonReference'
+        providedBy:
+          $ref: '#/components/schemas/CommonReference'
+        name:
+          type: string
+        telecom:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthcareServiceGetTelecom'
+        specialty:
+          $ref: '#/components/schemas/FHIRCodeableConcept'
+      required:
+      - active
+      - category
+      - id
+      - meta
+      - name
+      - resourceType
+      - telecom
+      - type
+    PractitionerRoleItemExtensionValueCodeableConceptCodingCodingContent:
       type: object
       properties:
         system:
           type: string
-        value:
+        code:
           type: string
       required:
+      - code
       - system
-      - value
-    BaseBundleSignature:
+    PractitionerRoleItemEndpoint:
       type: object
       properties:
-        when:
+        reference:
           type: string
-          format: date-time
-          description: When the signature was created
-        who:
-          type: string
-          description: Who signed
-        targetFormat:
-          type: string
-          description: The technical format of the signed resources
-        sigFormat:
-          type: string
-          description: The technical format of the signature
-        onBehalfOf:
-          type: string
-          description: The party represented
-        type:
-          type: array
-          items: {}
-          description: Indication of the reason the entity signed the object(s)
-        data:
-          type: string
-          description: The actual signature content (XML DigSig. JWT, picture, etc.)
       required:
-      - data
-      - type
-      - when
+      - reference
+    LocationGetTelecom:
+      type: object
+      properties:
+        phone:
+          $ref: '#/components/schemas/FHIRContactPoint'
+        fax:
+          $ref: '#/components/schemas/FHIRContactPoint'
+    CommonReference:
+      type: object
+      properties:
+        reference:
+          type: string
+      required:
+      - reference
+    LocationSearchEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/LocationGetResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
     PractitionerSearchResponse:
       type: object
       properties:
@@ -3257,42 +3385,209 @@ components:
       - resourceType
       - total
       - type
-    TypeF76Enum:
+    PractitionerRoleItemOrganization:
+      type: object
+      properties:
+        reference:
+          type: string
+        display:
+          type: string
+      required:
+      - display
+      - reference
+    PractitionerRoleItemExtensionValueCodeableConcept:
+      type: object
+      properties:
+        url:
+          type: string
+        valueCodeableConcept:
+          $ref: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConceptCoding'
+      required:
+      - url
+      - valueCodeableConcept
+    FHIRCoding:
+      type: object
+      properties:
+        system:
+          type: string
+          description: Identity of the terminology system
+        version:
+          type: string
+          description: Version of the system - if relevant
+        code:
+          type: string
+          description: Symbol in syntax defined by the system
+        display:
+          type: string
+          description: Representation defined by the system
+        userSelected:
+          type: string
+          description: If this coding was chosen directly by the user
+    FHIRAddressTypeEnum:
       enum:
-      - document
-      - message
-      - transaction
-      - transaction - response
-      - batch
-      - batch - response
-      - history
-      - searchset
-      - collection
+      - postal
+      - physical
+      - both
       type: string
-      description: '* `document` - document
+      description: '* `postal` - postal
 
-        * `message` - message
+        * `physical` - physical
 
-        * `transaction` - transaction
+        * `both` - both'
+    OrganizationAffiliationGetReference:
+      type: object
+      properties:
+        reference:
+          type: string
+      required:
+      - reference
+    LocationGetResponseStatusEnum:
+      enum:
+      - active
+      - suspended
+      - inactive
+      type: string
+      description: '* `active` - active
 
-        * `transaction - response` - transaction - response
+        * `suspended` - suspended
 
-        * `batch` - batch
+        * `inactive` - inactive'
+    HealthcareServiceSearchEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/HealthcareServiceGetResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
+    FHIRHumanName:
+      type: object
+      properties:
+        use:
+          $ref: '#/components/schemas/FHIRHumanNameUseEnum'
+        text:
+          type: string
+          description: Text representation of the full name
+        family:
+          type: string
+          description: Family name (often called 'Surname')
+        given:
+          type: array
+          items:
+            type: string
+          description: 'Given names (not always ''first''). Includes middle names
 
-        * `batch - response` - batch - response
 
-        * `history` - history
+            This repeating element order: Given Names appear in the correct order for presenting the name'
+        prefix:
+          type: array
+          items:
+            type: string
+          description: 'Parts that come before the name
 
-        * `searchset` - searchset
 
-        * `collection` - collection'
-    FHIRContactPointUseEnum:
+            This repeating element order: Prefixes appear in the correct order for presenting the name'
+        suffix:
+          type: array
+          items:
+            type: string
+          description: 'Parts that come after the name
+
+
+            This repeating element order: Suffixes appear in the correct order for presenting the name'
+        period:
+          allOf:
+          - $ref: '#/components/schemas/FHIRPeriod'
+          description: Time period when name was/is in use
+    EndpointSearchEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/EndpointGetResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
+    BaseBundleLink:
+      type: object
+      properties:
+        relation:
+          type: string
+        url:
+          type: string
+          description: Reference details for the link
+      required:
+      - relation
+      - url
+    HealthcareServiceGetTelecom:
+      type: object
+      properties:
+        extension:
+          type: array
+          items:
+            $ref: '#/components/schemas/HealthcareServiceGetTelecomExtension'
+      required:
+      - extension
+    FHIRCapabilityStatementRestModeEnum:
+      enum:
+      - client
+      - server
+      type: string
+      description: '* `client` - client
+
+        * `server` - server'
+    HealthcareServiceGetExtensionExtension:
+      type: object
+      properties:
+        url:
+          type: string
+        valueCodeableConcept:
+          $ref: '#/components/schemas/FHIRCodeableConcept'
+      required:
+      - url
+      - valueCodeableConcept
+    PractitionerSearchEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSearch'
+          description: Search related information
+        resource:
+          $ref: '#/components/schemas/PractitionerGetResponse'
+      required:
+      - fullUrl
+      - resource
+      - search
+    FHIRAddressUseEnum:
       enum:
       - home
       - work
       - temp
       - old
-      - mobile
+      - billing
       type: string
       description: '* `home` - home
 
@@ -3302,8 +3597,8 @@ components:
 
         * `old` - old
 
-        * `mobile` - mobile'
-    InsurancePlanSearchResponse:
+        * `billing` - billing'
+    OrganizationSearchResponse:
       type: object
       properties:
         resourceType:
@@ -3346,7 +3641,7 @@ components:
         entry:
           type: array
           items:
-            $ref: '#/components/schemas/InsurancePlanSearchEntry'
+            $ref: '#/components/schemas/OrganizationSearchEntry'
       required:
       - entry
       - id
@@ -3355,62 +3650,7 @@ components:
       - resourceType
       - total
       - type
-    FHIRAddressUseEnum:
-      enum:
-      - home
-      - work
-      - temp
-      - old
-      - billing
-      type: string
-      description: '* `home` - home
-
-        * `work` - work
-
-        * `temp` - temp
-
-        * `old` - old
-
-        * `billing` - billing'
-    PractitionerRoleItemExtensionValueCodeableConcept:
-      type: object
-      properties:
-        url:
-          type: string
-        valueCodeableConcept:
-          $ref: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConceptCoding'
-      required:
-      - url
-      - valueCodeableConcept
-    HealthcareServiceSearchEntry:
-      type: object
-      properties:
-        fullUrl:
-          type: string
-          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
-        search:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSearch'
-          description: Search related information
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/HealthcareServiceGetResponse'
-          description: A resource in the bundle
-      required:
-      - fullUrl
-      - resource
-      - search
-    PractitionerRoleItemExtensionValueCodeableConceptCodingCodingContent:
-      type: object
-      properties:
-        system:
-          type: string
-        code:
-          type: string
-      required:
-      - code
-      - system
-    OrganizationGetResponse:
+    InsurancePlanGetResponse:
       type: object
       properties:
         resourceType:
@@ -3421,129 +3661,42 @@ components:
           allOf:
           - $ref: '#/components/schemas/BaseResourceMeta'
           description: Metadata about the resource
-        text:
-          allOf:
-          - $ref: '#/components/schemas/BaseResourceText'
-          description: Text summary of the resource, for human interpretation
         identifier:
+          allOf:
+          - $ref: '#/components/schemas/FHIRIdentifier'
+          description: Business Identifier for Product
+        status:
+          $ref: '#/components/schemas/PublicationStatusEnum'
+        type:
           type: array
           items:
-            $ref: '#/components/schemas/FHIRIdentifier'
-          description: Identifies this organization across multiple systems
-        active:
-          type: boolean
-          description: Whether the organization's record is still in active use
-        type:
+            $ref: '#/components/schemas/FHIRCodeableConcept'
+          description: Kind of product
+        ownedBy:
           allOf:
-          - $ref: '#/components/schemas/FHIRCodeableConcept'
-          description: Kind of organization
+          - $ref: '#/components/schemas/CommonReference'
+          description: Product issuer
+        administeredBy:
+          allOf:
+          - $ref: '#/components/schemas/CommonReference'
+          description: Product administrator
+        network:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonReference'
+          description: What networks are Included
+        coverageArea:
+          type: array
+          items:
+            $ref: '#/components/schemas/CommonReference'
+          description: Where product applies
         name:
           type: string
-          description: Name used for the organization
-        telecom:
-          allOf:
-          - $ref: '#/components/schemas/OrganizationGetTelecom'
-          description: Contact details (e.g.phone/fax/url)
-        address:
-          allOf:
-          - $ref: '#/components/schemas/FHIRAddress'
-          description: Address for the contact
-        partOf:
-          allOf:
-          - $ref: '#/components/schemas/CommonReference'
-          description: The organization of which this organization forms a part
-        contact:
-          allOf:
-          - $ref: '#/components/schemas/FHIRExtendedContactDetail'
-          description: Official contact details for the Organization
-        endpoint:
-          allOf:
-          - $ref: '#/components/schemas/CommonReference'
-          description: Technical endpoints providing access to services operated for the organization
+          description: Official name
       required:
-      - active
       - id
-      - identifier
       - meta
-      - name
       - resourceType
-      - text
-    FHIRCapabilityStatementInteractionCode:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/CodeEnum'
-      required:
-      - code
-    CommonReference:
-      type: object
-      properties:
-        reference:
-          type: string
-      required:
-      - reference
-    BaseBundleLink:
-      type: object
-      properties:
-        relation:
-          type: string
-        url:
-          type: string
-          description: Reference details for the link
-      required:
-      - relation
-      - url
-    FHIRCapabilityStatementSoftware:
-      type: object
-      properties:
-        name:
-          type: string
-          description: A name the software is known by
-        version:
-          type: string
-          description: Version covered by this statement
-        releaseDate:
-          type: string
-          format: date-time
-          description: Date this version was released
-    CodeEnum:
-      enum:
-      - read
-      - vread
-      - update
-      - patch
-      - delete
-      - history-instance
-      - history-type
-      - create
-      - search-type
-      type: string
-      description: '* `read` - read
-
-        * `vread` - vread
-
-        * `update` - update
-
-        * `patch` - patch
-
-        * `delete` - delete
-
-        * `history-instance` - history-instance
-
-        * `history-type` - history-type
-
-        * `create` - create
-
-        * `search-type` - search-type'
-    BaseResourceText:
-      type: object
-      properties:
-        status:
-          type: string
-        div:
-          type: string
-      required:
-      - div
       - status
     PractitionerRoleItemResponse:
       type: object
@@ -3613,6 +3766,72 @@ components:
       - meta
       - resourceType
       - text
+    FHIRCapabilityStatementRestResource:
+      type: object
+      properties:
+        type:
+          type: string
+          description: A resource type that is supported
+        profile:
+          type: string
+          description: System-wide profile
+        interaction:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCapabilityStatementInteractionCode'
+        searchInclude:
+          type: array
+          items:
+            type: string
+          description: _include values supported by the server
+        searchRevInclude:
+          type: array
+          items:
+            type: string
+          description: _revinclude values supported by the server
+      required:
+      - searchInclude
+      - searchRevInclude
+      - type
+    EndpointGetResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+        id:
+          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseResourceMeta'
+          description: Metadata about the resource
+        text:
+          allOf:
+          - $ref: '#/components/schemas/BaseResourceText'
+          description: Text summary of the resource, for human interpretation
+        status:
+          $ref: '#/components/schemas/EndpointGetResponseStatusEnum'
+        connectionType:
+          allOf:
+          - $ref: '#/components/schemas/FHIRCodeableConcept'
+          description: Protocol/Profile/Standard to be used with this endpoint connection
+        managingOrganization:
+          allOf:
+          - $ref: '#/components/schemas/CommonReference'
+          description: Organization that manages this endpoint
+        payloadType:
+          allOf:
+          - $ref: '#/components/schemas/FHIRCodeableConcept'
+          description: The type of content that may be used at this endpoint (e.g. XDS Discharge summaries)
+        address:
+          type: string
+          description: The technical base address for connecting to this endpoint
+      required:
+      - address
+      - id
+      - meta
+      - resourceType
+      - status
+      - text
     OrganizationAffiliationGetResponse:
       type: object
       properties:
@@ -3677,63 +3896,125 @@ components:
       - participatingOrganization
       - resourceType
       - specialty
-    LocationGetResponse:
+    PractitionerRoleItemCoding:
       type: object
       properties:
-        resourceType:
+        system:
           type: string
-        id:
+        code:
           type: string
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseResourceMeta'
-          description: Metadata about the resource
-        text:
-          allOf:
-          - $ref: '#/components/schemas/BaseResourceText'
-          description: Text summary of the resource, for human interpretation
-        status:
-          $ref: '#/components/schemas/LocationGetResponseStatusEnum'
-        name:
-          type: string
-          description: Name of the location as used by humans
-        type:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRCodeableConcept'
-          description: Type of function performed
-        telecom:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationGetTelecom'
-          description: Official contact details for the location
-        address:
-          allOf:
-          - $ref: '#/components/schemas/FHIRAddress'
-          description: Physical location
-        position:
-          allOf:
-          - $ref: '#/components/schemas/LocationGetPosition'
-          description: The absolute geographic location
-        managingOrganization:
-          allOf:
-          - $ref: '#/components/schemas/CommonReference'
-          description: Organization responsible for provisioning and upkeep
-        partOf:
-          allOf:
-          - $ref: '#/components/schemas/CommonReference'
-          description: Another Location this one is physically a part of
-        endpoint:
-          allOf:
-          - $ref: '#/components/schemas/CommonReference'
-          description: Technical endpoints providing access to services operated for the location
       required:
-      - id
-      - meta
-      - name
-      - resourceType
-      - status
-      - text
+      - code
+      - system
+    TypeF76Enum:
+      enum:
+      - document
+      - message
+      - transaction
+      - transaction - response
+      - batch
+      - batch - response
+      - history
+      - searchset
+      - collection
+      type: string
+      description: '* `document` - document
+
+        * `message` - message
+
+        * `transaction` - transaction
+
+        * `transaction - response` - transaction - response
+
+        * `batch` - batch
+
+        * `batch - response` - batch - response
+
+        * `history` - history
+
+        * `searchset` - searchset
+
+        * `collection` - collection'
+    BaseResourceMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+          description: When the resource version last changed
+        profile:
+          type: array
+          items: {}
+          description: Profiles this resource claims to conform to
+        versionId:
+          type: string
+          description: Version specific identifier
+        source:
+          type: string
+          description: Identifies where the resource comes from
+      required:
+      - profile
+    SearchModeEnum:
+      enum:
+      - match
+      - include
+      - outcome
+      type: string
+      description: '* `match` - match
+
+        * `include` - include
+
+        * `outcome` - outcome'
+    PractitionerRoleItemExtensionValueReferenceReference:
+      type: object
+      properties:
+        reference:
+          type: string
+      required:
+      - reference
+    BaseBundleMeta:
+      type: object
+      properties:
+        lastUpdated:
+          type: string
+          format: date-time
+      required:
+      - lastUpdated
+    PractitionerRoleItemLocation:
+      type: object
+      properties:
+        reference:
+          type: string
+      required:
+      - reference
+    FHIRPeriod:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: Starting time with inclusive boundary
+        end:
+          type: string
+          format: date-time
+          description: End time with inclusive boundary, if not ongoing
+    FHIRContactPointUseEnum:
+      enum:
+      - home
+      - work
+      - temp
+      - old
+      - mobile
+      type: string
+      description: '* `home` - home
+
+        * `work` - work
+
+        * `temp` - temp
+
+        * `old` - old
+
+        * `mobile` - mobile'
     InsurancePlanSearchEntry:
       type: object
       properties:
@@ -3752,13 +4033,284 @@ components:
       - fullUrl
       - resource
       - search
-    PractitionerRoleItemExtensionValueReferenceReference:
+    InsurancePlanSearchResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: Bundle
+        id:
+          type: string
+          description: Logical id of this artifact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleMeta'
+          description: Metadata about the resource
+        type:
+          $ref: '#/components/schemas/TypeF76Enum'
+        total:
+          type: integer
+          minimum: 0
+          description: If search, the total number of matches
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseBundleLink'
+          description: Links related to this Bundle
+        timestamp:
+          type: string
+          format: date-time
+          description: When the bundle was assembled
+        signature:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSignature'
+          description: Digital Signature
+        identifier:
+          description: Persistent identifier for the bundle
+        language:
+          type: string
+          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
+        implicitRules:
+          type: string
+          description: A set of rules under which this content was created
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/InsurancePlanSearchEntry'
+      required:
+      - entry
+      - id
+      - link
+      - meta
+      - resourceType
+      - total
+      - type
+    BaseBundleSearch:
+      type: object
+      properties:
+        mode:
+          $ref: '#/components/schemas/SearchModeEnum'
+      required:
+      - mode
+    LocationSearchResponse:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          description: Bundle
+        id:
+          type: string
+          description: Logical id of this artifact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleMeta'
+          description: Metadata about the resource
+        type:
+          $ref: '#/components/schemas/TypeF76Enum'
+        total:
+          type: integer
+          minimum: 0
+          description: If search, the total number of matches
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseBundleLink'
+          description: Links related to this Bundle
+        timestamp:
+          type: string
+          format: date-time
+          description: When the bundle was assembled
+        signature:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSignature'
+          description: Digital Signature
+        identifier:
+          description: Persistent identifier for the bundle
+        language:
+          type: string
+          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
+        implicitRules:
+          type: string
+          description: A set of rules under which this content was created
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationSearchEntry'
+      required:
+      - entry
+      - id
+      - link
+      - meta
+      - resourceType
+      - total
+      - type
+    PractitionerRoleItemExtensionValueCodeableConceptCoding:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConceptCodingCodingContent'
+      required:
+      - coding
+    BaseResourceText:
+      type: object
+      properties:
+        status:
+          type: string
+        div:
+          type: string
+      required:
+      - div
+      - status
+    FHIRContactPoint:
+      type: object
+      properties:
+        system:
+          $ref: '#/components/schemas/SystemEnum'
+        value:
+          type: string
+          description: The actual contact point details
+        use:
+          allOf:
+          - $ref: '#/components/schemas/FHIRContactPointUseEnum'
+          description: 'purpose of this contact point
+
+
+            * `home` - home
+
+            * `work` - work
+
+            * `temp` - temp
+
+            * `old` - old
+
+            * `mobile` - mobile'
+        rank:
+          type: integer
+          description: Specify preferred order of use (1 = highest)
+        period:
+          allOf:
+          - $ref: '#/components/schemas/FHIRPeriod'
+          description: Time period when the contact point was/is in use
+    PractitionerRoleItemSpecialty:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/PractitionerRoleItemCoding'
+      required:
+      - coding
+    OrganizationSearchEntry:
+      type: object
+      properties:
+        fullUrl:
+          type: string
+          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
+        search:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSearch'
+          description: Search related information
+        resource:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationGetResponse'
+          description: A resource in the bundle
+      required:
+      - fullUrl
+      - resource
+      - search
+    FHIRCodeableConcept:
+      type: object
+      properties:
+        coding:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCoding'
+          description: Code defined by a terminology system
+        text:
+          type: string
+    OrganizationAffiliationGetOrganization:
       type: object
       properties:
         reference:
           type: string
+        display:
+          type: string
       required:
+      - display
       - reference
+    FHIRIdentifier:
+      type: object
+      properties:
+        use:
+          $ref: '#/components/schemas/FHIRIdentifierUseEnum'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/FHIRCodeableConcept'
+          description: Description of identifier
+        system:
+          type: string
+          description: The namespace for the identifier value
+        value:
+          type: string
+          description: The value that is unique
+        period:
+          allOf:
+          - $ref: '#/components/schemas/FHIRPeriod'
+          description: Time period when id is/was valid for use
+        assigner:
+          type: string
+          description: Organization that issued id (may be just text)
+    LocationGetPosition:
+      type: object
+      properties:
+        longitude:
+          type: string
+          format: decimal
+          pattern: ^-?0?(?:\.\d{0,18})?$
+          description: Longitude with WGS84 datum
+        latitude:
+          type: string
+          format: decimal
+          pattern: ^-?0?(?:\.\d{0,18})?$
+          description: Latitude with WGS84 datum
+      required:
+      - latitude
+      - longitude
+    HealthcareServiceGetTelecomExtension:
+      type: object
+      properties:
+        url:
+          type: string
+        valueReference:
+          $ref: '#/components/schemas/CommonReference'
+      required:
+      - url
+      - valueReference
+    FHIRHumanNameUseEnum:
+      enum:
+      - usual
+      - official
+      - temp
+      - nickname
+      - anonymous
+      - old
+      - maiden
+      type: string
+      description: '* `usual` - usual
+
+        * `official` - official
+
+        * `temp` - temp
+
+        * `nickname` - nickname
+
+        * `anonymous` - anonymous
+
+        * `old` - old
+
+        * `maiden` - maiden'
     PractitionerRoleSearchEntry:
       type: object
       properties:
@@ -3777,55 +4329,6 @@ components:
       - fullUrl
       - resource
       - search
-    LocationGetPosition:
-      type: object
-      properties:
-        longitude:
-          type: string
-          format: decimal
-          pattern: ^-?0?(?:\.\d{0,18})?$
-          description: Longitude with WGS84 datum
-        latitude:
-          type: string
-          format: decimal
-          pattern: ^-?0?(?:\.\d{0,18})?$
-          description: Latitude with WGS84 datum
-      required:
-      - latitude
-      - longitude
-    FHIRPeriod:
-      type: object
-      properties:
-        start:
-          type: string
-          format: date-time
-          description: Starting time with inclusive boundary
-        end:
-          type: string
-          format: date-time
-          description: End time with inclusive boundary, if not ongoing
-    PractitionerRoleItemExtensionValue:
-      oneOf:
-      - $ref: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConcept'
-      - $ref: '#/components/schemas/PractitionerRoleItemExtensionValueReference'
-      discriminator:
-        propertyName: type
-        mapping:
-          valueCodeableConcept: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConcept'
-          valueReference: '#/components/schemas/PractitionerRoleItemExtensionValueReference'
-    FHIRCapabilityStatementRest:
-      type: object
-      properties:
-        mode:
-          $ref: '#/components/schemas/FHIRCapabilityStatementRestModeEnum'
-        resource:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRCapabilityStatementRestResource'
-          description: Resource served on the REST interface
-      required:
-      - mode
-      - resource
     EndpointSearchResponse:
       type: object
       properties:
@@ -3878,7 +4381,54 @@ components:
       - resourceType
       - total
       - type
-    LocationSearchEntry:
+    FHIRCapabilityStatement:
+      type: object
+      properties:
+        resourceType:
+          type: string
+          default: CapabilityStatement
+        id:
+          type: string
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseResourceMeta'
+          description: Metadata about a resource
+        status:
+          $ref: '#/components/schemas/PublicationStatusEnum'
+        date:
+          type: string
+          format: date-time
+          description: Date last changed
+        publisher:
+          type: string
+          description: Name of the publisher/steward
+        kind:
+          $ref: '#/components/schemas/KindEnum'
+        software:
+          allOf:
+          - $ref: '#/components/schemas/FHIRCapabilityStatementSoftware'
+          description: Software that is covered by this capability statement
+        fhirVersion:
+          type: string
+          description: FHIR Version the system supports
+        format:
+          type: array
+          items:
+            type: string
+          description: formats supported (xml | json | ttl | mime type)
+        rest:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCapabilityStatementRest'
+          description: "\tIf the endpoint is a RESTful one"
+      required:
+      - date
+      - fhirVersion
+      - format
+      - kind
+      - meta
+      - status
+    OrganizationAffiliationSearchEntry:
       type: object
       properties:
         fullUrl:
@@ -3890,108 +4440,95 @@ components:
           description: Search related information
         resource:
           allOf:
-          - $ref: '#/components/schemas/LocationGetResponse'
+          - $ref: '#/components/schemas/OrganizationAffiliationGetResponse'
           description: A resource in the bundle
       required:
       - fullUrl
       - resource
       - search
-    HealthcareServiceGetResponse:
-      type: object
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseResourceMeta'
-          description: Metadata about the resource
-        identifier:
-          allOf:
-          - $ref: '#/components/schemas/FHIRIdentifier'
-          description: External identifiers for this item
-        active:
-          type: boolean
-          description: Whether this HealthcareService record is in active use
-        extension:
-          $ref: '#/components/schemas/HealthcareServiceGetExtension'
-        category:
-          $ref: '#/components/schemas/FHIRCodeableConcept'
-        type:
-          $ref: '#/components/schemas/FHIRCodeableConcept'
-        location:
-          $ref: '#/components/schemas/CommonReference'
-        coverageArea:
-          $ref: '#/components/schemas/CommonReference'
-        providedBy:
-          $ref: '#/components/schemas/CommonReference'
-        name:
-          type: string
-        telecom:
-          type: array
-          items:
-            $ref: '#/components/schemas/HealthcareServiceGetTelecom'
-        specialty:
-          $ref: '#/components/schemas/FHIRCodeableConcept'
-      required:
+    PublicationStatusEnum:
+      enum:
+      - draft
       - active
-      - category
-      - id
-      - meta
-      - name
-      - resourceType
-      - telecom
-      - type
-    FHIRHumanName:
+      - retired
+      - unknown
+      type: string
+      description: '* `draft` - draft
+
+        * `active` - active
+
+        * `retired` - retired
+
+        * `unknown` - unknown'
+    FHIRAddress:
       type: object
       properties:
         use:
-          $ref: '#/components/schemas/FHIRHumanNameUseEnum'
+          allOf:
+          - $ref: '#/components/schemas/FHIRAddressUseEnum'
+          description: 'purpose of this address
+
+
+            * `home` - home
+
+            * `work` - work
+
+            * `temp` - temp
+
+            * `old` - old
+
+            * `billing` - billing'
+        type:
+          $ref: '#/components/schemas/FHIRAddressTypeEnum'
         text:
           type: string
-          description: Text representation of the full name
-        family:
+          description: Text representation of the address
+        line:
           type: string
-          description: Family name (often called 'Surname')
-        given:
-          type: array
-          items:
-            type: string
-          description: 'Given names (not always ''first''). Includes middle names
-
-
-            This repeating element order: Given Names appear in the correct order for presenting the name'
-        prefix:
-          type: array
-          items:
-            type: string
-          description: 'Parts that come before the name
-
-
-            This repeating element order: Prefixes appear in the correct order for presenting the name'
-        suffix:
-          type: array
-          items:
-            type: string
-          description: 'Parts that come after the name
-
-
-            This repeating element order: Suffixes appear in the correct order for presenting the name'
+          description: 'Street name, number, direction & P.O. Box etc. This repeating element order: The order in which lines should appear in an address label'
+        city:
+          type: string
+          description: Name of city, town etc.
+        district:
+          type: string
+          description: District name (aka county)
+        state:
+          type: string
+          description: Sub-unit of country (abbreviations ok)
+        postalCode:
+          type: string
+          description: Postal code for area
+        country:
+          type: string
+          description: Country (e.g. may be ISO 3166 2 or 3 letter code)
         period:
           allOf:
           - $ref: '#/components/schemas/FHIRPeriod'
-          description: Time period when name was/is in use
-    OrganizationAffiliationGetOrganization:
+          description: Time period when address was/is in use
+    PractitionerGetTelecomExtension:
       type: object
       properties:
-        reference:
+        url:
           type: string
-        display:
+        id:
           type: string
+        valueReference:
+          $ref: '#/components/schemas/CommonReference'
       required:
-      - display
-      - reference
+      - id
+      - url
+      - valueReference
+    OrganizationAffiliationGetPeriod:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date
+          description: Starting time with inclusive boundary
+        end:
+          type: string
+          format: date
+          description: End time with inclusive boundary, if not ongoing
     PractitionerGetTelecom:
       type: object
       properties:
@@ -4001,21 +4538,58 @@ components:
             $ref: '#/components/schemas/PractitionerGetTelecomExtension'
       required:
       - extension
-    BaseBundleSearch:
+    OrganizationAffiliationSearchResponse:
       type: object
       properties:
-        mode:
-          $ref: '#/components/schemas/SearchModeEnum'
-      required:
-      - mode
-    BaseBundleMeta:
-      type: object
-      properties:
-        lastUpdated:
+        resourceType:
+          type: string
+          description: Bundle
+        id:
+          type: string
+          description: Logical id of this artifact
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleMeta'
+          description: Metadata about the resource
+        type:
+          $ref: '#/components/schemas/TypeF76Enum'
+        total:
+          type: integer
+          minimum: 0
+          description: If search, the total number of matches
+        link:
+          type: array
+          items:
+            $ref: '#/components/schemas/BaseBundleLink'
+          description: Links related to this Bundle
+        timestamp:
           type: string
           format: date-time
+          description: When the bundle was assembled
+        signature:
+          allOf:
+          - $ref: '#/components/schemas/BaseBundleSignature'
+          description: Digital Signature
+        identifier:
+          description: Persistent identifier for the bundle
+        language:
+          type: string
+          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
+        implicitRules:
+          type: string
+          description: A set of rules under which this content was created
+        entry:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationAffiliationSearchEntry'
       required:
-      - lastUpdated
+      - entry
+      - id
+      - link
+      - meta
+      - resourceType
+      - total
+      - type
     SystemEnum:
       enum:
       - phone
@@ -4088,318 +4662,146 @@ components:
       - resourceType
       - telecom
       - text
-    OrganizationAffiliationGetPeriod:
+    OrganizationGetResponse:
       type: object
       properties:
-        start:
-          type: string
-          format: date
-          description: Starting time with inclusive boundary
-        end:
-          type: string
-          format: date
-          description: End time with inclusive boundary, if not ongoing
-    FHIRAddress:
-      type: object
-      properties:
-        use:
-          allOf:
-          - $ref: '#/components/schemas/FHIRAddressUseEnum'
-          description: 'purpose of this address
-
-
-            * `home` - home
-
-            * `work` - work
-
-            * `temp` - temp
-
-            * `old` - old
-
-            * `billing` - billing'
-        type:
-          $ref: '#/components/schemas/FHIRAddressTypeEnum'
-        text:
-          type: string
-          description: Text representation of the address
-        line:
-          type: string
-          description: 'Street name, number, direction & P.O. Box etc. This repeating element order: The order in which lines should appear in an address label'
-        city:
-          type: string
-          description: Name of city, town etc.
-        district:
-          type: string
-          description: District name (aka county)
-        state:
-          type: string
-          description: Sub-unit of country (abbreviations ok)
-        postalCode:
-          type: string
-          description: Postal code for area
-        country:
-          type: string
-          description: Country (e.g. may be ISO 3166 2 or 3 letter code)
-        period:
-          allOf:
-          - $ref: '#/components/schemas/FHIRPeriod'
-          description: Time period when address was/is in use
-    PractitionerGetTelecomExtension:
-      type: object
-      properties:
-        url:
+        resourceType:
           type: string
         id:
           type: string
-        valueReference:
-          $ref: '#/components/schemas/CommonReference'
-      required:
-      - id
-      - url
-      - valueReference
-    PractitionerRoleItemSpecialty:
-      type: object
-      properties:
-        coding:
-          type: array
-          items:
-            $ref: '#/components/schemas/PractitionerRoleItemCoding'
-      required:
-      - coding
-    PractitionerSearchEntry:
-      type: object
-      properties:
-        fullUrl:
-          type: string
-          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
-        search:
+        meta:
           allOf:
-          - $ref: '#/components/schemas/BaseBundleSearch'
-          description: Search related information
-        resource:
-          $ref: '#/components/schemas/PractitionerGetResponse'
-      required:
-      - fullUrl
-      - resource
-      - search
-    FHIRAddressTypeEnum:
-      enum:
-      - postal
-      - physical
-      - both
-      type: string
-      description: '* `postal` - postal
-
-        * `physical` - physical
-
-        * `both` - both'
-    FHIRCodeableConcept:
-      type: object
-      properties:
-        coding:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRCoding'
-          description: Code defined by a terminology system
+          - $ref: '#/components/schemas/BaseResourceMeta'
+          description: Metadata about the resource
         text:
-          type: string
-    PractitionerRoleItemExtensionValueCodeableConceptCoding:
-      type: object
-      properties:
-        coding:
+          allOf:
+          - $ref: '#/components/schemas/BaseResourceText'
+          description: Text summary of the resource, for human interpretation
+        identifier:
           type: array
           items:
-            $ref: '#/components/schemas/PractitionerRoleItemExtensionValueCodeableConceptCodingCodingContent'
+            $ref: '#/components/schemas/FHIRIdentifier'
+          description: Identifies this organization across multiple systems
+        active:
+          type: boolean
+          description: Whether the organization's record is still in active use
+        type:
+          allOf:
+          - $ref: '#/components/schemas/FHIRCodeableConcept'
+          description: Kind of organization
+        name:
+          type: string
+          description: Name used for the organization
+        telecom:
+          allOf:
+          - $ref: '#/components/schemas/OrganizationGetTelecom'
+          description: Contact details (e.g.phone/fax/url)
+        address:
+          allOf:
+          - $ref: '#/components/schemas/FHIRAddress'
+          description: Address for the contact
+        partOf:
+          allOf:
+          - $ref: '#/components/schemas/CommonReference'
+          description: The organization of which this organization forms a part
+        contact:
+          allOf:
+          - $ref: '#/components/schemas/FHIRExtendedContactDetail'
+          description: Official contact details for the Organization
+        endpoint:
+          allOf:
+          - $ref: '#/components/schemas/CommonReference'
+          description: Technical endpoints providing access to services operated for the organization
       required:
-      - coding
-    PublicationStatusEnum:
-      enum:
-      - draft
       - active
-      - retired
-      - unknown
-      type: string
-      description: '* `draft` - draft
-
-        * `active` - active
-
-        * `retired` - retired
-
-        * `unknown` - unknown'
-    PractitionerRoleItemCoding:
-      type: object
-      properties:
-        system:
-          type: string
-        code:
-          type: string
-      required:
-      - code
-      - system
-    OrganizationSearchEntry:
-      type: object
-      properties:
-        fullUrl:
-          type: string
-          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
-        search:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSearch'
-          description: Search related information
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/OrganizationGetResponse'
-          description: A resource in the bundle
-      required:
-      - fullUrl
-      - resource
-      - search
-    FHIRContactPoint:
-      type: object
-      properties:
-        system:
-          $ref: '#/components/schemas/SystemEnum'
-        value:
-          type: string
-          description: The actual contact point details
-        use:
-          allOf:
-          - $ref: '#/components/schemas/FHIRContactPointUseEnum'
-          description: 'purpose of this contact point
-
-
-            * `home` - home
-
-            * `work` - work
-
-            * `temp` - temp
-
-            * `old` - old
-
-            * `mobile` - mobile'
-        rank:
-          type: integer
-          description: Specify preferred order of use (1 = highest)
-        period:
-          allOf:
-          - $ref: '#/components/schemas/FHIRPeriod'
-          description: Time period when the contact point was/is in use
-    OrganizationAffiliationSearchEntry:
-      type: object
-      properties:
-        fullUrl:
-          type: string
-          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
-        search:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSearch'
-          description: Search related information
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/OrganizationAffiliationGetResponse'
-          description: A resource in the bundle
-      required:
-      - fullUrl
-      - resource
-      - search
-    PractitionerRoleItemPractitioner:
-      type: object
-      properties:
-        reference:
-          type: string
-        display:
-          type: string
-      required:
-      - display
-      - reference
-    HealthcareServiceGetTelecom:
+      - id
+      - identifier
+      - meta
+      - name
+      - resourceType
+      - text
+    HealthcareServiceGetExtension:
       type: object
       properties:
         extension:
           type: array
           items:
-            $ref: '#/components/schemas/HealthcareServiceGetTelecomExtension'
+            $ref: '#/components/schemas/HealthcareServiceGetExtensionExtension'
+        url:
+          type: string
       required:
       - extension
-    SearchModeEnum:
-      enum:
-      - match
-      - include
-      - outcome
-      type: string
-      description: '* `match` - match
-
-        * `include` - include
-
-        * `outcome` - outcome'
-    GenderEnum:
-      enum:
-      - male
-      - female
-      - other
-      - unknown
-      type: string
-      description: '* `male` - male
-
-        * `female` - female
-
-        * `other` - other
-
-        * `unknown` - unknown'
-    HealthcareServiceGetTelecomExtension:
+      - url
+    BaseBundleSignature:
+      type: object
+      properties:
+        when:
+          type: string
+          format: date-time
+          description: When the signature was created
+        who:
+          type: string
+          description: Who signed
+        targetFormat:
+          type: string
+          description: The technical format of the signed resources
+        sigFormat:
+          type: string
+          description: The technical format of the signature
+        onBehalfOf:
+          type: string
+          description: The party represented
+        type:
+          type: array
+          items: {}
+          description: Indication of the reason the entity signed the object(s)
+        data:
+          type: string
+          description: The actual signature content (XML DigSig. JWT, picture, etc.)
+      required:
+      - data
+      - type
+      - when
+    PractitionerRoleItemIdentifier:
+      type: object
+      properties:
+        system:
+          type: string
+        value:
+          type: string
+      required:
+      - system
+      - value
+    PractitionerRoleItemExtensionValueReference:
       type: object
       properties:
         url:
           type: string
         valueReference:
-          $ref: '#/components/schemas/CommonReference'
+          $ref: '#/components/schemas/PractitionerRoleItemExtensionValueReferenceReference'
       required:
       - url
       - valueReference
-    PractitionerRoleItemOrganization:
-      type: object
-      properties:
-        reference:
-          type: string
-        display:
-          type: string
-      required:
-      - display
-      - reference
-    FHIRCapabilityStatementRestModeEnum:
+    EndpointGetResponseStatusEnum:
       enum:
-      - client
-      - server
+      - active
+      - suspended
+      - error
+      - 'off'
+      - entered-in-error
+      - test
       type: string
-      description: '* `client` - client
+      description: '* `active` - active
 
-        * `server` - server'
-    OrganizationGetTelecom:
-      type: object
-      properties:
-        phone:
-          $ref: '#/components/schemas/FHIRContactPoint'
-        fax:
-          $ref: '#/components/schemas/FHIRContactPoint'
-    FHIRExtendedContactDetail:
-      type: object
-      properties:
-        purpose:
-          $ref: '#/components/schemas/FHIRCodeableConcept'
-        name:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRHumanName'
-        telecom:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRContactPoint'
-        address:
-          $ref: '#/components/schemas/FHIRAddress'
-        organization:
-          $ref: '#/components/schemas/CommonReference'
-        period:
-          $ref: '#/components/schemas/FHIRPeriod'
+        * `suspended` - suspended
+
+        * `error` - error
+
+        * `off` - off
+
+        * `entered-in-error` - entered-in-error
+
+        * `test` - test'
     HealthcareServiceSearchResponse:
       type: object
       properties:
@@ -4452,138 +4854,72 @@ components:
       - resourceType
       - total
       - type
-    OrganizationSearchResponse:
+    FHIRExtendedContactDetail:
       type: object
       properties:
-        resourceType:
-          type: string
-          description: Bundle
-        id:
-          type: string
-          description: Logical id of this artifact
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleMeta'
-          description: Metadata about the resource
-        type:
-          $ref: '#/components/schemas/TypeF76Enum'
-        total:
-          type: integer
-          minimum: 0
-          description: If search, the total number of matches
-        link:
+        purpose:
+          $ref: '#/components/schemas/FHIRCodeableConcept'
+        name:
           type: array
           items:
-            $ref: '#/components/schemas/BaseBundleLink'
-          description: Links related to this Bundle
-        timestamp:
-          type: string
-          format: date-time
-          description: When the bundle was assembled
-        signature:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSignature'
-          description: Digital Signature
-        identifier:
-          description: Persistent identifier for the bundle
-        language:
-          type: string
-          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
-        implicitRules:
-          type: string
-          description: A set of rules under which this content was created
-        entry:
+            $ref: '#/components/schemas/FHIRHumanName'
+        telecom:
           type: array
           items:
-            $ref: '#/components/schemas/OrganizationSearchEntry'
-      required:
-      - entry
-      - id
-      - link
-      - meta
-      - resourceType
-      - total
-      - type
-    LocationSearchResponse:
+            $ref: '#/components/schemas/FHIRContactPoint'
+        address:
+          $ref: '#/components/schemas/FHIRAddress'
+        organization:
+          $ref: '#/components/schemas/CommonReference'
+        period:
+          $ref: '#/components/schemas/FHIRPeriod'
+    FHIRCapabilityStatementInteractionCode:
       type: object
       properties:
-        resourceType:
-          type: string
-          description: Bundle
-        id:
-          type: string
-          description: Logical id of this artifact
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleMeta'
-          description: Metadata about the resource
-        type:
-          $ref: '#/components/schemas/TypeF76Enum'
-        total:
-          type: integer
-          minimum: 0
-          description: If search, the total number of matches
-        link:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseBundleLink'
-          description: Links related to this Bundle
-        timestamp:
-          type: string
-          format: date-time
-          description: When the bundle was assembled
-        signature:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSignature'
-          description: Digital Signature
-        identifier:
-          description: Persistent identifier for the bundle
-        language:
-          type: string
-          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
-        implicitRules:
-          type: string
-          description: A set of rules under which this content was created
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationSearchEntry'
+        code:
+          $ref: '#/components/schemas/CodeEnum'
       required:
-      - entry
-      - id
-      - link
-      - meta
-      - resourceType
-      - total
-      - type
-    FHIRCapabilityStatementRestResource:
+      - code
+    CodeEnum:
+      enum:
+      - read
+      - vread
+      - update
+      - patch
+      - delete
+      - history-instance
+      - history-type
+      - create
+      - search-type
+      type: string
+      description: '* `read` - read
+
+        * `vread` - vread
+
+        * `update` - update
+
+        * `patch` - patch
+
+        * `delete` - delete
+
+        * `history-instance` - history-instance
+
+        * `history-type` - history-type
+
+        * `create` - create
+
+        * `search-type` - search-type'
+    PractitionerRoleItemPractitioner:
       type: object
       properties:
-        type:
+        reference:
           type: string
-          description: A resource type that is supported
-        profile:
+        display:
           type: string
-          description: System-wide profile
-        interaction:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRCapabilityStatementInteractionCode'
-        searchInclude:
-          type: array
-          items:
-            type: string
-          description: _include values supported by the server
-        searchRevInclude:
-          type: array
-          items:
-            type: string
-          description: _revinclude values supported by the server
       required:
-      - searchInclude
-      - searchRevInclude
-      - type
-    EndpointGetResponse:
+      - display
+      - reference
+    LocationGetResponse:
       type: object
       properties:
         resourceType:
@@ -4599,26 +4935,44 @@ components:
           - $ref: '#/components/schemas/BaseResourceText'
           description: Text summary of the resource, for human interpretation
         status:
-          $ref: '#/components/schemas/EndpointGetResponseStatusEnum'
-        connectionType:
+          $ref: '#/components/schemas/LocationGetResponseStatusEnum'
+        name:
+          type: string
+          description: Name of the location as used by humans
+        type:
+          type: array
+          items:
+            $ref: '#/components/schemas/FHIRCodeableConcept'
+          description: Type of function performed
+        telecom:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationGetTelecom'
+          description: Official contact details for the location
+        address:
           allOf:
-          - $ref: '#/components/schemas/FHIRCodeableConcept'
-          description: Protocol/Profile/Standard to be used with this endpoint connection
+          - $ref: '#/components/schemas/FHIRAddress'
+          description: Physical location
+        position:
+          allOf:
+          - $ref: '#/components/schemas/LocationGetPosition'
+          description: The absolute geographic location
         managingOrganization:
           allOf:
           - $ref: '#/components/schemas/CommonReference'
-          description: Organization that manages this endpoint
-        payloadType:
+          description: Organization responsible for provisioning and upkeep
+        partOf:
           allOf:
-          - $ref: '#/components/schemas/FHIRCodeableConcept'
-          description: The type of content that may be used at this endpoint (e.g. XDS Discharge summaries)
-        address:
-          type: string
-          description: The technical base address for connecting to this endpoint
+          - $ref: '#/components/schemas/CommonReference'
+          description: Another Location this one is physically a part of
+        endpoint:
+          allOf:
+          - $ref: '#/components/schemas/CommonReference'
+          description: Technical endpoints providing access to services operated for the location
       required:
-      - address
       - id
       - meta
+      - name
       - resourceType
       - status
       - text
@@ -4631,360 +4985,6 @@ components:
             $ref: '#/components/schemas/PractitionerRoleItemCoding'
       required:
       - coding
-    FHIRIdentifier:
-      type: object
-      properties:
-        use:
-          $ref: '#/components/schemas/FHIRIdentifierUseEnum'
-        type:
-          allOf:
-          - $ref: '#/components/schemas/FHIRCodeableConcept'
-          description: Description of identifier
-        system:
-          type: string
-          description: The namespace for the identifier value
-        value:
-          type: string
-          description: The value that is unique
-        period:
-          allOf:
-          - $ref: '#/components/schemas/FHIRPeriod'
-          description: Time period when id is/was valid for use
-        assigner:
-          type: string
-          description: Organization that issued id (may be just text)
-    EndpointGetResponseStatusEnum:
-      enum:
-      - active
-      - suspended
-      - error
-      - 'off'
-      - entered-in-error
-      - test
-      type: string
-      description: '* `active` - active
-
-        * `suspended` - suspended
-
-        * `error` - error
-
-        * `off` - off
-
-        * `entered-in-error` - entered-in-error
-
-        * `test` - test'
-    PractitionerRoleItemExtensionValueReference:
-      type: object
-      properties:
-        url:
-          type: string
-        valueReference:
-          $ref: '#/components/schemas/PractitionerRoleItemExtensionValueReferenceReference'
-      required:
-      - url
-      - valueReference
-    EndpointSearchEntry:
-      type: object
-      properties:
-        fullUrl:
-          type: string
-          description: URI for resource (e.g. the absolute URL server address, URI for UUID/OID, etc.)
-        search:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSearch'
-          description: Search related information
-        resource:
-          allOf:
-          - $ref: '#/components/schemas/EndpointGetResponse'
-          description: A resource in the bundle
-      required:
-      - fullUrl
-      - resource
-      - search
-    PractitionerRoleItemLocation:
-      type: object
-      properties:
-        reference:
-          type: string
-      required:
-      - reference
-    FHIRCapabilityStatement:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          default: CapabilityStatement
-        id:
-          type: string
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseResourceMeta'
-          description: Metadata about a resource
-        status:
-          $ref: '#/components/schemas/PublicationStatusEnum'
-        date:
-          type: string
-          format: date-time
-          description: Date last changed
-        publisher:
-          type: string
-          description: Name of the publisher/steward
-        kind:
-          $ref: '#/components/schemas/KindEnum'
-        software:
-          allOf:
-          - $ref: '#/components/schemas/FHIRCapabilityStatementSoftware'
-          description: Software that is covered by this capability statement
-        fhirVersion:
-          type: string
-          description: FHIR Version the system supports
-        format:
-          type: array
-          items:
-            type: string
-          description: formats supported (xml | json | ttl | mime type)
-        rest:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRCapabilityStatementRest'
-          description: "\tIf the endpoint is a RESTful one"
-      required:
-      - date
-      - fhirVersion
-      - format
-      - kind
-      - meta
-      - status
-    HealthcareServiceGetExtension:
-      type: object
-      properties:
-        extension:
-          type: array
-          items:
-            $ref: '#/components/schemas/HealthcareServiceGetExtensionExtension'
-        url:
-          type: string
-      required:
-      - extension
-      - url
-    LocationGetTelecom:
-      type: object
-      properties:
-        phone:
-          $ref: '#/components/schemas/FHIRContactPoint'
-        fax:
-          $ref: '#/components/schemas/FHIRContactPoint'
-    OrganizationAffiliationGetReference:
-      type: object
-      properties:
-        reference:
-          type: string
-      required:
-      - reference
-    PractitionerRoleSearchResponse:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          description: Bundle
-        id:
-          type: string
-          description: Logical id of this artifact
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleMeta'
-          description: Metadata about the resource
-        type:
-          $ref: '#/components/schemas/TypeF76Enum'
-        total:
-          type: integer
-          minimum: 0
-          description: If search, the total number of matches
-        link:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseBundleLink'
-          description: Links related to this Bundle
-        timestamp:
-          type: string
-          format: date-time
-          description: When the bundle was assembled
-        signature:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSignature'
-          description: Digital Signature
-        identifier:
-          description: Persistent identifier for the bundle
-        language:
-          type: string
-          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
-        implicitRules:
-          type: string
-          description: A set of rules under which this content was created
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/PractitionerRoleSearchEntry'
-          description: "Entry in the bundle - will have a resource or information\n\n- Rule: must be a resource unless there's a request or response\n- Rule: fullUrl cannot be a version specific reference This repeating element order: For bundles of type 'document' and 'message', the first resource is special (must be Composition or MessageHeader respectively). For all bundles, the meaning of the order of entries depends on the bundle type\n    "
-      required:
-      - entry
-      - id
-      - link
-      - meta
-      - resourceType
-      - total
-      - type
-    FHIRHumanNameUseEnum:
-      enum:
-      - usual
-      - official
-      - temp
-      - nickname
-      - anonymous
-      - old
-      - maiden
-      type: string
-      description: '* `usual` - usual
-
-        * `official` - official
-
-        * `temp` - temp
-
-        * `nickname` - nickname
-
-        * `anonymous` - anonymous
-
-        * `old` - old
-
-        * `maiden` - maiden'
-    HealthcareServiceGetExtensionExtension:
-      type: object
-      properties:
-        url:
-          type: string
-        valueCodeableConcept:
-          $ref: '#/components/schemas/FHIRCodeableConcept'
-      required:
-      - url
-      - valueCodeableConcept
-    InsurancePlanGetResponse:
-      type: object
-      properties:
-        resourceType:
-          type: string
-        id:
-          type: string
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseResourceMeta'
-          description: Metadata about the resource
-        identifier:
-          allOf:
-          - $ref: '#/components/schemas/FHIRIdentifier'
-          description: Business Identifier for Product
-        status:
-          $ref: '#/components/schemas/PublicationStatusEnum'
-        type:
-          type: array
-          items:
-            $ref: '#/components/schemas/FHIRCodeableConcept'
-          description: Kind of product
-        ownedBy:
-          allOf:
-          - $ref: '#/components/schemas/CommonReference'
-          description: Product issuer
-        administeredBy:
-          allOf:
-          - $ref: '#/components/schemas/CommonReference'
-          description: Product administrator
-        network:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonReference'
-          description: What networks are Included
-        coverageArea:
-          type: array
-          items:
-            $ref: '#/components/schemas/CommonReference'
-          description: Where product applies
-        name:
-          type: string
-          description: Official name
-      required:
-      - id
-      - meta
-      - resourceType
-      - status
-    KindEnum:
-      enum:
-      - instance
-      - capability
-      - requirements
-      type: string
-      description: '* `instance` - instance
-
-        * `capability` - capability
-
-        * `requirements` - requirements'
-    OrganizationAffiliationSearchResponse:
-      type: object
-      properties:
-        resourceType:
-          type: string
-          description: Bundle
-        id:
-          type: string
-          description: Logical id of this artifact
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleMeta'
-          description: Metadata about the resource
-        type:
-          $ref: '#/components/schemas/TypeF76Enum'
-        total:
-          type: integer
-          minimum: 0
-          description: If search, the total number of matches
-        link:
-          type: array
-          items:
-            $ref: '#/components/schemas/BaseBundleLink'
-          description: Links related to this Bundle
-        timestamp:
-          type: string
-          format: date-time
-          description: When the bundle was assembled
-        signature:
-          allOf:
-          - $ref: '#/components/schemas/BaseBundleSignature'
-          description: Digital Signature
-        identifier:
-          description: Persistent identifier for the bundle
-        language:
-          type: string
-          description: 'Language of the resource content. Supported languages can be found at: https://www.hl7.org/fhir/valueset-languages.html'
-        implicitRules:
-          type: string
-          description: A set of rules under which this content was created
-        entry:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrganizationAffiliationSearchEntry'
-      required:
-      - entry
-      - id
-      - link
-      - meta
-      - resourceType
-      - total
-      - type
-    PractitionerRoleItemEndpoint:
-      type: object
-      properties:
-        reference:
-          type: string
-      required:
-      - reference
   securitySchemes:
     basicAuth:
       type: http

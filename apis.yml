@@ -70,7 +70,7 @@ tags_raw:
 - Payer
 apis:
 - aid: clover-health:clover-health-fhir-r4-formulary-api-api
-  name: Clover Health fhir-r4-formulary-api
+  name: Clover Health Fhir R4 Formulary API
   description: The fhir-r4-formulary-api API from Clover Health — 5 operation(s) for fhir-r4-formulary-api.
   humanURL: https://www.cloverhealth.com/developers
   baseURL: https://public-api.cloverhealth.com
