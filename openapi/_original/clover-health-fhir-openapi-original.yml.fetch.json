@@ -1,0 +1,12 @@
+{
+ "url": "https://public-api.cloverhealth.com/schema",
+ "requested_url": "https://public-api.cloverhealth.com/schema",
+ "status": 200,
+ "content_type": "application/yaml; charset=utf-8",
+ "bytes": 390763,
+ "sha256": "beb2db47b77edca8ff54323f7446bb60c3d00c2669a23886d908dbd8e4e60dd3",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
